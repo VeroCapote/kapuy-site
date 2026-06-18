@@ -216,17 +216,14 @@
 
       <!--
         INTEGRACIÓN KIT (ConvertKit) — Form ID 9580214.
-        Este formulario postea directo a Kit y conserva el diseño de Kapüy.
-
-        IMPORTANTE: para que, tras suscribirse, el usuario llegue a la guía, en el panel
-        de Kit hay que cambiar el "after subscribe" de este formulario a
-        "Redirect to an external page" apuntando a:
-            https://TU-DOMINIO/recursos/la-guia
-        (ahora está en "mostrar mensaje", por eso todavía no redirige).
+        El email se envía a Kit (queda guardado en tu cuenta) usando un iframe oculto,
+        y al terminar la página redirige sola a la guía (/recursos/la-guia) por JS.
+        No hace falta configurar nada en el panel de Kit; funciona en cualquier dominio.
       -->
-      <form class="fallback-form"
+      <iframe name="kit_target" title="Kit" style="display:none" aria-hidden="true"></iframe>
+      <form id="kit-form" class="fallback-form"
             action="https://app.kit.com/forms/9580214/subscriptions"
-            method="post">
+            method="post" target="kit_target">
         <input type="email" name="email_address" placeholder="tu@email.com" aria-label="Tu email" required>
         <button type="submit" class="btn-primary">Quiero la guía</button>
       </form>
@@ -239,5 +236,26 @@
       <p style="margin-top:0.5rem;"><a href="/">← Volver al inicio</a></p>
     </footer>
   </main>
+
+  <script>
+    // Envía el email a Kit por un iframe oculto y, al terminar, lleva a la guía.
+    (function () {
+      var form = document.getElementById('kit-form');
+      var frame = document.querySelector('iframe[name="kit_target"]');
+      var btn = form.querySelector('button');
+      var sent = false;
+
+      form.addEventListener('submit', function () {
+        sent = true;
+        btn.disabled = true;
+        btn.textContent = 'Enviando…';
+      });
+
+      // El iframe dispara "load" tras recibir la respuesta de Kit: ahí redirigimos.
+      frame.addEventListener('load', function () {
+        if (sent) window.location.href = '/recursos/la-guia';
+      });
+    })();
+  </script>
 </body>
 </html>
