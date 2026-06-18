@@ -215,20 +215,17 @@
       <p class="note">Déjame tu email y te llevo directo a la guía.</p>
 
       <!--
-        INTEGRACIÓN KIT (ConvertKit):
-        1. Reemplaza <KIT_FORM_ID> con el ID del formulario de Kit (en los dos lugares).
-        2. Borra el bloque .fallback-form de abajo cuando actives el embed.
-        3. El redirect a /recursos/la-guia se configura en el PANEL DE KIT
-           (Form → Settings → "Redirect to an external page"), NO aquí.
+        INTEGRACIÓN KIT (ConvertKit) — Form ID 9580214.
+        Este formulario postea directo a Kit y conserva el diseño de Kapüy.
 
-        <script async data-uid="<KIT_FORM_ID>" src="https://kapuy.kit.com/<KIT_FORM_ID>/index.js"></script>
-        (cuentas antiguas: src="https://f.convertkit.com/ck/form/<KIT_FORM_ID>.js")
+        IMPORTANTE: para que, tras suscribirse, el usuario llegue a la guía, en el panel
+        de Kit hay que cambiar el "after subscribe" de este formulario a
+        "Redirect to an external page" apuntando a:
+            https://TU-DOMINIO/recursos/la-guia
+        (ahora está en "mostrar mensaje", por eso todavía no redirige).
       -->
-
-      <!-- Formulario de respaldo: postea directo a Kit. Funciona aunque el embed JS no esté.
-           El redirect tras suscribirse igual se define en el panel de Kit. -->
       <form class="fallback-form"
-            action="https://app.kit.com/forms/<KIT_FORM_ID>/subscriptions"
+            action="https://app.kit.com/forms/9580214/subscriptions"
             method="post">
         <input type="email" name="email_address" placeholder="tu@email.com" aria-label="Tu email" required>
         <button type="submit" class="btn-primary">Quiero la guía</button>
