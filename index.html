@@ -17,6 +17,38 @@
       This page requires JavaScript to display.
     </div>
   </noscript>
+  <!-- Kapüy: barra flotante de lead magnet (independiente del bundle React). -->
+  <script>
+    (function () {
+      var DISMISS_KEY = 'kapuyLeadCtaDismissed';
+      function dismissed() { try { return sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; } }
+      function build() {
+        var bar = document.createElement('div');
+        bar.id = 'kapuy-lead-cta';
+        bar.setAttribute('style', 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:2147483000;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;max-width:calc(100vw - 24px);background:#FAF8F3;color:#0F172A;border:1px solid #C8C4BB;border-radius:12px;padding:12px 14px 12px 18px;box-shadow:0 12px 32px rgba(15,23,42,.32);font-family:-apple-system,BlinkMacSystemFont,Satoshi,sans-serif;');
+        var txt = document.createElement('span');
+        txt.setAttribute('style', 'font-size:14px;line-height:1.35;font-weight:500;');
+        txt.innerHTML = '¿Tu marketing no termina de vender? <strong>Descargá gratis</strong> la guía: las 5 fugas del embudo.';
+        var btn = document.createElement('a');
+        btn.href = '/recursos/guia-embudo';
+        btn.textContent = 'Quiero la guía';
+        btn.setAttribute('style', 'flex:none;background:#2952FF;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:9px 16px;border-radius:6px;white-space:nowrap;');
+        var close = document.createElement('button');
+        close.setAttribute('aria-label', 'Cerrar');
+        close.textContent = '×';
+        close.setAttribute('style', 'flex:none;background:none;border:none;color:#717787;font-size:20px;line-height:1;cursor:pointer;padding:0 2px;');
+        close.onclick = function () { try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) {} var el = document.getElementById('kapuy-lead-cta'); if (el) el.remove(); };
+        bar.appendChild(txt); bar.appendChild(btn); bar.appendChild(close);
+        return bar;
+      }
+      function ensure() {
+        if (dismissed() || !document.body || document.getElementById('kapuy-lead-cta')) return;
+        document.body.appendChild(build());
+      }
+      // La app reemplaza el documento al cargar; el intervalo reinyecta la barra después.
+      setInterval(ensure, 700);
+    })();
+  </script>
 </head>
 <body>
   <div id="__bundler_thumbnail">
