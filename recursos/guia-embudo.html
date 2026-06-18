@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guía gratuita: las 5 fugas del embudo — Kapüy</title>
+  <meta name="description" content="Descubre dónde pierdes ventas en el viaje de tu cliente y cómo taparlo. Guía gratuita de Kapüy para dueños de negocio.">
+
+  <!-- Fuentes: Satoshi (Fontshare) + Caveat e IBM Plex Mono (Google Fonts) -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+
+    :root {
+      --navy: #0F172A;
+      --cobalt: #2952FF;
+      --cobalt-deep: #1E3FD6;
+      --cobalt-tint: #E2E7FF;
+      --copper: #C9A17A;
+      --bone-100: #FAF8F3;
+      --bone-200: #F3F0EA;
+      --bone-300: #E9E5DD;
+      --ink: #0F172A;
+      --ink-soft: #3A4254;
+      --ink-faint: #717787;
+      --hairline: #C8C4BB;
+
+      --font-sans: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      --font-hand: 'Caveat', 'Segoe Script', cursive;
+
+      --container-text: 720px;
+      --shadow-sm: 0 2px 8px rgba(15,23,42,.10);
+      --shadow-md: 0 10px 28px rgba(15,23,42,.14);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bone-200);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: var(--container-text);
+      margin: 0 auto;
+      padding: clamp(2rem, 6vw, 5rem) 1.5rem;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: clamp(2.4rem, 6.5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+
+    h1 .accent { color: var(--cobalt); }
+
+    .lead {
+      font-size: 1.25rem;
+      color: var(--ink-soft);
+      max-width: 38ch;
+      margin-bottom: 2rem;
+    }
+
+    .hand {
+      font-family: var(--font-hand);
+      font-size: 1.5rem;
+      color: var(--cobalt);
+      transform: rotate(-2deg);
+      display: inline-block;
+    }
+
+    .benefits {
+      list-style: none;
+      margin: 0 0 2.5rem;
+      padding: 0;
+      display: grid;
+      gap: 0.85rem;
+    }
+    .benefits li {
+      position: relative;
+      padding-left: 1.85rem;
+      color: var(--ink-soft);
+      font-size: 1.05rem;
+    }
+    .benefits li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 0.7rem;
+      height: 0.7rem;
+      border: 2px solid var(--cobalt);
+      border-radius: 50%;
+    }
+
+    .form-card {
+      background: var(--bone-100);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      box-shadow: var(--shadow-sm);
+    }
+    .form-card h2 {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .form-card p.note {
+      font-size: 0.95rem;
+      color: var(--ink-faint);
+      margin-bottom: 1.25rem;
+    }
+
+    /* --- Fallback form (visible hasta integrar el embed de Kit) --- */
+    .fallback-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .fallback-form input[type="email"] {
+      flex: 1 1 240px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+    }
+    .fallback-form input[type="email"]:focus {
+      outline: none;
+      border-color: var(--cobalt);
+      box-shadow: 0 0 0 3px var(--cobalt-tint);
+    }
+    .btn-primary {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      background: var(--cobalt);
+      border: none;
+      border-radius: 6px;
+      padding: 0.85rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s cubic-bezier(.22,.61,.36,1);
+      white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--cobalt-deep); }
+
+    .privacy {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      margin-top: 1rem;
+      letter-spacing: 0.01em;
+    }
+
+    footer {
+      border-top: 1.5px solid var(--copper);
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+    }
+    footer a { color: var(--cobalt); text-decoration: none; }
+    footer .brand {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">Guía gratuita · Kapüy</p>
+
+    <h1>Las 5 fugas del embudo que te <span class="accent">cuestan ventas</span></h1>
+
+    <p class="lead">
+      No es que «no llegan clientes». Es que se te escapan en puntos concretos del viaje.
+      Te muestro dónde — y cómo taparlo. <span class="hand">en 10 minutos</span>
+    </p>
+
+    <ul class="benefits">
+      <li>Las 5 etapas donde un negocio pierde clientes sin darse cuenta.</li>
+      <li>El error más común de cada etapa y su solución rápida.</li>
+      <li>Un mini-autodiagnóstico para encontrar tu fuga más cara hoy.</li>
+    </ul>
+
+    <section class="form-card">
+      <h2>Recibe la guía gratis</h2>
+      <p class="note">Déjame tu email y te llevo directo a la guía.</p>
+
+      <!--
+        INTEGRACIÓN KIT (ConvertKit):
+        1. Reemplaza <KIT_FORM_ID> con el ID del formulario de Kit (en los dos lugares).
+        2. Borra el bloque .fallback-form de abajo cuando actives el embed.
+        3. El redirect a /recursos/la-guia se configura en el PANEL DE KIT
+           (Form → Settings → "Redirect to an external page"), NO aquí.
+
+        <script async data-uid="<KIT_FORM_ID>" src="https://kapuy.kit.com/<KIT_FORM_ID>/index.js"></script>
+        (cuentas antiguas: src="https://f.convertkit.com/ck/form/<KIT_FORM_ID>.js")
+      -->
+
+      <!-- Formulario de respaldo: postea directo a Kit. Funciona aunque el embed JS no esté.
+           El redirect tras suscribirse igual se define en el panel de Kit. -->
+      <form class="fallback-form"
+            action="https://app.kit.com/forms/<KIT_FORM_ID>/subscriptions"
+            method="post">
+        <input type="email" name="email_address" placeholder="tu@email.com" aria-label="Tu email" required>
+        <button type="submit" class="btn-primary">Quiero la guía</button>
+      </form>
+
+      <p class="privacy">Sin spam. Cancela cuando quieras.</p>
+    </section>
+
+    <footer>
+      <p class="brand">Kapüy — el sistema invisible que mueve tu marketing</p>
+      <p style="margin-top:0.5rem;"><a href="/">← Volver al inicio</a></p>
+    </footer>
+  </main>
+</body>
+</html>
