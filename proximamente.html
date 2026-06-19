@@ -37,11 +37,11 @@
     gap: clamp(24px, 4vh, 48px);
   }
 
-  /* ── Header ───────────────────────────────── */
+  /* ── Header (barra de utilidad: marca + idioma) ── */
   header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
   }
 
@@ -62,6 +62,36 @@
     margin-top: 8px;
   }
 
+  /* Toggle de idioma */
+  .lang {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .lang button {
+    background: none;
+    border: 0;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .lang button + button { border-left: 1px solid var(--line); }
+  .lang button.active { background: var(--ink); color: var(--bg); }
+  .lang button:not(.active):hover { color: var(--ink); }
+
+  /* ── Centro (todo centrado) ───────────────── */
+  main {
+    align-self: center;
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   .status-pill {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -74,22 +104,18 @@
     align-items: center;
     gap: 8px;
     white-space: nowrap;
+    margin-bottom: clamp(20px, 3vh, 28px);
   }
   .blink {
     width: 7px; height: 7px;
     background: var(--ink);
     border-radius: 50%;
     animation: pulse 1.6s ease-in-out infinite;
+    flex-shrink: 0;
   }
   @keyframes pulse {
     0%, 100% { opacity: 1; transform: scale(1); }
     50%      { opacity: 0.2; transform: scale(0.7); }
-  }
-
-  /* ── Centro ───────────────────────────────── */
-  main {
-    align-self: center;
-    max-width: 920px;
   }
 
   .eyebrow {
@@ -103,7 +129,7 @@
 
   h1 {
     font-weight: 700;
-    font-size: clamp(38px, 8vw, 92px);
+    font-size: clamp(36px, 7.5vw, 88px);
     line-height: 0.98;
     letter-spacing: -0.03em;
   }
@@ -111,7 +137,7 @@
     display: block;
     color: var(--ink-mute);
     font-weight: 500;
-    font-size: clamp(19px, 3.2vw, 36px);
+    font-size: clamp(18px, 3vw, 34px);
     letter-spacing: -0.01em;
     margin-top: clamp(12px, 1.6vh, 20px);
   }
@@ -126,26 +152,31 @@
   }
 
   .lede {
-    margin-top: clamp(26px, 4vh, 36px);
-    max-width: 56ch;
+    margin: clamp(26px, 4vh, 36px) auto 0;
+    max-width: 58ch;
     font-size: clamp(16px, 1.7vw, 19px);
     line-height: 1.55;
     color: var(--ink-soft);
   }
   .lede strong { color: var(--ink); font-weight: 600; }
 
-  /* Lectura técnica estilo terminal */
+  /* Lectura técnica estilo terminal — bloque centrado, texto alineado a la izquierda */
   .readout {
-    margin-top: clamp(26px, 4vh, 36px);
+    display: inline-block;
+    text-align: left;
+    margin: clamp(26px, 4vh, 36px) auto 0;
+    max-width: 100%;
     font-family: var(--font-mono);
     font-size: clamp(12px, 1.3vw, 14px);
-    line-height: 1.9;
+    line-height: 1.85;
     color: var(--ink-soft);
     border-left: 2px solid var(--line);
     padding-left: 18px;
   }
-  .readout .k { color: var(--ink-mute); }
-  .readout .v { color: var(--ink); }
+  .rhead { color: var(--ink-mute); margin-bottom: 2px; }
+  .rline { display: flex; gap: 1.2ch; align-items: baseline; }
+  .rk { flex: 0 0 13ch; color: var(--ink-mute); }
+  .rv { flex: 1 1 auto; min-width: 0; color: var(--ink); }
   .cursor {
     display: inline-block;
     width: 8px; height: 1.05em;
@@ -160,6 +191,7 @@
     margin-top: clamp(32px, 5vh, 44px);
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     gap: 16px 24px;
   }
@@ -188,24 +220,23 @@
     letter-spacing: 0.03em;
   }
 
-  /* ── Footer ───────────────────────────────── */
+  /* ── Footer (centrado) ────────────────────── */
   footer {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.06em;
     color: var(--ink-mute);
     text-transform: uppercase;
   }
-  footer a { color: var(--ink-soft); text-decoration: none; }
-  footer a:hover { color: var(--ink); }
 
   @media (max-width: 560px) {
-    .status-pill { display: none; }
-    footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .wordmark .gloss { display: none; }
+    .rk { flex-basis: 11ch; }
   }
 </style>
 </head>
@@ -216,49 +247,106 @@
     <header>
       <div class="wordmark">
         Kapüy
-        <span class="gloss">sistemas de marketing</span>
+        <span class="gloss" id="gloss">sistemas de marketing</span>
       </div>
-      <div class="status-pill"><span class="blink"></span> Sistema en construcción</div>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" aria-label="Español">ES</button>
+        <button type="button" data-lang="en" aria-label="English">EN</button>
+      </div>
     </header>
 
     <main>
-      <p class="eyebrow">// 01 — Estamos armando algo que sí se puede medir</p>
+      <div class="status-pill"><span class="blink"></span> <span id="statusText">Sistema en construcción</span></div>
+
+      <p class="eyebrow" id="eyebrow">// 01 — Estamos armando algo que sí se puede medir</p>
 
       <h1>
-        El sistema está<br>en construcción.
-        <span class="irony">(Esta página también, sí.)</span>
+        <span id="h1lead">El sistema está<br>en construcción.</span>
+        <span class="irony" id="h1irony">(Esta página también, sí.)</span>
       </h1>
 
-      <p class="annotation">lo invisible mueve las mareas</p>
+      <p class="annotation" id="annotation">lo invisible mueve las mareas</p>
 
-      <p class="lede">
+      <p class="lede" id="lede">
         Construimos <strong>sistemas de marketing que puedes rastrear</strong> —no posts que rezas
         para que funcionen. Ahora mismo estamos armando el nuestro con la misma obsesión por el
         detalle que le metemos a tu funnel. Vuelve pronto. O adelántate.
       </p>
 
       <div class="readout">
-        <span class="k">&gt; kapuy.init()</span><br>
-        <span class="k">status&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="v">en construcción</span><br>
-        <span class="k">entregamos&nbsp;</span> <span class="v">crecimiento predecible y medible</span><br>
-        <span class="k">no vendemos</span> <span class="v">humo, ni likes, ni vanity metrics</span><br>
-        <span class="k">lanzamiento</span> <span class="v">pronto<span class="cursor"></span></span>
+        <div class="rhead" id="rhead">&gt; kapuy.init()</div>
+        <div class="rline"><span class="rk" id="rk1">status</span><span class="rv" id="rv1">en construcción</span></div>
+        <div class="rline"><span class="rk" id="rk2">entregamos</span><span class="rv" id="rv2">crecimiento predecible y medible</span></div>
+        <div class="rline"><span class="rk" id="rk3">no vendemos</span><span class="rv" id="rv3">humo, ni likes, ni vanity metrics</span></div>
+        <div class="rline"><span class="rk" id="rk4">lanzamiento</span><span class="rv"><span id="rv4">pronto</span><span class="cursor"></span></span></div>
       </div>
 
       <div class="cta-row">
         <a class="cta" href="mailto:vero@kapuymarketing.com?subject=Quiero%20un%20sistema%2C%20no%20posts">
-          Hablemos <span class="arrow">→</span>
+          <span id="ctaText">Hablemos</span> <span class="arrow">→</span>
         </a>
-        <span class="cta-note">¿No quieres esperar a la web? Empecemos por tu negocio.</span>
+        <span class="cta-note" id="ctaNote">¿No quieres esperar a la web? Empecemos por tu negocio.</span>
       </div>
     </main>
 
     <footer>
-      <span>© 2026 Kapüy — Sistemas de marketing</span>
-      <span>Negocio → Estrategia → Sistemas → Ejecución</span>
+      <span id="footerLeft">© 2026 Kapüy — Sistemas de marketing</span>
+      <span id="footerRight">Negocio → Estrategia → Sistemas → Ejecución</span>
     </footer>
 
   </div>
+
+  <script>
+    var dict = {
+      gloss:       { es: "sistemas de marketing",                                en: "marketing systems" },
+      statusText:  { es: "Sistema en construcción",                              en: "System under construction" },
+      eyebrow:     { es: "// 01 — Estamos armando algo que sí se puede medir",    en: "// 01 — Building something you can actually measure" },
+      h1lead:      { es: "El sistema está<br>en construcción.",                   en: "The system is<br>under construction." },
+      h1irony:     { es: "(Esta página también, sí.)",                            en: "(This page too, yes.)" },
+      annotation:  { es: "lo invisible mueve las mareas",                         en: "the invisible moves the tides" },
+      lede:        {
+        es: "Construimos <strong>sistemas de marketing que puedes rastrear</strong> —no posts que rezas para que funcionen. Ahora mismo estamos armando el nuestro con la misma obsesión por el detalle que le metemos a tu funnel. Vuelve pronto. O adelántate.",
+        en: "We build <strong>marketing systems you can actually track</strong> —not posts you pray will work. Right now we're building our own with the same obsession for detail we pour into your funnel. Come back soon. Or skip the wait."
+      },
+      rhead:       { es: "&gt; kapuy.init()",                                     en: "&gt; kapuy.init()" },
+      rk1:         { es: "status",       en: "status" },
+      rv1:         { es: "en construcción",                  en: "under construction" },
+      rk2:         { es: "entregamos",   en: "we deliver" },
+      rv2:         { es: "crecimiento predecible y medible", en: "predictable, measurable growth" },
+      rk3:         { es: "no vendemos",  en: "we don't sell" },
+      rv3:         { es: "humo, ni likes, ni vanity metrics", en: "smoke, likes, or vanity metrics" },
+      rk4:         { es: "lanzamiento",  en: "launch" },
+      rv4:         { es: "pronto",       en: "soon" },
+      ctaText:     { es: "Hablemos",                                             en: "Let's talk" },
+      ctaNote:     { es: "¿No quieres esperar a la web? Empecemos por tu negocio.", en: "Don't want to wait for the site? Let's start with your business." },
+      footerLeft:  { es: "© 2026 Kapüy — Sistemas de marketing",                 en: "© 2026 Kapüy — Marketing systems" },
+      footerRight: { es: "Negocio → Estrategia → Sistemas → Ejecución",          en: "Business → Strategy → Systems → Execution" }
+    };
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.title = lang === "en" ? "Kapüy — Coming soon" : "Kapüy — Próximamente";
+      for (var id in dict) {
+        var el = document.getElementById(id);
+        if (el) el.innerHTML = dict[id][lang];
+      }
+      var btns = document.querySelectorAll(".lang button");
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.toggle("active", btns[i].getAttribute("data-lang") === lang);
+      }
+      try { localStorage.setItem("kapuy_lang", lang); } catch (e) {}
+    }
+
+    var saved = null;
+    try { saved = localStorage.getItem("kapuy_lang"); } catch (e) {}
+    var initial = saved || ((navigator.language || "es").toLowerCase().indexOf("en") === 0 ? "en" : "es");
+
+    var btns = document.querySelectorAll(".lang button");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () { setLang(this.getAttribute("data-lang")); });
+    }
+    setLang(initial);
+  </script>
 
 </body>
 </html>
