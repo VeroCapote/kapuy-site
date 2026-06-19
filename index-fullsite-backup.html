@@ -17,6 +17,63 @@
       This page requires JavaScript to display.
     </div>
   </noscript>
+  <!-- Kapüy: pop-up de lead magnet (independiente del bundle React). -->
+  <script>
+    (function () {
+      var DISMISS_KEY = 'kapuyLeadCtaDismissed';
+      function dismissed() { try { return sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; } }
+      function close() {
+        try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) {}
+        var el = document.getElementById('kapuy-lead-cta'); if (el) el.remove();
+      }
+      function build() {
+        var overlay = document.createElement('div');
+        overlay.id = 'kapuy-lead-cta';
+        overlay.setAttribute('style', 'position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(8,14,28,.6);font-family:-apple-system,BlinkMacSystemFont,Satoshi,sans-serif;');
+        overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+
+        var card = document.createElement('div');
+        card.setAttribute('style', 'position:relative;width:100%;max-width:440px;background:#FAF8F3;color:#0F172A;border-radius:16px;padding:34px 28px 30px;box-shadow:0 24px 64px rgba(8,14,28,.5);text-align:center;');
+
+        var closeBtn = document.createElement('button');
+        closeBtn.setAttribute('aria-label', 'Cerrar');
+        closeBtn.textContent = '×';
+        closeBtn.setAttribute('style', 'position:absolute;top:12px;right:14px;background:none;border:none;color:#717787;font-size:26px;line-height:1;cursor:pointer;padding:4px;');
+        closeBtn.onclick = close;
+
+        var eyebrow = document.createElement('div');
+        eyebrow.setAttribute('style', 'font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#717787;margin-bottom:12px;');
+        eyebrow.textContent = 'Guía gratuita · Kapüy';
+
+        var title = document.createElement('div');
+        title.setAttribute('style', 'font-size:24px;font-weight:900;line-height:1.15;letter-spacing:-.01em;margin-bottom:12px;');
+        title.textContent = 'Las 5 fugas del embudo que te cuestan ventas';
+
+        var txt = document.createElement('p');
+        txt.setAttribute('style', 'font-size:15px;line-height:1.5;color:#3A4254;margin:0 0 22px;');
+        txt.textContent = '¿Tu marketing no termina de vender? Descubrí dónde pierdes clientes y cómo taparlo. Descargala gratis.';
+
+        var btn = document.createElement('a');
+        btn.href = '/recursos/guia-embudo';
+        btn.textContent = 'Quiero la guía';
+        btn.setAttribute('style', 'display:inline-block;background:#2952FF;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:13px 28px;border-radius:8px;');
+
+        card.appendChild(closeBtn);
+        card.appendChild(eyebrow);
+        card.appendChild(title);
+        card.appendChild(txt);
+        card.appendChild(btn);
+        overlay.appendChild(card);
+        return overlay;
+      }
+      function ensure() {
+        if (dismissed() || !document.body || document.getElementById('kapuy-lead-cta')) return;
+        document.body.appendChild(build());
+      }
+      // La app reemplaza el documento al cargar; el intervalo reinyecta el pop-up después.
+      setInterval(ensure, 700);
+    })();
+  </script>
 </head>
 <body>
   <div id="__bundler_thumbnail">
