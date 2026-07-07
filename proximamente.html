@@ -219,6 +219,17 @@
     color: var(--ink-mute);
     letter-spacing: 0.03em;
   }
+  .cta-email {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-mute);
+    padding-bottom: 2px;
+    transition: opacity 0.2s ease;
+  }
+  .cta-email:hover { opacity: 0.7; }
 
   /* ── Footer (centrado) ────────────────────── */
   footer {
@@ -282,9 +293,10 @@
       </div>
 
       <div class="cta-row">
-        <a class="cta" href="mailto:vero@kapuymarketing.com?subject=Quiero%20un%20sistema%2C%20no%20posts">
+        <a class="cta" href="mailto:hey@kapuymarketing.com?subject=Quiero%20un%20sistema%2C%20no%20posts">
           <span id="ctaText">Hablemos</span> <span class="arrow">→</span>
         </a>
+        <a class="cta-email" href="mailto:hey@kapuymarketing.com?subject=Quiero%20un%20sistema%2C%20no%20posts">hey@kapuymarketing.com</a>
         <span class="cta-note" id="ctaNote">¿No quieres esperar a la web? Empecemos por tu negocio.</span>
       </div>
     </main>
