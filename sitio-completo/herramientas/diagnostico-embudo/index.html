@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Diagnóstico de Fugas del Embudo — Kapüy</title>
+  <meta name="description" content="Descubre por dónde se te escapan los clientes. Diagnóstico gratuito de las 5 etapas de tu embudo, en 2 minutos.">
+
+  <!-- Fuentes: mismas que el sitio (Satoshi + IBM Plex Mono + Caveat) -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+
+    /* Tokens de marca Kapüy — mismos valores que el resto del sitio.
+       (Al integrar conviene extraerlos a un CSS compartido; ver nota de deploy.) */
+    :root {
+      --navy: #0F172A;
+      --cobalt: #2952FF;
+      --cobalt-deep: #1E3FD6;
+      --cobalt-tint: #E2E7FF;
+      --copper: #C9A17A;
+      --bone-100: #FAF8F3;
+      --bone-200: #F3F0EA;
+      --bone-300: #E9E5DD;
+      --ink: #0F172A;
+      --ink-soft: #3A4254;
+      --ink-faint: #717787;
+      --hairline: #C8C4BB;
+      --signal-red: #C8503A;
+
+      --font-sans: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+      --font-hand: 'Caveat', 'Segoe Script', cursive;
+
+      --container: 760px;
+      --shadow-sm: 0 2px 8px rgba(15,23,42,.10);
+      --shadow-md: 0 10px 28px rgba(15,23,42,.14);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bone-200);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Chrome del sitio ────────────────────────────────────────────── */
+    .site-nav, .site-footer {
+      background: var(--navy);
+      color: #C3C8D4;
+    }
+    .site-nav {
+      padding: 1rem 1.5rem;
+    }
+    .site-nav .inner, .site-footer .inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .site-nav a.logo {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+    }
+    .site-nav .tag {
+      font-family: var(--font-hand);
+      font-size: 1.15rem;
+      color: var(--copper);
+      transform: rotate(-1.5deg);
+    }
+    .site-footer {
+      margin-top: auto;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .site-footer .brand {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #818AA0;
+    }
+    .site-footer a { color: #8AA0FF; text-decoration: none; }
+
+    /* ── Contenedor de la app ────────────────────────────────────────── */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: clamp(2rem, 6vw, 4rem) 1.5rem;
+    }
+    .card {
+      background: var(--bone-100);
+      border: 1px solid var(--hairline);
+      border-radius: 14px;
+      padding: clamp(1.75rem, 5vw, 3rem);
+      box-shadow: var(--shadow-sm);
+    }
+
+    @keyframes enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    [data-anim] { animation: enter 240ms cubic-bezier(.22,.61,.36,1); }
+    @media (prefers-reduced-motion: reduce) { [data-anim] { animation: none; } }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-faint);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: clamp(2rem, 5.5vw, 3.1rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .accent { color: var(--cobalt); }
+    h2.q {
+      font-weight: 700;
+      font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .lead { font-size: 1.15rem; color: var(--ink-soft); margin-bottom: 1.75rem; }
+    .hand-note {
+      font-family: var(--font-hand);
+      font-size: 1.35rem;
+      color: var(--cobalt);
+      display: block;
+      margin-top: 1rem;
+      transform: rotate(-1.5deg);
+    }
+
+    /* Botones */
+    .btn-primary {
+      font-family: var(--font-sans); font-weight: 700; font-size: 1.02rem;
+      color: #fff; background: var(--cobalt); border: none; border-radius: 6px;
+      padding: 0.95rem 1.9rem; cursor: pointer; text-decoration: none; display: inline-block;
+      transition: background .2s cubic-bezier(.22,.61,.36,1);
+    }
+    .btn-primary:hover { background: var(--cobalt-deep); }
+    .btn-ghost {
+      font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em;
+      color: var(--ink-faint); background: none; border: none; cursor: pointer; padding: 0.5rem 0;
+    }
+    .btn-ghost:disabled { opacity: 0.35; cursor: default; }
+    .btn-ghost:not(:disabled):hover { color: var(--cobalt); }
+
+    /* Progreso */
+    .progress { height: 4px; background: var(--bone-300); border-radius: 99px; margin-bottom: 1.5rem; overflow: hidden; }
+    .progress-bar { height: 100%; background: var(--cobalt); border-radius: 99px; transition: width .3s cubic-bezier(.22,.61,.36,1); }
+
+    /* Opciones */
+    .options { display: grid; gap: 0.7rem; }
+    .option {
+      display: flex; align-items: flex-start; gap: 0.85rem; text-align: left;
+      font-family: var(--font-sans); font-size: 1.02rem; color: var(--ink-soft);
+      background: #fff; border: 1.5px solid var(--hairline); border-radius: 9px;
+      padding: 1rem 1.1rem; cursor: pointer; line-height: 1.4;
+      transition: border-color .15s, background .15s, transform .05s;
+    }
+    .option:hover { border-color: var(--cobalt); background: var(--cobalt-tint); }
+    .option:active { transform: scale(.995); }
+    .option.is-selected { border-color: var(--cobalt); background: var(--cobalt-tint); }
+    .option .tick {
+      flex: none; width: 1.15rem; height: 1.15rem; margin-top: 0.15rem;
+      border: 1.5px solid var(--hairline); border-radius: 50%;
+      transition: border-color .15s, background .15s;
+    }
+    .option:hover .tick, .option.is-selected .tick { border-color: var(--cobalt); background: var(--cobalt); box-shadow: inset 0 0 0 3px #fff; }
+    .nav { margin-top: 1.5rem; }
+
+    /* ── Resultado ───────────────────────────────────────────────────── */
+    .claim-kicker { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.25rem; }
+    .claim { font-size: clamp(2.4rem, 7vw, 3.8rem); margin-bottom: 1.5rem; }
+
+    .health { display: flex; align-items: center; gap: 1.25rem; background: var(--navy); color: #C3C8D4; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-md); }
+    .health-num { font-weight: 900; font-size: 3rem; color: #fff; line-height: 1; }
+    .health-num span { font-size: 1.1rem; color: #818AA0; font-weight: 500; }
+    .health-meta .grade { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8AA0FF; display: block; margin-bottom: 0.2rem; }
+    .health-meta strong { color: #fff; font-size: 1.2rem; display: block; }
+    .health-meta p { color: #818AA0; font-size: 0.95rem; margin-top: 0.15rem; }
+
+    .verdict { margin-bottom: 1.5rem; }
+    .verdict p { font-size: 1.05rem; margin-bottom: 0.6rem; }
+    .verdict strong { color: var(--ink); }
+
+    .caveat { border-left: 3px solid var(--copper); background: var(--bone-200); border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+    .caveat .label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--copper); display: block; margin-bottom: 0.35rem; }
+    .caveat p { font-size: 0.98rem; color: var(--ink-soft); }
+
+    .map { border-top: 1.5px solid var(--copper); padding-top: 1.5rem; margin-bottom: 2rem; }
+    .map-title { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1rem; }
+    .map-row { display: flex; align-items: center; gap: 0.85rem; padding: 0.7rem 0; border-bottom: 1px solid var(--bone-300); }
+    .map-row:last-child { border-bottom: none; }
+    .map-idx { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-faint); }
+    .map-name { flex: 1; color: var(--ink); font-weight: 500; }
+    .map-name em { color: var(--signal-red); font-style: normal; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .map-row.is-leak { background: rgba(200,80,58,.05); border-radius: 6px; padding-left: 0.5rem; padding-right: 0.5rem; }
+    .chip { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 99px; border: 1.5px solid; }
+    .chip-red { color: var(--signal-red); border-color: var(--signal-red); }
+    .chip-copper { color: var(--copper); border-color: var(--copper); }
+    .chip-cobalt { color: var(--cobalt); border-color: var(--cobalt); }
+
+    /* Embudo + consentimiento */
+    .funnel { background: var(--navy); color: #C3C8D4; border-radius: 12px; padding: clamp(1.5rem, 4vw, 2.25rem); box-shadow: var(--shadow-md); }
+    .funnel h3 { color: #fff; font-weight: 900; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 0.6rem; }
+    .funnel-body { color: #A6AEC0; margin-bottom: 1.5rem; }
+    .optin { display: grid; gap: 0.85rem; }
+    .optin input[type=email] { font-family: var(--font-sans); font-size: 1rem; padding: 0.85rem 1rem; border-radius: 6px; border: 1.5px solid #3D4763; background: #0B1220; color: #fff; }
+    .optin input[type=email]::placeholder { color: #5B667F; }
+    .optin .opt { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.95rem; color: #C3C8D4; cursor: pointer; }
+    .optin .opt input { margin-top: 0.25rem; accent-color: var(--cobalt); }
+    .consent { font-size: 0.82rem; color: #818AA0; line-height: 1.5; border: 1px solid #2A3350; border-radius: 8px; padding: 0.85rem 1rem; }
+    .consent strong { color: #A6AEC0; }
+    .stub-note { font-family: var(--font-mono); font-size: 0.75rem; color: var(--copper); margin-top: 0.25rem; }
+    .stub-note.ok { color: #7FE0A0; }
+
+    .result-nav { text-align: center; margin-top: 1.5rem; }
+
+    /* Título del resultado: nunca desbordar en pantallas muy chicas. */
+    .claim { overflow-wrap: break-word; hyphens: auto; }
+    h1 { overflow-wrap: break-word; }
+
+    /* Muy angosto: apilar el bloque de salud. */
+    @media (max-width: 420px) {
+      .health { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="inner">
+      <a class="logo" href="/">Kapüy</a>
+      <span class="tag">el sistema invisible</span>
+    </div>
+  </nav>
+
+  <main id="app"><!-- render dinámico --></main>
+
+  <footer class="site-footer">
+    <div class="inner" style="display:block;">
+      <p class="brand">Kapüy — el sistema invisible que mueve tu marketing</p>
+      <p style="margin-top:0.5rem;"><a href="/">← Volver al inicio</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

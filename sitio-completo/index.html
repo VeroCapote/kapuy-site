@@ -74,6 +74,61 @@
       setInterval(ensure, 700);
     })();
   </script>
+  <!-- Kapüy: barra flotante del free tool (Diagnóstico de Fugas). Independiente del bundle React. -->
+  <script>
+    (function () {
+      var DISMISS_KEY = 'kapuyQuizCtaDismissed';
+      var QUIZ_URL = '/herramientas/diagnostico-embudo/';
+      function dismissed() { try { return sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; } }
+      function close() {
+        try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) {}
+        var el = document.getElementById('kapuy-quiz-cta'); if (el) el.remove();
+      }
+      function build() {
+        var bar = document.createElement('div');
+        bar.id = 'kapuy-quiz-cta';
+        bar.setAttribute('style', 'position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:2147482000;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;max-width:calc(100% - 24px);background:#0F172A;color:#fff;border-radius:14px;padding:15px 40px 15px 22px;box-shadow:0 16px 40px rgba(8,14,28,.4);font-family:-apple-system,BlinkMacSystemFont,Satoshi,sans-serif;');
+
+        var textWrap = document.createElement('div');
+        textWrap.setAttribute('style', 'display:flex;flex-direction:column;gap:2px;min-width:0;');
+
+        var eyebrow = document.createElement('span');
+        eyebrow.setAttribute('style', 'font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8AA0FF;');
+        eyebrow.textContent = 'Diagnóstico gratis · 2 min';
+
+        var title = document.createElement('span');
+        title.setAttribute('style', 'font-size:15px;font-weight:700;line-height:1.25;letter-spacing:-.01em;');
+        title.textContent = '¿Por dónde se te escapan los clientes?';
+
+        textWrap.appendChild(eyebrow);
+        textWrap.appendChild(title);
+
+        var btn = document.createElement('a');
+        btn.href = QUIZ_URL;
+        btn.textContent = 'Hacer el test →';
+        btn.setAttribute('style', 'flex-shrink:0;display:inline-block;white-space:nowrap;background:#2952FF;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:11px 20px;border-radius:8px;');
+
+        var closeBtn = document.createElement('button');
+        closeBtn.setAttribute('aria-label', 'Cerrar');
+        closeBtn.textContent = '×';
+        closeBtn.setAttribute('style', 'position:absolute;top:8px;right:12px;background:none;border:none;color:#818AA0;font-size:20px;line-height:1;cursor:pointer;padding:2px;');
+        closeBtn.onclick = close;
+
+        bar.appendChild(textWrap);
+        bar.appendChild(btn);
+        bar.appendChild(closeBtn);
+        return bar;
+      }
+      function ensure() {
+        if (dismissed() || !document.body || document.getElementById('kapuy-quiz-cta')) return;
+        // No competir con el modal de la guía: esperar a que se cierre.
+        if (document.getElementById('kapuy-lead-cta')) return;
+        document.body.appendChild(build());
+      }
+      // La app reemplaza el documento al cargar; el intervalo reinyecta la barra después.
+      setInterval(ensure, 700);
+    })();
+  </script>
 </head>
 <body>
   <div id="__bundler_thumbnail">
