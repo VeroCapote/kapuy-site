@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kapüy — Dashboard de embudo</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+
+  /* Tokens heredados del sitio (herramientas/diagnostico-embudo), adaptados a
+     superficie oscura. Acento único: cobalto. */
+  :root {
+    --navy:        #0F172A;
+    --surface:     #0B1020;
+    --surface-2:   #131A2E;
+    --cobalt:      #2952FF;
+    --cobalt-lift: #8AA0FF;
+    --cobalt-tint: #E2E7FF;
+    --copper:      #C9A17A;
+    --bone-100:    #FAF8F3;
+    --on-dark:     #EEF1F8;
+    --on-dark-soft:#9AA3B8;
+    --on-dark-faint:#666E85;
+    --hairline:    #222A40;
+    --signal-red:  #C8503A;
+
+    --font-sans: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    --font-hand: 'Caveat', 'Segoe Script', cursive;
+
+    --container: 1080px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--surface);
+    color: var(--on-dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 0 24px 96px;
+  }
+
+  .wrap { max-width: var(--container); margin: 0 auto; }
+
+  /* ---- Encabezado ---- */
+  header { padding: 72px 0 40px; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--on-dark-faint);
+  }
+
+  h1 {
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.05;
+    margin: 14px 0 12px;
+  }
+
+  .sub {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--on-dark-soft);
+    max-width: 60ch;
+  }
+
+  /* ---- Barra de control ---- */
+  .controls {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline);
+  }
+  .controls .label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--on-dark-faint); margin-right: 4px;
+  }
+  .chip {
+    font-family: var(--font-mono); font-size: 12px;
+    background: none; color: var(--on-dark-soft);
+    border: 1px solid var(--hairline); border-radius: 999px;
+    padding: 6px 14px; cursor: pointer;
+    transition: border-color .15s, color .15s;
+  }
+  .chip:hover { border-color: var(--cobalt-lift); color: var(--on-dark); }
+  .chip[aria-pressed="true"] {
+    border-color: var(--cobalt); color: #fff; background: var(--cobalt);
+  }
+  .stamp {
+    margin-left: auto; font-family: var(--font-mono); font-size: 11px;
+    color: var(--on-dark-faint);
+  }
+
+  /* ---- Veredicto ---- */
+  .verdict {
+    margin-top: 34px; padding: 22px 24px;
+    border-left: 2px solid var(--cobalt);
+    background: var(--surface-2);
+  }
+  .verdict h2 {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--on-dark-faint); font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .verdict p { font-size: 19px; line-height: 1.45; font-weight: 500; letter-spacing: -.01em; }
+  .verdict .hand {
+    font-family: var(--font-hand); font-size: 21px; color: var(--copper);
+    display: block; margin-top: 12px;
+  }
+
+  /* ---- Secciones: bandas con hairline, sin cards ---- */
+  section { padding: 44px 0 8px; border-top: 1px solid var(--hairline); margin-top: 44px; }
+
+  .sec-head {
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    margin-bottom: 34px;
+  }
+  .sec-title { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+  .sec-q { font-size: 15px; color: var(--on-dark-soft); }
+  .sec-src {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+    color: var(--on-dark-faint);
+  }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+  .dot.live    { background: var(--cobalt-lift); box-shadow: 0 0 0 3px rgba(138,160,255,.16); }
+  .dot.pending { background: var(--on-dark-faint); }
+
+  /* ---- Tira de métricas ---- */
+  .strip {
+    display: grid; gap: 40px 56px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+
+  .m-label {
+    font-size: 13px; color: var(--on-dark-soft); font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .m-value {
+    font-size: clamp(44px, 6vw, 68px);
+    font-weight: 900; letter-spacing: -.035em; line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .m-value .unit { font-size: .42em; font-weight: 700; letter-spacing: -.01em; color: var(--on-dark-soft); margin-left: 2px; }
+  .m-value.empty { color: var(--on-dark-faint); font-weight: 300; }
+
+  .m-meta {
+    display: flex; align-items: center; gap: 7px; margin-top: 12px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--on-dark-faint);
+  }
+
+  .m-reading {
+    margin-top: 12px; font-size: 13px; line-height: 1.5;
+    color: var(--on-dark-soft); max-width: 34ch;
+  }
+  .m-note {
+    margin-top: 8px; font-size: 12px; line-height: 1.45;
+    color: var(--on-dark-faint); max-width: 38ch;
+  }
+
+  footer {
+    margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--hairline);
+    font-family: var(--font-mono); font-size: 11px; color: var(--on-dark-faint);
+    line-height: 1.7;
+  }
+
+  .err {
+    margin-top: 34px; padding: 18px 20px;
+    border-left: 2px solid var(--signal-red); background: var(--surface-2);
+    font-size: 14px; color: var(--on-dark-soft);
+  }
+
+  @media (max-width: 640px) {
+    header { padding-top: 48px; }
+    .stamp { margin-left: 0; width: 100%; }
+    .sec-src { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Kapüy · Interno</div>
+    <h1>Dónde fuga el embudo</h1>
+    <p class="sub">
+      Siete números y su lectura. Nada de vanity metrics: si un dato no está en vivo,
+      acá aparece un guion—no un cero inventado.
+    </p>
+
+    <div class="controls">
+      <span class="label">Periodo</span>
+      <button class="chip" data-period="7">7 días</button>
+      <button class="chip" data-period="30" aria-pressed="true">30 días</button>
+      <button class="chip" data-period="90">90 días</button>
+      <span class="stamp" id="stamp">cargando…</span>
+    </div>
+  </header>
+
+  <div id="verdict-slot"></div>
+  <div id="sections"></div>
+
+  <footer id="footer"></footer>
+</div>
+
+<script type="module">
+  const fmt = new Intl.NumberFormat('es-VE');
+
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+
+  /** null nunca se vuelve 0. Un hueco se ve como hueco. */
+  function renderValue(m) {
+    const box = el('div', 'm-value');
+    if (m.value === null || m.value === undefined) {
+      box.classList.add('empty');
+      box.textContent = '—';
+      return box;
+    }
+    if (m.format === 'percent') {
+      box.textContent = (Math.round(m.value * 10) / 10).toString().replace('.', ',');
+      box.appendChild(el('span', 'unit', '%'));
+    } else {
+      box.textContent = fmt.format(m.value);
+    }
+    return box;
+  }
+
+  function renderMetric(m) {
+    const wrap = el('div', 'metric');
+    wrap.appendChild(el('div', 'm-label', m.label));
+    wrap.appendChild(renderValue(m));
+
+    const meta = el('div', 'm-meta');
+    meta.appendChild(el('span', 'dot ' + m.status));
+    meta.appendChild(el('span', null, `${m.status} · ${m.window}`));
+    wrap.appendChild(meta);
+
+    if (m.reading) wrap.appendChild(el('p', 'm-reading', m.reading));
+    if (m.note) wrap.appendChild(el('p', 'm-note', m.note));
+    return wrap;
+  }
+
+  function renderSection(s) {
+    const sec = el('section');
+    const head = el('div', 'sec-head');
+    head.appendChild(el('span', 'sec-title', s.label));
+    head.appendChild(el('span', 'sec-q', s.question || ''));
+
+    const src = el('div', 'sec-src');
+    src.appendChild(el('span', 'dot ' + s.status));
+    src.appendChild(el('span', null, `${s.source} · ${s.status}`));
+    head.appendChild(src);
+    sec.appendChild(head);
+
+    const strip = el('div', 'strip');
+    s.metrics.forEach((m) => strip.appendChild(renderMetric(m)));
+    sec.appendChild(strip);
+
+    if (s.note) sec.appendChild(el('p', 'm-note', s.note));
+    return sec;
+  }
+
+  /** El veredicto solo habla de lo que puede probar. Si falta el dato, lo dice. */
+  function renderVerdict(data) {
+    const find = (id) => {
+      for (const s of data.sections) {
+        const m = s.metrics.find((x) => x.id === id);
+        if (m) return m;
+      }
+      return null;
+    };
+    const visitas = find('visitantes');
+    const leads = find('leads');
+    const open = find('open_rate');
+
+    const box = el('div', 'verdict');
+    box.appendChild(el('h2', null, 'Lectura'));
+
+    const vivos = data.sections.flatMap((s) => s.metrics).filter((m) => m.status === 'live').length;
+    const total = data.sections.flatMap((s) => s.metrics).length;
+
+    let texto;
+    if (visitas?.status === 'live' && leads?.status === 'live') {
+      if (visitas.value === 0) {
+        texto = 'Nadie llegó al sitio en el periodo. El cuello es tráfico: sin visitas, el resto del embudo no tiene de qué opinar.';
+      } else if (leads.value === 0) {
+        texto = `Llegaron ${fmt.format(visitas.value)} personas y ninguna dejó datos. El tráfico existe; el que no convence es el mensaje—o no hay dónde dejar los datos.`;
+      } else if (open?.status === 'live' && open.value < 20) {
+        texto = 'Entran leads pero casi nadie abre los correos. La fuga se mudó al email.';
+      } else {
+        texto = 'Hay datos en vivo en tráfico y captura. Compará las dos tasas de abajo para ubicar la fuga.';
+      }
+    } else {
+      texto = `Todavía no alcanza para diagnosticar: ${vivos} de ${total} métricas están en vivo. Un veredicto con la mitad de los datos sería justamente el humo que no vendemos.`;
+    }
+    box.appendChild(el('p', null, texto));
+
+    const pendientes = data.sections
+      .flatMap((s) => s.metrics)
+      .filter((m) => m.status === 'pending')
+      .map((m) => m.label);
+    if (pendientes.length) {
+      box.appendChild(el('span', 'hand', `Faltan por conectar: ${pendientes.join(', ')}`));
+    }
+    return box;
+  }
+
+  let periodo = 30;
+
+  async function load() {
+    const secs = document.getElementById('sections');
+    const vslot = document.getElementById('verdict-slot');
+    document.getElementById('stamp').textContent = 'cargando…';
+
+    try {
+      const res = await fetch(`/api/dashboard?period=${periodo}`, { credentials: 'same-origin' });
+      if (res.status === 401) { window.location.href = '/dashboard/login'; return; }
+      if (!res.ok) throw new Error(`El endpoint respondió HTTP ${res.status}`);
+      const data = await res.json();
+
+      vslot.replaceChildren(renderVerdict(data));
+      secs.replaceChildren(...data.sections.map(renderSection));
+
+      const t = new Date(data.generated_at);
+      document.getElementById('stamp').textContent =
+        'actualizado ' + t.toLocaleString('es-VE', { dateStyle: 'medium', timeStyle: 'short' });
+
+      const vivos = data.sections.flatMap((s) => s.metrics).filter((m) => m.status === 'live').length;
+      const total = data.sections.flatMap((s) => s.metrics).length;
+      document.getElementById('footer').textContent =
+        `${vivos}/${total} métricas en vivo · ventana ${data.period_days} días · fuentes: ` +
+        data.sections.map((s) => `${s.source} (${s.status})`).join(' · ');
+    } catch (err) {
+      vslot.replaceChildren();
+      secs.replaceChildren(
+        el('div', 'err', `No se pudo cargar el dashboard: ${err.message}`)
+      );
+      document.getElementById('stamp').textContent = 'error';
+    }
+  }
+
+  document.querySelectorAll('.chip').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      periodo = parseInt(btn.dataset.period, 10);
+      document.querySelectorAll('.chip').forEach((b) =>
+        b.setAttribute('aria-pressed', String(b === btn))
+      );
+      load();
+    });
+  });
+
+  load();
+</script>
+</body>
+</html>

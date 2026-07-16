@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kapüy — Dashboard</title>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  @import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,700,900&display=swap');
+  :root {
+    --surface: #0B1020;
+    --surface-2: #131A2E;
+    --cobalt: #2952FF;
+    --cobalt-lift: #8AA0FF;
+    --on-dark: #EEF1F8;
+    --on-dark-soft: #9AA3B8;
+    --on-dark-faint: #666E85;
+    --hairline: #222A40;
+    --signal-red: #C8503A;
+    --font-sans: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--surface); color: var(--on-dark);
+    font-family: var(--font-sans); -webkit-font-smoothing: antialiased;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .box { width: 100%; max-width: 380px; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--on-dark-faint); margin-bottom: 14px;
+  }
+  h1 { font-size: 28px; font-weight: 900; letter-spacing: -.02em; line-height: 1.1; }
+  p.sub { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--on-dark-soft); }
+  form { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+  input {
+    font-family: var(--font-sans); font-size: 15px;
+    background: var(--surface-2); color: var(--on-dark);
+    border: 1px solid var(--hairline); border-radius: 8px;
+    padding: 13px 14px; outline: none;
+  }
+  input:focus { border-color: var(--cobalt-lift); }
+  button {
+    font-family: var(--font-sans); font-size: 15px; font-weight: 700;
+    background: var(--cobalt); color: #fff; border: none; border-radius: 8px;
+    padding: 13px 14px; cursor: pointer;
+  }
+  button:disabled { opacity: .6; cursor: default; }
+  .err {
+    font-size: 13px; color: var(--signal-red); min-height: 18px;
+  }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="eyebrow">Kapüy · Interno</div>
+    <h1>Esto no es para todos</h1>
+    <p class="sub">Los números del embudo viven detrás de esta puerta. Password, por favor.</p>
+    <form id="f">
+      <input id="p" type="password" name="password" placeholder="Password" autocomplete="current-password" required autofocus>
+      <button id="b" type="submit">Entrar</button>
+      <div class="err" id="e"></div>
+    </form>
+  </div>
+<script>
+  const f = document.getElementById('f');
+  const p = document.getElementById('p');
+  const b = document.getElementById('b');
+  const e = document.getElementById('e');
+
+  f.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    e.textContent = '';
+    b.disabled = true;
+    b.textContent = 'Verificando…';
+    try {
+      const res = await fetch('/api/dashboard-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ password: p.value }),
+      });
+      if (res.ok) {
+        window.location.href = '/dashboard';
+        return;
+      }
+      const data = await res.json().catch(() => ({}));
+      e.textContent = data.error || 'No entraste. Revisá la password.';
+    } catch (err) {
+      e.textContent = 'Falló la conexión: ' + err.message;
+    }
+    b.disabled = false;
+    b.textContent = 'Entrar';
+  });
+</script>
+</body>
+</html>
