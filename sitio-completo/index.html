@@ -144,6 +144,16 @@
       setInterval(hide, 500);
     })();
   </script>
+
+  <!-- Kapüy: Vercel Web Analytics. Alimenta la tile "Visitantes únicos" de /dashboard.
+       A diferencia del pop-up y del sink de errores, este NO necesita reinyección por
+       intervalo: los scripts `defer` corren antes de DOMContentLoaded, y el unpack del
+       bundle recién reemplaza el documento en ese evento. Alcanza a mandar el pageview,
+       y como el swap sólo re-ejecuta los scripts del template, no se cuenta dos veces. -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <div id="__bundler_thumbnail">
