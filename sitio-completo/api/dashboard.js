@@ -309,16 +309,29 @@ async function emailAdapter(periodDays) {
       headers,
     });
     const s = body?.stats ?? body;
-    if (typeof s?.open_rate === 'number') {
-      openRate.value = s.open_rate;
-      openRate.status = 'live';
-      algoVivo = true;
+
+    // Sin envíos no hay tasa. Kit devuelve open_rate: 0 cuando sent: 0, pero ese
+    // 0 no es un dato: una tasa sobre cero envíos no existe, no es cero. Mismo
+    // criterio que la conversión visita→lead: sin denominador, no se calcula.
+    const sent = typeof s?.sent === 'number' ? s.sent : null;
+
+    if (sent === 0) {
+      const nota = 'No hay envíos en la ventana. Una tasa sobre cero envíos no existe—no es 0%.';
+      openRate.note = nota;
+      clickRate.note = nota;
+    } else {
+      if (typeof s?.open_rate === 'number') {
+        openRate.value = s.open_rate;
+        openRate.status = 'live';
+        algoVivo = true;
+      }
+      if (typeof s?.click_rate === 'number') {
+        clickRate.value = s.click_rate;
+        clickRate.status = 'live';
+        algoVivo = true;
+      }
     }
-    if (typeof s?.click_rate === 'number') {
-      clickRate.value = s.click_rate;
-      clickRate.status = 'live';
-      algoVivo = true;
-    }
+    if (sent !== null) section.sent = sent;
   } catch (err) {
     openRate.note = `Kit email_stats: ${err.message}`;
     clickRate.note = `Kit email_stats: ${err.message}`;

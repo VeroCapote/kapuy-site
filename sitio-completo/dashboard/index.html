@@ -298,12 +298,19 @@
     const vivos = data.sections.flatMap((s) => s.metrics).filter((m) => m.status === 'live').length;
     const total = data.sections.flatMap((s) => s.metrics).length;
 
+    // Umbral bajo el cual no hay diagnóstico posible: con un puñado de visitas
+    // cualquier tasa es ruido. Preferimos decir "no sé" a inventar una causa.
+    const MUESTRA_MINIMA = 30;
+
     let texto;
     if (visitas?.status === 'live' && leads?.status === 'live') {
+      const personas = visitas.value === 1 ? '1 persona' : `${fmt.format(visitas.value)} personas`;
       if (visitas.value === 0) {
         texto = 'Nadie llegó al sitio en el periodo. El cuello es tráfico: sin visitas, el resto del embudo no tiene de qué opinar.';
+      } else if (visitas.value < MUESTRA_MINIMA) {
+        texto = `Solo ${personas} en la ventana. Es muy poco para diagnosticar nada: con esta muestra, cualquier tasa es ruido. El cuello hoy es tráfico—no hay a quién medirle el mensaje.`;
       } else if (leads.value === 0) {
-        texto = `Llegaron ${fmt.format(visitas.value)} personas y ninguna dejó datos. El tráfico existe; el que no convence es el mensaje—o no hay dónde dejar los datos.`;
+        texto = `Llegaron ${personas} y ninguna dejó datos. El tráfico existe; el que no convence es el mensaje—o no hay dónde dejar los datos.`;
       } else if (open?.status === 'live' && open.value < 20) {
         texto = 'Entran leads pero casi nadie abre los correos. La fuga se mudó al email.';
       } else {
