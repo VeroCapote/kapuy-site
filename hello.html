@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) — GA4 kapuymarketing.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R9VF8E09L8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R9VF8E09L8');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kapüy — Marketing you don't have to second-guess</title>
+<meta name="description" content="We build the funnel underneath the marketing: what brings people in, what keeps them moving, and what turns interest into a conversation." />
+<meta name="robots" content="noindex" />
+
+<style>
+  :root {
+    --bg:       #ffffff;
+    --ink:      #111111;
+    --ink-soft: #444444;
+    --ink-mute: #888888;
+    --line:     #e6e6e6;
+    --wash:     #fafafa;
+
+    --font-sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 40px);
+  }
+
+  /* ── Header ───────────────────────────────── */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: clamp(20px, 4vw, 36px) 0;
+  }
+
+  .wordmark {
+    font-weight: 700;
+    font-size: clamp(18px, 2.2vw, 22px);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .lang { display: inline-flex; border: 1px solid var(--line); flex-shrink: 0; }
+  .lang button {
+    background: none; border: 0; padding: 7px 12px; cursor: pointer;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--ink-mute); transition: color 0.15s ease, background 0.15s ease;
+  }
+  .lang button + button { border-left: 1px solid var(--line); }
+  .lang button.active { background: var(--ink); color: var(--bg); }
+  .lang button:not(.active):hover { color: var(--ink); }
+
+  /* ── Section rhythm ───────────────────────── */
+  section { padding: clamp(40px, 7vh, 64px) 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: 0; padding-top: clamp(12px, 2vh, 24px); }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 1.3vw, 12px);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: clamp(18px, 3vh, 28px);
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: clamp(32px, 6.4vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: clamp(21px, 2.9vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: clamp(16px, 2.4vh, 22px);
+  }
+
+  .lede {
+    margin-top: clamp(22px, 3.4vh, 30px);
+    max-width: 56ch;
+    font-size: clamp(17px, 1.8vw, 20px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  p.body {
+    max-width: 62ch;
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.68;
+    color: var(--ink-soft);
+  }
+  p.body + p.body { margin-top: 1.1em; }
+  p.body strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Bloque del formulario ────────────────── */
+  .callout {
+    background: var(--wash);
+    border: 1px solid var(--line);
+    padding: clamp(24px, 4vw, 36px);
+  }
+  .callout h2 { margin-bottom: 14px; }
+  .callout p.body { max-width: 56ch; }
+
+  form { max-width: 460px; margin-top: clamp(22px, 3vh, 28px); }
+  .field { margin-bottom: 14px; }
+  label.lbl {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 7px;
+  }
+  input[type="email"], input[type="text"] {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 13px 14px;
+    transition: border-color 0.15s ease;
+  }
+  input[type="email"]:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--ink);
+  }
+
+  button.submit {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--ink);
+    border: 0;
+    padding: 15px 26px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  button.submit:hover:not(:disabled) { opacity: 0.85; transform: translateY(-2px); }
+  button.submit:disabled { opacity: 0.45; cursor: default; }
+
+  .formnote {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--ink-mute);
+    max-width: 46ch;
+  }
+  .msg { margin-top: 16px; font-size: 15px; line-height: 1.55; max-width: 52ch; display: none; }
+  .msg.show { display: block; }
+  .msg.ok { color: var(--ink); }
+  .msg.err { color: #a33; }
+
+  /* ── Lista del "no" ───────────────────────── */
+  ul.nots { list-style: none; max-width: 60ch; }
+  ul.nots li {
+    position: relative;
+    padding-left: 20px;
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.62;
+    color: var(--ink-soft);
+  }
+  ul.nots li + li { margin-top: 10px; }
+  ul.nots li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    color: var(--ink-mute);
+    font-weight: 700;
+  }
+
+  a.inline {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-mute);
+    transition: opacity 0.2s ease;
+  }
+  a.inline:hover { opacity: 0.7; }
+
+  /* ── Footer ───────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: clamp(28px, 4vh, 40px) 0 clamp(32px, 5vh, 48px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  footer a { color: var(--ink-mute); text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--ink); }
+  .social { display: flex; gap: 16px; align-items: center; }
+  .social svg { width: 17px; height: 17px; fill: currentColor; display: block; }
+
+  @media (max-width: 560px) {
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <a class="wordmark" href="/">Kapüy</a>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <button type="button" data-lang="en" aria-label="English">EN</button>
+      <button type="button" data-lang="es" aria-label="Español">ES</button>
+    </div>
+  </header>
+
+  <!-- ── 1. Hero ────────────────────────────── -->
+  <section>
+    <p class="eyebrow" id="eyebrow">// You're here from Navacare's newsletter</p>
+    <h1 id="h1">Marketing you don't<br>have to second-guess.</h1>
+    <p class="lede" id="lede">
+      We're Kapüy. We build the <strong>funnel underneath the marketing</strong>, so the money you
+      spend on getting attention doesn't leak out before it becomes a customer.
+    </p>
+  </section>
+
+  <!-- ── 2. Qué hacemos ─────────────────────── -->
+  <section>
+    <h2 id="h2what">What we actually do</h2>
+    <p class="body" id="what1">
+      Most businesses don't have a marketing problem. <strong>They have a funnel with holes in
+      it.</strong> People find you, they get interested, and then somewhere between that first
+      moment and the decision to buy, they quietly fall out.
+    </p>
+    <p class="body" id="what2">
+      Usually it happens where nobody is looking. The page that answers a question they weren't
+      asking. The follow-up that never went out. The offer that made perfect sense to you and none
+      to them. The form that asks for eight things when it needed two.
+    </p>
+    <p class="body" id="what3">
+      So we build the whole path instead of decorating one end of it: what brings people in, what
+      keeps them moving, and what turns interest into an actual conversation. Then we put enough
+      measurement on it that <strong>the next decision is based on something other than a hunch.</strong>
+    </p>
+  </section>
+
+  <!-- ── 3. La prueba ───────────────────────── -->
+  <section>
+    <h2 id="h2proof">You've already seen our work</h2>
+    <p class="body" id="proof1">
+      The Navacare content and video that brought you here is ours. We've been the team behind it
+      for a while now, which is the part we'd rather show you than describe.
+    </p>
+  </section>
+
+  <!-- ── 4. Formulario ──────────────────────── -->
+  <section>
+    <div class="callout">
+      <h2 id="h2call">Twenty minutes, no pitch</h2>
+      <p class="body" id="callcopy">
+        You tell us what the business is trying to grow. We tell you where your funnel is most
+        likely leaking and what we'd do about it first. <strong>And if it turns out we're not
+        useful to you, we'll say so on the call</strong> instead of following you around for a
+        quarter.
+      </p>
+
+      <form id="leadForm" novalidate>
+        <div class="field">
+          <label class="lbl" for="email" id="lblEmail">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@yourbusiness.com" />
+        </div>
+        <div class="field">
+          <label class="lbl" for="biz" id="lblBiz">What kind of business (optional)</label>
+          <input type="text" id="biz" name="biz" autocomplete="organization" placeholder="What you sell, in three words" />
+        </div>
+
+        <button type="submit" class="submit" id="submitBtn">
+          <span id="submitText">Set up the call</span> <span aria-hidden="true">→</span>
+        </button>
+
+        <p class="formnote" id="formnote">
+          We write back to set a time, and that's it. You are not being added to a list, and there is
+          no newsletter waiting for you on the other side of this button.
+        </p>
+
+        <p class="msg" id="msg"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── 5. El "no" ─────────────────────────── -->
+  <section>
+    <h2 id="h2no">Who we're not for</h2>
+    <p class="body" id="nointro">Saying this out loud saves everybody a call:</p>
+    <ul class="nots">
+      <li id="no1">You want posts by the dozen, and the number of them is how you'll judge whether it worked.</li>
+      <li id="no2">You need results next week. Funnels don't move that way, and anyone who tells you otherwise is selling something.</li>
+      <li id="no3">You'd genuinely rather not know which half of the budget did nothing.</li>
+    </ul>
+    <p class="body" id="nooutro" style="margin-top:22px;">
+      None of those are character flaws. They're just a different job than the one we do.
+    </p>
+    <p class="body" id="famline" style="margin-top:22px;">
+      And if you came here for your mom or your dad rather than for a business, then we're not who
+      you need, but <a class="inline" href="https://navacare.org" target="_blank" rel="noopener noreferrer"
+      onclick="gtag('event','handoff_navacare',{origen:'hello'});">Navacare</a> is. Their guidance
+      is free to families.
+    </p>
+  </section>
+
+  <footer>
+    <span id="footcopy">© 2026 Kapüy · Marketing systems</span>
+    <div class="social">
+      <a href="mailto:hey@kapuymarketing.com" id="footmail"
+         onclick="gtag('event','contacto_click',{metodo:'footer_hello'});">hey@kapuymarketing.com</a>
+      <a href="https://www.linkedin.com/company/kapuy-marketing/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://instagram.com/kapuymarketing" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script type="module">
+  /* ══════════════════════════════════════════════════════════
+     CONFIG
+     ══════════════════════════════════════════════════════════ */
+
+  // Supabase — publishable key, pública por diseño. Con RLS insert-only
+  // no permite leer nada. Mismo proyecto que el diagnóstico de embudo.
+  const SUPABASE_URL      = 'https://eptkrujkcgwzgeqgevxp.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_EfMv_jfTzBStf2oKUzVyow_RWKatcAe';
+  const TABLE             = 'hello_leads';
+
+  // Kit — dejar vacío hasta tener el form. Con los dos campos llenos, el
+  // submit también suscribe en Kit. Si falla, no bloquea: Supabase ya guardó.
+  // KIT_FORM_ID   → Kit → Grow → Landing Pages & Forms → el form → el número de la URL
+  // KIT_PUBLIC_KEY→ Kit → Settings → Developer → API Key (la pública, NO la secret)
+  const KIT_FORM_ID    = '';
+  const KIT_PUBLIC_KEY = '';
+
+  // Agendamiento — opcional a propósito. Con la URL puesta, la pantalla de
+  // éxito ofrece agendar de una. Vacío, dice que escribimos nosotros.
+  // Nunca antes del formulario: primero el correo, después la agenda, para
+  // no perder a quien todavía no quiere comprometer 20 minutos.
+  const BOOKING_URL = 'https://calendar.app.google/KSk3iVaMTGCEcb2k9y';
+
+  const SOURCE = 'navacare-newsletter';
+
+  /* ══════════════════════════════════════════════════════════
+     i18n
+     ══════════════════════════════════════════════════════════ */
+  const dict = {
+    eyebrow: {
+      en: "// You're here from Navacare's newsletter",
+      es: "// Llegaste desde el newsletter de Navacare"
+    },
+    h1: {
+      en: "Marketing you don't<br>have to second-guess.",
+      es: "Marketing del que no<br>tienes que dudar."
+    },
+    lede: {
+      en: "We're Kapüy. We build the <strong>funnel underneath the marketing</strong>, so the money you spend on getting attention doesn't leak out before it becomes a customer.",
+      es: "Somos Kapüy. Construimos el <strong>embudo que va debajo del marketing</strong>, para que la plata que inviertes en llamar la atención no se te fugue antes de convertirse en cliente."
+    },
+    h2what: { en: "What we actually do", es: "Qué hacemos en concreto" },
+    what1: {
+      en: "Most businesses don't have a marketing problem. <strong>They have a funnel with holes in it.</strong> People find you, they get interested, and then somewhere between that first moment and the decision to buy, they quietly fall out.",
+      es: "La mayoría de los negocios no tiene un problema de marketing. <strong>Tiene un embudo lleno de huecos.</strong> La gente te encuentra, se interesa, y en algún punto entre ese primer momento y la decisión de comprar, se cae en silencio."
+    },
+    what2: {
+      en: "Usually it happens where nobody is looking. The page that answers a question they weren't asking. The follow-up that never went out. The offer that made perfect sense to you and none to them. The form that asks for eight things when it needed two.",
+      es: "Casi siempre pasa donde nadie está mirando. La página que responde una pregunta que nadie hizo. El seguimiento que nunca salió. La oferta que a ti te cuadraba perfecto y a ellos nada. El formulario que pide ocho datos cuando necesitaba dos."
+    },
+    what3: {
+      en: "So we build the whole path instead of decorating one end of it: what brings people in, what keeps them moving, and what turns interest into an actual conversation. Then we put enough measurement on it that <strong>the next decision is based on something other than a hunch.</strong>",
+      es: "Así que construimos el camino completo en vez de decorarle una punta: qué trae a la gente, qué la mantiene avanzando y qué convierte el interés en una conversación de verdad. Y le ponemos suficiente medición encima como para que <strong>la próxima decisión se tome con algo más que una corazonada.</strong>"
+    },
+    h2proof: { en: "You've already seen our work", es: "Ya viste nuestro trabajo" },
+    proof1: {
+      en: "The Navacare content and video that brought you here is ours. We've been the team behind it for a while now, which is the part we'd rather show you than describe.",
+      es: "El contenido y el video de Navacare que te trajeron hasta aquí son nuestros. Somos el equipo detrás de eso desde hace un buen rato, y preferimos enseñártelo antes que describírtelo."
+    },
+    h2call: { en: "Twenty minutes, no pitch", es: "Veinte minutos, sin pitch" },
+    callcopy: {
+      en: "You tell us what the business is trying to grow. We tell you where your funnel is most likely leaking and what we'd do about it first. <strong>And if it turns out we're not useful to you, we'll say so on the call</strong> instead of following you around for a quarter.",
+      es: "Tú nos cuentas qué quiere hacer crecer el negocio. Nosotros te decimos dónde es más probable que se te esté fugando el embudo y qué haríamos primero. <strong>Y si resulta que no te servimos, te lo decimos en la llamada</strong>, en vez de perseguirte durante tres meses."
+    },
+    lblEmail:   { en: "Email", es: "Correo" },
+    lblBiz:     { en: "What kind of business (optional)", es: "Qué tipo de negocio (opcional)" },
+    submitText: { en: "Set up the call", es: "Agendemos" },
+    formnote: {
+      en: "We write back to set a time, and that's it. You are not being added to a list, and there is no newsletter waiting for you on the other side of this button.",
+      es: "Te escribimos para cuadrar la hora y ya. No te estamos metiendo en ninguna lista, y no hay un newsletter esperándote del otro lado de este botón."
+    },
+    h2no:    { en: "Who we're not for", es: "Para quién no somos" },
+    nointro: { en: "Saying this out loud saves everybody a call:", es: "Decirlo en voz alta nos ahorra una llamada a todos:" },
+    no1: {
+      en: "You want posts by the dozen, and the number of them is how you'll judge whether it worked.",
+      es: "Quieres publicaciones por docena, y la cantidad es cómo vas a juzgar si funcionó."
+    },
+    no2: {
+      en: "You need results next week. Funnels don't move that way, and anyone who tells you otherwise is selling something.",
+      es: "Necesitas resultados la semana que viene. Los embudos no se mueven así, y quien te diga lo contrario te está vendiendo algo."
+    },
+    no3: {
+      en: "You'd genuinely rather not know which half of the budget did nothing.",
+      es: "En el fondo, prefieres no enterarte de cuál mitad del presupuesto no hizo nada."
+    },
+    nooutro: {
+      en: "None of those are character flaws. They're just a different job than the one we do.",
+      es: "Ninguna de esas es un defecto de carácter. Simplemente son un trabajo distinto al nuestro."
+    },
+    famline: {
+      en: 'And if you came here for your mom or your dad rather than for a business, then we\'re not who you need, but <a class="inline" href="https://navacare.org" target="_blank" rel="noopener noreferrer" onclick="gtag(\'event\',\'handoff_navacare\',{origen:\'hello\'});">Navacare</a> is. Their guidance is free to families.',
+      es: 'Y si llegaste aquí por tu mamá o tu papá y no por un negocio, entonces no somos quien necesitas, pero <a class="inline" href="https://navacare.org" target="_blank" rel="noopener noreferrer" onclick="gtag(\'event\',\'handoff_navacare\',{origen:\'hello\'});">Navacare</a> sí. Su acompañamiento es gratis para las familias.'
+    },
+    footcopy: { en: "© 2026 Kapüy · Marketing systems", es: "© 2026 Kapüy · Sistemas de marketing" },
+
+    // Placeholders de inputs (se aplican con setAttribute, no con innerHTML)
+    _phEmail: { en: "you@yourbusiness.com", es: "tu@tunegocio.com" },
+    _phBiz:   { en: "What you sell, in three words", es: "Qué vendes, en tres palabras" },
+
+    // Mensajes de estado del formulario
+    _sending: { en: "Sending…", es: "Enviando…" },
+    _ok: {
+      en: "Got it. We'll write back within two business days to set a time. If it's urgent, hey@kapuymarketing.com reaches a human faster.",
+      es: "Listo. Te escribimos en máximo dos días hábiles para cuadrar la hora. Si es urgente, hey@kapuymarketing.com llega a un humano más rápido."
+    },
+    _okBooking: {
+      en: "Got it, you're on our list either way. Now grab whichever time suits you, or leave it and we'll write back within two business days.",
+      es: "Listo, ya quedaste con nosotros de todas formas. Ahora agarra la hora que más te sirva, o déjalo así y te escribimos en máximo dos días hábiles."
+    },
+    _bookNow: { en: "Pick a time", es: "Elegir hora" },
+    _errEmail: { en: "That email doesn't look right. Mind checking it?", es: "Ese correo no se ve bien. ¿Lo revisas?" },
+    _errSave:  {
+      en: "Something broke on our end, which is embarrassing on a marketing site. Write us at hey@kapuymarketing.com and we'll fix it.",
+      es: "Algo se rompió de nuestro lado, lo cual es vergonzoso en un sitio de marketing. Escríbenos a hey@kapuymarketing.com y lo arreglamos."
+    }
+  };
+
+  let lang = 'en';
+
+  function setLang(next) {
+    lang = next;
+    document.documentElement.lang = next;
+    document.title = next === 'es'
+      ? "Kapüy — Marketing del que no tienes que dudar"
+      : "Kapüy — Marketing you don't have to second-guess";
+    for (const id in dict) {
+      if (id.startsWith('_')) continue;
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = dict[id][next];
+    }
+    document.getElementById('email').placeholder = dict._phEmail[next];
+    document.getElementById('biz').placeholder   = dict._phBiz[next];
+    document.querySelectorAll('.lang button').forEach((b) => {
+      b.classList.toggle('active', b.dataset.lang === next);
+    });
+    try { localStorage.setItem('kapuy_lang', next); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang button').forEach((b) => {
+    b.addEventListener('click', () => setLang(b.dataset.lang));
+  });
+
+  // Default EN: este tráfico viene de un newsletter de Florida. Solo cae a ES
+  // si el navegador es hispano o si ya eligió ES en el sitio antes.
+  let saved = null;
+  try { saved = localStorage.getItem('kapuy_lang'); } catch (e) {}
+  setLang(saved || ((navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en'));
+
+  /* ══════════════════════════════════════════════════════════
+     Envío
+     ══════════════════════════════════════════════════════════ */
+  const form = document.getElementById('leadForm');
+  const msg  = document.getElementById('msg');
+  const btn  = document.getElementById('submitBtn');
+  const btnText = document.getElementById('submitText');
+
+  function show(kind, text) {
+    msg.className = 'msg show ' + kind;
+    msg.textContent = text;
+  }
+
+  function uuid() {
+    return (crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+          const r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+  }
+
+  // INSERT puro con return=minimal, para no gatillar un SELECT que RLS
+  // insert-only bloquearía. Mismo patrón que el diagnóstico de embudo.
+  async function saveToSupabase(row) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify(row),
+    });
+    if (!res.ok) throw new Error('supabase ' + res.status);
+  }
+
+  // Kit es best-effort: si falla o no está configurado, el lead ya está a salvo.
+  async function saveToKit(email, biz) {
+    if (!KIT_FORM_ID || !KIT_PUBLIC_KEY) return;
+    try {
+      await fetch(`https://api.kit.com/v3/forms/${KIT_FORM_ID}/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          api_key: KIT_PUBLIC_KEY,
+          email,
+          fields: { source: SOURCE, business_type: biz || '' },
+        }),
+      });
+    } catch (e) { /* silencioso a propósito */ }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const biz   = document.getElementById('biz').value.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      show('err', dict._errEmail[lang]);
+      return;
+    }
+
+    btn.disabled = true;
+    btnText.textContent = dict._sending[lang];
+    msg.className = 'msg';
+
+    try {
+      await saveToSupabase({
+        id: uuid(),
+        email,
+        business_type: biz || null,
+        wants_call: true,          // la llamada es la única oferta de esta página
+        source: SOURCE,
+        lang,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent,
+      });
+
+      await saveToKit(email, biz);
+
+      gtag('event', 'hello_signup', { idioma: lang });
+      form.querySelectorAll('input').forEach((i) => { i.disabled = true; });
+      btn.style.display = 'none';
+
+      if (BOOKING_URL) {
+        show('ok', dict._okBooking[lang]);
+        const book = document.createElement('a');
+        book.className = 'submit';
+        book.href = BOOKING_URL;
+        book.target = '_blank';
+        book.rel = 'noopener noreferrer';
+        book.style.textDecoration = 'none';
+        book.innerHTML = dict._bookNow[lang] + ' <span aria-hidden="true">→</span>';
+        book.addEventListener('click', () => gtag('event', 'hello_booking_click', { idioma: lang }));
+        msg.after(book);
+      } else {
+        show('ok', dict._ok[lang]);
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btnText.textContent = dict.submitText[lang];
+      show('err', dict._errSave[lang]);
+    }
+  });
+</script>
+
+</body>
+</html>
