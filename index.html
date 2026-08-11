@@ -11,8 +11,13 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kapüy — Próximamente</title>
-<meta name="description" content="Construimos sistemas de marketing medibles, no posts. Nuestra web está en construcción. Vuelve pronto, o adelántate." />
+<title>Kapüy — Agencia de marketing con estrategia, ideas y sistema</title>
+<meta name="description" content="Agencia de marketing para negocios que ya quemaron dinero sin saber a dónde fue. Estrategia que decide la dirección, ideas que se recuerdan y el embudo que sostiene a las dos." />
+<link rel="canonical" href="https://kapuymarketing.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://kapuymarketing.com/" />
+<meta property="og:title" content="Kapüy — Movemos mareas" />
+<meta property="og:description" content="Estrategia que decide la dirección, ideas que se recuerdan y el embudo que sostiene a las dos." />
 
 <style>
   :root {
@@ -21,379 +26,593 @@
     --ink-soft: #444444;
     --ink-mute: #888888;
     --line:     #e6e6e6;
+    --wash:     #fafafa;
 
     --font-sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
 
   body {
     font-family: var(--font-sans);
     background: var(--bg);
     color: var(--ink);
-    min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
   }
 
-  .frame {
-    min-height: 100dvh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: clamp(20px, 4vw, 48px);
-    gap: clamp(24px, 4vh, 48px);
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 40px);
   }
 
-  /* ── Header (barra de utilidad: marca + idioma) ── */
+  /* ── Header ───────────────────────────────── */
   header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
+    padding: clamp(20px, 4vw, 36px) 0;
   }
 
   .wordmark {
     font-weight: 700;
-    font-size: clamp(18px, 2.2vw, 22px);
-    letter-spacing: -0.01em;
+    font-size: clamp(19px, 2.4vw, 24px);
+    letter-spacing: -0.015em;
     line-height: 1;
+    color: var(--ink);
+    text-decoration: none;
   }
-  .wordmark .gloss {
+  .wordmark .tag {
     display: block;
     font-family: var(--font-mono);
     font-weight: 400;
     font-size: 10px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ink-mute);
-    margin-top: 8px;
+    margin-top: 9px;
   }
 
-  /* Toggle de idioma */
-  .lang {
-    display: inline-flex;
-    border: 1px solid var(--line);
-    flex-shrink: 0;
-  }
+  .lang { display: inline-flex; border: 1px solid var(--line); flex-shrink: 0; }
   .lang button {
-    background: none;
-    border: 0;
-    padding: 7px 12px;
-    cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: var(--ink-mute);
-    transition: color 0.15s ease, background 0.15s ease;
+    background: none; border: 0; padding: 7px 12px; cursor: pointer;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--ink-mute); transition: color 0.15s ease, background 0.15s ease;
   }
   .lang button + button { border-left: 1px solid var(--line); }
   .lang button.active { background: var(--ink); color: var(--bg); }
   .lang button:not(.active):hover { color: var(--ink); }
 
-  /* ── Centro (todo centrado) ───────────────── */
-  main {
-    align-self: center;
-    width: 100%;
-    max-width: 940px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .status-pill {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    border: 1px solid var(--line);
-    padding: 8px 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-    margin-bottom: clamp(20px, 3vh, 28px);
-  }
-  .blink {
-    width: 7px; height: 7px;
-    background: var(--ink);
-    border-radius: 50%;
-    animation: pulse 1.6s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.2; transform: scale(0.7); }
-  }
-
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: clamp(11px, 1.3vw, 13px);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: clamp(20px, 3vh, 32px);
-  }
+  /* ── Section rhythm ───────────────────────── */
+  section { padding: clamp(40px, 7vh, 64px) 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: 0; padding-top: clamp(16px, 3vh, 32px); }
 
   h1 {
     font-weight: 700;
-    font-size: clamp(36px, 7.5vw, 88px);
-    line-height: 0.98;
+    font-size: clamp(34px, 6.8vw, 66px);
+    line-height: 1.02;
     letter-spacing: -0.03em;
   }
-  h1 .irony {
-    display: block;
-    color: var(--ink-mute);
-    font-weight: 500;
-    font-size: clamp(18px, 3vw, 34px);
-    letter-spacing: -0.01em;
-    margin-top: clamp(12px, 1.6vh, 20px);
-  }
 
-  .annotation {
-    margin-top: clamp(18px, 2.4vh, 24px);
-    font-family: var(--font-mono);
-    font-size: clamp(11px, 1.2vw, 13px);
-    letter-spacing: 0.04em;
-    color: var(--ink-mute);
-    font-style: italic;
+  h2 {
+    font-weight: 700;
+    font-size: clamp(21px, 2.9vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: clamp(16px, 2.4vh, 22px);
   }
 
   .lede {
-    margin: clamp(26px, 4vh, 36px) auto 0;
-    max-width: 58ch;
-    font-size: clamp(16px, 1.7vw, 19px);
+    margin-top: clamp(22px, 3.4vh, 30px);
+    max-width: 56ch;
+    font-size: clamp(17px, 1.8vw, 20px);
     line-height: 1.55;
     color: var(--ink-soft);
   }
   .lede strong { color: var(--ink); font-weight: 600; }
 
-  /* Lectura técnica estilo terminal — bloque centrado, texto alineado a la izquierda */
-  .readout {
-    display: inline-block;
-    text-align: left;
-    margin: clamp(26px, 4vh, 36px) auto 0;
-    max-width: 100%;
-    font-family: var(--font-mono);
-    font-size: clamp(12px, 1.3vw, 14px);
-    line-height: 1.85;
+  p.body {
+    max-width: 62ch;
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.68;
     color: var(--ink-soft);
-    border-left: 2px solid var(--line);
-    padding-left: 18px;
   }
-  .rhead { color: var(--ink-mute); margin-bottom: 2px; }
-  .rline { display: flex; gap: 1.2ch; align-items: baseline; }
-  .rk { flex: 0 0 13ch; color: var(--ink-mute); }
-  .rv { flex: 1 1 auto; min-width: 0; color: var(--ink); }
-  .cursor {
-    display: inline-block;
-    width: 8px; height: 1.05em;
-    background: var(--ink);
-    vertical-align: text-bottom;
-    margin-left: 2px;
-    animation: caret 1.1s steps(1) infinite;
-  }
-  @keyframes caret { 50% { opacity: 0; } }
+  p.body + p.body { margin-top: 1.1em; }
+  p.body strong { color: var(--ink); font-weight: 600; }
 
-  .cta-row {
-    margin-top: clamp(32px, 5vh, 44px);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 16px 24px;
+  /* Remate de sección: el párrafo que cierra el argumento y tiene que pesar. */
+  p.body.punch { color: var(--ink); font-weight: 600; }
+
+  /* ── Bloque del formulario ────────────────── */
+  .callout {
+    background: var(--wash);
+    border: 1px solid var(--line);
+    padding: clamp(24px, 4vw, 36px);
   }
-  .cta {
+  .callout h2 { margin-bottom: 14px; }
+  .callout p.body { max-width: 56ch; }
+
+  form { max-width: 460px; margin-top: clamp(22px, 3vh, 28px); }
+  .field { margin-bottom: 14px; }
+  label.lbl {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 7px;
+  }
+  input[type="email"], input[type="text"] {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 13px 14px;
+    transition: border-color 0.15s ease;
+  }
+  input[type="email"]:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--ink);
+  }
+
+  button.submit, a.submit {
+    margin-top: 8px;
     font-family: var(--font-mono);
     font-size: 13px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    text-decoration: none;
     color: var(--bg);
     background: var(--ink);
+    border: 0;
     padding: 15px 26px;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  .cta:hover { opacity: 0.85; transform: translateY(-2px); }
-  .cta .arrow { transition: transform 0.2s ease; }
-  .cta:hover .arrow { transform: translateX(4px); }
+  button.submit:hover:not(:disabled), a.submit:hover { opacity: 0.85; transform: translateY(-2px); }
+  button.submit:disabled { opacity: 0.45; cursor: default; }
 
-  .cta-note {
+  .formnote {
+    margin-top: 14px;
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 11.5px;
+    line-height: 1.6;
     color: var(--ink-mute);
-    letter-spacing: 0.03em;
+    max-width: 46ch;
   }
-  .cta-email {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.03em;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink-mute);
-    padding-bottom: 2px;
-    transition: opacity 0.2s ease;
-  }
-  .cta-email:hover { opacity: 0.7; }
+  .msg { margin-top: 16px; font-size: 15px; line-height: 1.55; max-width: 52ch; display: none; }
+  .msg.show { display: block; }
+  .msg.ok { color: var(--ink); }
+  .msg.err { color: #a33; }
 
-  /* ── Redes sociales ───────────────────────── */
-  .social {
-    display: flex;
-    gap: 18px;
-    margin-bottom: 4px;
+  /* ── Lista del "no" ───────────────────────── */
+  ul.nots { list-style: none; max-width: 60ch; }
+  ul.nots li {
+    position: relative;
+    padding-left: 20px;
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 1.62;
+    color: var(--ink-soft);
   }
-  .social a {
+  ul.nots li + li { margin-top: 10px; }
+  ul.nots li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
     color: var(--ink-mute);
-    display: inline-flex;
-    transition: color 0.2s ease, transform 0.2s ease;
+    font-weight: 700;
   }
-  .social a:hover { color: var(--ink); transform: translateY(-2px); }
-  .social svg { width: 20px; height: 20px; fill: currentColor; display: block; }
 
-  /* ── Footer (centrado) ────────────────────── */
+  /* ── Footer ───────────────────────────────── */
   footer {
+    border-top: 1px solid var(--line);
+    padding: clamp(28px, 4vh, 40px) 0 clamp(32px, 5vh, 48px);
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px 24px;
     align-items: center;
-    text-align: center;
-    gap: 6px;
+    justify-content: space-between;
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.06em;
     color: var(--ink-mute);
     text-transform: uppercase;
   }
+  footer a { color: var(--ink-mute); text-decoration: none; transition: color 0.2s ease; }
+  footer a:hover { color: var(--ink); }
+  .social { display: flex; gap: 16px; align-items: center; }
+  .social svg { width: 17px; height: 17px; fill: currentColor; display: block; }
 
   @media (max-width: 560px) {
-    .wordmark .gloss { display: none; }
-    .rk { flex-basis: 11ch; }
+    footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
-  <div class="frame">
+<div class="wrap">
 
-    <header>
-      <div class="wordmark">
-        Kapüy
-        <span class="gloss" id="gloss">sistemas de marketing</span>
-      </div>
-      <div class="lang" role="group" aria-label="Idioma / Language">
-        <button type="button" data-lang="es" aria-label="Español">ES</button>
-        <button type="button" data-lang="en" aria-label="English">EN</button>
-      </div>
-    </header>
+  <header>
+    <a class="wordmark" href="/">
+      Kapüy
+      <span class="tag" id="tagline">Movemos mareas</span>
+    </a>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-label="Español">ES</button>
+      <button type="button" data-lang="en" aria-label="English">EN</button>
+    </div>
+  </header>
 
-    <main>
-      <div class="status-pill"><span class="blink"></span> <span id="statusText">Sistema en construcción</span></div>
+  <!-- ── 1. Hero ────────────────────────────── -->
+  <section>
+    <h1 id="h1">Deja de preguntarte<br>si funciona.</h1>
+    <p class="lede" id="lede">
+      Somos Kapüy, una agencia de marketing para negocios que <strong>ya quemaron dinero sin saber
+      a dónde fue</strong>. Construimos la estrategia, las ideas y el embudo que sostiene a las dos.
+    </p>
+  </section>
 
-      <p class="eyebrow" id="eyebrow">// 01 — Estamos armando algo que sí se puede medir</p>
+  <!-- ── 2. El problema ─────────────────────── -->
+  <section>
+    <h2 id="h2problem">Por qué el marketing se siente como un hoyo negro</h2>
+    <p class="body" id="prob1">
+      Las agencias se parten en dos y ninguna mitad sirve sola. Están <strong>las que piensan</strong>:
+      te entregan una estrategia impecable en un PDF de treinta páginas que nadie reabre, y lo que
+      sale a la calle no lo recuerda nadie. Y están <strong>las que crean</strong>: piezas lindas,
+      ejecución rápida, cero criterio detrás, así que nadie sabe por qué se hizo eso ni qué se
+      suponía que moviera.
+    </p>
+    <p class="body punch" id="prob2">
+      Terminas eligiendo entre una idea que no funciona y un plan que no emociona. Nosotras
+      preferimos que no tengas que elegir.
+    </p>
+  </section>
 
-      <h1>
-        <span id="h1lead">El sistema está<br>en construcción.</span>
-        <span class="irony" id="h1irony">(Esta página también, sí.)</span>
-      </h1>
+  <!-- ── 3. Qué hacemos ─────────────────────── -->
+  <section>
+    <h2 id="h2what">Qué hacemos en concreto</h2>
+    <p class="body" id="what1">
+      La estrategia decide la dirección. La creatividad hace que valga la pena recordarlo. Y debajo
+      de las dos hay un embudo haciendo la parte sin glamour: <strong>atrapar a la gente que ya
+      estaba interesada antes de que se caiga en silencio.</strong>
+    </p>
+    <p class="body" id="what2">
+      Porque casi siempre se cae donde nadie está mirando. La página que responde una pregunta que
+      nadie hizo. El seguimiento que nunca salió. La oferta que a ti te cuadraba perfecto y a ellos
+      nada. El formulario que pide ocho datos cuando necesitaba dos.
+    </p>
+    <p class="body" id="what3">
+      Construimos el camino completo en vez de decorarle una punta, y le ponemos suficiente medición
+      encima como para que <strong>la próxima decisión se tome con algo más que una corazonada.</strong>
+    </p>
+  </section>
 
-      <p class="annotation" id="annotation">lo invisible mueve las mareas</p>
+  <!-- ── 4. El "no" ─────────────────────────── -->
+  <!-- Va ANTES del formulario a propósito: filtra a quien no califica antes
+       de pedirle el correo, y le da a quien sí califica la sensación de haber
+       pasado un filtro. -->
+  <section>
+    <h2 id="h2no">Para quién no somos</h2>
+    <p class="body" id="nointro">Decirlo en voz alta nos ahorra una llamada a todos:</p>
+    <ul class="nots">
+      <li id="no1">Quieres publicaciones por docena, y la cantidad es cómo vas a juzgar si funcionó.</li>
+      <li id="no2">Necesitas resultados la semana que viene. Los embudos no se mueven así, y quien te diga lo contrario te está vendiendo algo.</li>
+      <li id="no3">En el fondo, prefieres no enterarte de cuál mitad del presupuesto no hizo nada.</li>
+      <li id="no4">Tu presupuesto de marketing está por debajo de <strong>$1.000 al mes</strong>. Por debajo de ahí solo alcanza para piezas sueltas, y ya sabes cómo termina eso.</li>
+    </ul>
+    <p class="body" id="nooutro" style="margin-top:22px;">
+      Ninguna de esas es un defecto de carácter. Simplemente son un trabajo distinto al nuestro.
+    </p>
+    <p class="body" id="noedge" style="margin-top:1.1em;">
+      Y si andas cerca de esa cifra pero crees que vale la pena conversarlo, escríbenos igual.
+      Preferimos decidirlo juntos que dejarte fuera por cien dólares.
+    </p>
+  </section>
 
-      <p class="lede" id="lede">
-        Construimos <strong>sistemas de marketing que puedes rastrear</strong> —no posts que rezas
-        para que funcionen. Ahora mismo estamos armando el nuestro con la misma obsesión por el
-        detalle que le metemos a tu funnel. Vuelve pronto. O adelántate.
+  <!-- ── 5. Formulario ──────────────────────── -->
+  <section>
+    <div class="callout">
+      <h2 id="h2call">Treinta minutos, sin pitch</h2>
+      <p class="body" id="callcopy">
+        Media hora para ver si esto tiene sentido para los dos. Tú nos cuentas qué quieres hacer
+        crecer y qué ya intentaste. Nosotras hacemos las preguntas que suelen destapar lo que de
+        verdad está pasando. Al final vas a saber si somos las indicadas, y <strong>si no lo somos,
+        te lo decimos en la llamada</strong> en vez de perseguirte durante tres meses.
       </p>
 
-      <div class="readout">
-        <div class="rhead" id="rhead">&gt; kapuy.init()</div>
-        <div class="rline"><span class="rk" id="rk1">status</span><span class="rv" id="rv1">en construcción</span></div>
-        <div class="rline"><span class="rk" id="rk2">entregamos</span><span class="rv" id="rv2">crecimiento predecible y medible</span></div>
-        <div class="rline"><span class="rk" id="rk3">no vendemos</span><span class="rv" id="rv3">humo, ni likes, ni vanity metrics</span></div>
-        <div class="rline"><span class="rk" id="rk4">lanzamiento</span><span class="rv"><span id="rv4">pronto</span><span class="cursor"></span></span></div>
-      </div>
+      <form id="leadForm" novalidate>
+        <div class="field">
+          <label class="lbl" for="email" id="lblEmail">Correo</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="tu@tunegocio.com" />
+        </div>
+        <div class="field">
+          <label class="lbl" for="biz" id="lblBiz">Qué tipo de negocio (opcional)</label>
+          <input type="text" id="biz" name="biz" autocomplete="organization" placeholder="Qué vendes, en tres palabras" />
+        </div>
 
-      <div class="cta-row">
-        <a class="cta" href="mailto:hey@kapuymarketing.com?subject=Quiero%20un%20sistema%2C%20no%20posts" onclick="gtag('event','contacto_click',{metodo:'boton_hablemos'});">
-          <span id="ctaText">Hablemos</span> <span class="arrow">→</span>
-        </a>
-        <a class="cta-email" href="mailto:hey@kapuymarketing.com?subject=Quiero%20un%20sistema%2C%20no%20posts" onclick="gtag('event','contacto_click',{metodo:'email_directo'});">hey@kapuymarketing.com</a>
-        <span class="cta-note" id="ctaNote">¿No quieres esperar a la web? Empecemos por tu negocio.</span>
-      </div>
-    </main>
+        <button type="submit" class="submit" id="submitBtn">
+          <span id="submitText">Agendemos</span> <span aria-hidden="true">→</span>
+        </button>
 
-    <footer>
-      <div class="social">
-        <a href="https://instagram.com/kapuymarketing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" onclick="gtag('event','social_click',{red:'instagram'});">
-          <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/company/kapuy-marketing/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" onclick="gtag('event','social_click',{red:'linkedin'});">
-          <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <!-- Facebook (agregar mañana cuando esté creada la página):
-        <a href="URL_FACEBOOK" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        -->
-      </div>
-      <span id="footerLeft">© 2026 Kapüy — Sistemas de marketing</span>
-      <span id="footerRight">Negocio → Estrategia → Sistemas → Ejecución</span>
-    </footer>
+        <p class="formnote" id="formnote">
+          Te escribimos para cuadrar la hora y ya. No te estamos metiendo en ninguna lista, y no hay
+          un newsletter esperándote del otro lado de este botón.
+        </p>
 
-  </div>
+        <p class="msg" id="msg"></p>
+      </form>
+    </div>
+  </section>
 
-  <script>
-    var dict = {
-      gloss:       { es: "sistemas de marketing",                                en: "marketing systems" },
-      statusText:  { es: "Sistema en construcción",                              en: "System under construction" },
-      eyebrow:     { es: "// 01 — Estamos armando algo que sí se puede medir",    en: "// 01 — Building something you can actually measure" },
-      h1lead:      { es: "El sistema está<br>en construcción.",                   en: "The system is<br>under construction." },
-      h1irony:     { es: "(Esta página también, sí.)",                            en: "(This page too, yes.)" },
-      annotation:  { es: "lo invisible mueve las mareas",                         en: "the invisible moves the tides" },
-      lede:        {
-        es: "Construimos <strong>sistemas de marketing que puedes rastrear</strong> —no posts que rezas para que funcionen. Ahora mismo estamos armando el nuestro con la misma obsesión por el detalle que le metemos a tu funnel. Vuelve pronto. O adelántate.",
-        en: "We build <strong>marketing systems you can actually track</strong> —not posts you pray will work. Right now we're building our own with the same obsession for detail we pour into your funnel. Come back soon. Or skip the wait."
+  <footer>
+    <span id="footcopy">© 2026 Kapüy · Movemos mareas</span>
+    <div class="social">
+      <a href="mailto:hey@kapuymarketing.com" onclick="gtag('event','contacto_click',{metodo:'footer_home'});">hey@kapuymarketing.com</a>
+      <a href="https://www.linkedin.com/company/kapuy-marketing/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://instagram.com/kapuymarketing" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<script type="module">
+  /* ══════════════════════════════════════════════════════════
+     CONFIG — mismo proyecto y misma tabla que /hello.
+     Solo cambia `source`, para poder separar de dónde vino cada lead.
+     ══════════════════════════════════════════════════════════ */
+  const SUPABASE_URL      = 'https://eptkrujkcgwzgeqgevxp.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_EfMv_jfTzBStf2oKUzVyow_RWKatcAe';
+  const TABLE             = 'hello_leads';
+  const SOURCE            = 'home';
+
+  const KIT_FORM_ID    = '';
+  const KIT_PUBLIC_KEY = '';
+
+  const BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0zDoHcVWmu39LkAC0rV-M11I6YIvnTTaa3LS3is5urjq_pheee7kpGUl0Yu4zynT5aJbUlyiUF';
+
+  /* ══════════════════════════════════════════════════════════
+     i18n
+     ══════════════════════════════════════════════════════════ */
+  const dict = {
+    tagline: { es: "Movemos mareas", en: "We move tides" },
+    h1: {
+      es: "Deja de preguntarte<br>si funciona.",
+      en: "Marketing you don't<br>have to second-guess."
+    },
+    lede: {
+      es: "Somos Kapüy, una agencia de marketing para negocios que <strong>ya quemaron dinero sin saber a dónde fue</strong>. Construimos la estrategia, las ideas y el embudo que sostiene a las dos.",
+      en: "We're Kapüy, a marketing agency for businesses that <strong>already burned money without ever finding out where it went</strong>. We build the strategy, the ideas, and the funnel holding both up."
+    },
+    h2problem: {
+      es: "Por qué el marketing se siente como un hoyo negro",
+      en: "Why marketing feels like a black hole"
+    },
+    prob1: {
+      es: "Las agencias se parten en dos y ninguna mitad sirve sola. Están <strong>las que piensan</strong>: te entregan una estrategia impecable en un PDF de treinta páginas que nadie reabre, y lo que sale a la calle no lo recuerda nadie. Y están <strong>las que crean</strong>: piezas lindas, ejecución rápida, cero criterio detrás, así que nadie sabe por qué se hizo eso ni qué se suponía que moviera.",
+      en: "Agencies come in two kinds and neither one is enough alone. There are <strong>the ones who think</strong>: you get an immaculate strategy in a thirty-page PDF nobody opens twice, and whatever reaches the street is forgettable. And there are <strong>the ones who make</strong>: nice work, fast turnaround, no reasoning underneath, so nobody can tell you why it was made or what it was meant to move."
+    },
+    prob2: {
+      es: "Terminas eligiendo entre una idea que no funciona y un plan que no emociona. Nosotras preferimos que no tengas que elegir.",
+      en: "You end up choosing between an idea that doesn't work and a plan that doesn't move anyone. We'd rather you didn't have to choose."
+    },
+    h2what: { es: "Qué hacemos en concreto", en: "What we actually do" },
+    what1: {
+      es: "La estrategia decide la dirección. La creatividad hace que valga la pena recordarlo. Y debajo de las dos hay un embudo haciendo la parte sin glamour: <strong>atrapar a la gente que ya estaba interesada antes de que se caiga en silencio.</strong>",
+      en: "Strategy picks the direction. The creative work makes it worth remembering. And underneath both there's a funnel doing the unglamorous part: <strong>catching the people who were already interested, before they quietly fall out.</strong>"
+    },
+    what2: {
+      es: "Porque casi siempre se cae donde nadie está mirando. La página que responde una pregunta que nadie hizo. El seguimiento que nunca salió. La oferta que a ti te cuadraba perfecto y a ellos nada. El formulario que pide ocho datos cuando necesitaba dos.",
+      en: "Because they almost always fall out where nobody is looking. The page that answers a question they weren't asking. The follow-up that never went out. The offer that made perfect sense to you and none to them. The form that asks for eight things when it needed two."
+    },
+    what3: {
+      es: "Construimos el camino completo en vez de decorarle una punta, y le ponemos suficiente medición encima como para que <strong>la próxima decisión se tome con algo más que una corazonada.</strong>",
+      en: "We build the whole path instead of decorating one end of it, and we put enough measurement on it that <strong>the next decision is based on something other than a hunch.</strong>"
+    },
+    h2call: { es: "Treinta minutos, sin pitch", en: "Thirty minutes, no pitch" },
+    callcopy: {
+      es: "Media hora para ver si esto tiene sentido para los dos. Tú nos cuentas qué quieres hacer crecer y qué ya intentaste. Nosotras hacemos las preguntas que suelen destapar lo que de verdad está pasando. Al final vas a saber si somos las indicadas, y <strong>si no lo somos, te lo decimos en la llamada</strong> en vez de perseguirte durante tres meses.",
+      en: "Half an hour to find out whether this makes sense for both of us. You tell us what you're trying to grow and what you've already tried. We ask the questions that tend to surface what's really going on. By the end you'll know if we're the right people for this, and <strong>if we're not, we'll tell you on the call</strong> instead of following you around for a quarter."
+    },
+    lblEmail:   { es: "Correo", en: "Email" },
+    lblBiz:     { es: "Qué tipo de negocio (opcional)", en: "What kind of business (optional)" },
+    submitText: { es: "Agendemos", en: "Set up the call" },
+    formnote: {
+      es: "Te escribimos para cuadrar la hora y ya. No te estamos metiendo en ninguna lista, y no hay un newsletter esperándote del otro lado de este botón.",
+      en: "We write back to set a time, and that's it. You are not being added to a list, and there is no newsletter waiting for you on the other side of this button."
+    },
+    h2no:    { es: "Para quién no somos", en: "Who we're not for" },
+    nointro: { es: "Decirlo en voz alta nos ahorra una llamada a todos:", en: "Saying this out loud saves everybody a call:" },
+    no1: {
+      es: "Quieres publicaciones por docena, y la cantidad es cómo vas a juzgar si funcionó.",
+      en: "You want posts by the dozen, and the number of them is how you'll judge whether it worked."
+    },
+    no2: {
+      es: "Necesitas resultados la semana que viene. Los embudos no se mueven así, y quien te diga lo contrario te está vendiendo algo.",
+      en: "You need results next week. Funnels don't move that way, and anyone who tells you otherwise is selling something."
+    },
+    no3: {
+      es: "En el fondo, prefieres no enterarte de cuál mitad del presupuesto no hizo nada.",
+      en: "You'd genuinely rather not know which half of the budget did nothing."
+    },
+    no4: {
+      es: "Tu presupuesto de marketing está por debajo de <strong>$1.000 al mes</strong>. Por debajo de ahí solo alcanza para piezas sueltas, y ya sabes cómo termina eso.",
+      en: "Your marketing budget is under <strong>$1,000 a month</strong>. Below that there's only enough for scattered pieces, and you already know how that ends."
+    },
+    nooutro: {
+      es: "Ninguna de esas es un defecto de carácter. Simplemente son un trabajo distinto al nuestro.",
+      en: "None of those are character flaws. They're just a different job than the one we do."
+    },
+    noedge: {
+      es: "Y si andas cerca de esa cifra pero crees que vale la pena conversarlo, escríbenos igual. Preferimos decidirlo juntos que dejarte fuera por cien dólares.",
+      en: "And if you're close to that number but think it's worth a conversation, write us anyway. We'd rather decide it together than lose you over a hundred dollars."
+    },
+    footcopy: { es: "© 2026 Kapüy · Movemos mareas", en: "© 2026 Kapüy · We move tides" },
+
+    _phEmail: { es: "tu@tunegocio.com", en: "you@yourbusiness.com" },
+    _phBiz:   { es: "Qué vendes, en tres palabras", en: "What you sell, in three words" },
+
+    _sending: { es: "Enviando…", en: "Sending…" },
+    _ok: {
+      es: "Listo. Te escribimos en máximo dos días hábiles para cuadrar la hora. Si es urgente, hey@kapuymarketing.com llega a un humano más rápido.",
+      en: "Got it. We'll write back within two business days to set a time. If it's urgent, hey@kapuymarketing.com reaches a human faster."
+    },
+    _okBooking: {
+      es: "Listo, ya quedaste con nosotras de todas formas. Ahora agarra la hora que más te sirva, o déjalo así y te escribimos en máximo dos días hábiles.",
+      en: "Got it, you're on our list either way. Now grab whichever time suits you, or leave it and we'll write back within two business days."
+    },
+    _bookNow:  { es: "Elegir hora", en: "Pick a time" },
+    _errEmail: { es: "Ese correo no se ve bien. ¿Lo revisas?", en: "That email doesn't look right. Mind checking it?" },
+    _errSave:  {
+      es: "Algo se rompió de nuestro lado, lo cual es vergonzoso en un sitio de marketing. Escríbenos a hey@kapuymarketing.com y lo arreglamos.",
+      en: "Something broke on our end, which is embarrassing on a marketing site. Write us at hey@kapuymarketing.com and we'll fix it."
+    }
+  };
+
+  let lang = 'es';
+
+  function setLang(next) {
+    lang = next;
+    document.documentElement.lang = next;
+    document.title = next === 'en'
+      ? "Kapüy — Marketing agency: strategy, ideas and the system underneath"
+      : "Kapüy — Agencia de marketing con estrategia, ideas y sistema";
+    for (const id in dict) {
+      if (id.startsWith('_')) continue;
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = dict[id][next];
+    }
+    document.getElementById('email').placeholder = dict._phEmail[next];
+    document.getElementById('biz').placeholder   = dict._phBiz[next];
+    document.querySelectorAll('.lang button').forEach((b) => {
+      b.classList.toggle('active', b.dataset.lang === next);
+    });
+    try { localStorage.setItem('kapuy_lang', next); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang button').forEach((b) => {
+    b.addEventListener('click', () => setLang(b.dataset.lang));
+  });
+
+  // Default ES en la home (la marca opera desde LATAM); cae a EN por navegador.
+  let saved = null;
+  try { saved = localStorage.getItem('kapuy_lang'); } catch (e) {}
+  setLang(saved || ((navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es'));
+
+  /* ══════════════════════════════════════════════════════════
+     Envío — mismo contrato que /hello
+     ══════════════════════════════════════════════════════════ */
+  const form = document.getElementById('leadForm');
+  const msg  = document.getElementById('msg');
+  const btn  = document.getElementById('submitBtn');
+  const btnText = document.getElementById('submitText');
+
+  function show(kind, text) {
+    msg.className = 'msg show ' + kind;
+    msg.textContent = text;
+  }
+
+  function uuid() {
+    return (crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+          const r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+  }
+
+  async function saveToSupabase(row) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
       },
-      rhead:       { es: "&gt; kapuy.init()",                                     en: "&gt; kapuy.init()" },
-      rk1:         { es: "status",       en: "status" },
-      rv1:         { es: "en construcción",                  en: "under construction" },
-      rk2:         { es: "entregamos",   en: "we deliver" },
-      rv2:         { es: "crecimiento predecible y medible", en: "predictable, measurable growth" },
-      rk3:         { es: "no vendemos",  en: "we don't sell" },
-      rv3:         { es: "humo, ni likes, ni vanity metrics", en: "smoke, likes, or vanity metrics" },
-      rk4:         { es: "lanzamiento",  en: "launch" },
-      rv4:         { es: "pronto",       en: "soon" },
-      ctaText:     { es: "Hablemos",                                             en: "Let's talk" },
-      ctaNote:     { es: "¿No quieres esperar a la web? Empecemos por tu negocio.", en: "Don't want to wait for the site? Let's start with your business." },
-      footerLeft:  { es: "© 2026 Kapüy — Sistemas de marketing",                 en: "© 2026 Kapüy — Marketing systems" },
-      footerRight: { es: "Negocio → Estrategia → Sistemas → Ejecución",          en: "Business → Strategy → Systems → Execution" }
-    };
+      body: JSON.stringify(row),
+    });
+    if (!res.ok) throw new Error('supabase ' + res.status);
+  }
 
-    function setLang(lang) {
-      document.documentElement.lang = lang;
-      document.title = lang === "en" ? "Kapüy — Coming soon" : "Kapüy — Próximamente";
-      for (var id in dict) {
-        var el = document.getElementById(id);
-        if (el) el.innerHTML = dict[id][lang];
-      }
-      var btns = document.querySelectorAll(".lang button");
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].classList.toggle("active", btns[i].getAttribute("data-lang") === lang);
-      }
-      try { localStorage.setItem("kapuy_lang", lang); } catch (e) {}
+  async function saveToKit(email, biz) {
+    if (!KIT_FORM_ID || !KIT_PUBLIC_KEY) return;
+    try {
+      await fetch(`https://api.kit.com/v3/forms/${KIT_FORM_ID}/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          api_key: KIT_PUBLIC_KEY,
+          email,
+          fields: { source: SOURCE, business_type: biz || '' },
+        }),
+      });
+    } catch (e) { /* silencioso a propósito */ }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const biz   = document.getElementById('biz').value.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      show('err', dict._errEmail[lang]);
+      return;
     }
 
-    var saved = null;
-    try { saved = localStorage.getItem("kapuy_lang"); } catch (e) {}
-    var initial = saved || ((navigator.language || "es").toLowerCase().indexOf("en") === 0 ? "en" : "es");
+    btn.disabled = true;
+    btnText.textContent = dict._sending[lang];
+    msg.className = 'msg';
 
-    var btns = document.querySelectorAll(".lang button");
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", function () { setLang(this.getAttribute("data-lang")); });
+    try {
+      await saveToSupabase({
+        id: uuid(),
+        email,
+        business_type: biz || null,
+        wants_call: true,
+        source: SOURCE,
+        lang,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent,
+      });
+
+      await saveToKit(email, biz);
+
+      gtag('event', 'home_signup', { idioma: lang });
+      form.querySelectorAll('input').forEach((i) => { i.disabled = true; });
+      btn.style.display = 'none';
+
+      if (BOOKING_URL) {
+        show('ok', dict._okBooking[lang]);
+        const book = document.createElement('a');
+        book.className = 'submit';
+        book.href = BOOKING_URL;
+        book.target = '_blank';
+        book.rel = 'noopener noreferrer';
+        book.innerHTML = dict._bookNow[lang] + ' <span aria-hidden="true">→</span>';
+        book.addEventListener('click', () => gtag('event', 'home_booking_click', { idioma: lang }));
+        msg.after(book);
+      } else {
+        show('ok', dict._ok[lang]);
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btnText.textContent = dict.submitText[lang];
+      show('err', dict._errSave[lang]);
     }
-    setLang(initial);
-  </script>
+  });
+</script>
 
 </body>
 </html>
