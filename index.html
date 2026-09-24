@@ -30,7 +30,8 @@
      TOKENS — Kapüy Design System (Claude Design). Se definen una
      sola vez; el resto del archivo solo lee variables.
      Regla: nunca texto lima sobre marfil. Sobre lima, texto carbón
-     o morado. Lima es acento: un bloque lima por pantalla.
+     o morado. Los acentos de texto van en bloque lima con texto
+     morado (.acento), nunca morado suelto sobre marfil.
      ══════════════════════════════════════════════════════════ */
   :root {
     /* Los cuatro */
@@ -49,6 +50,7 @@
     --morado-linea: #5A3358;
     --morado-ola:   #6B3A6B;
     --lima-hondo:   #B6EA6C;
+    --critico:      #FF9C8F;
     --marfil-82: rgba(244, 241, 232, 0.82);
     --marfil-70: rgba(244, 241, 232, 0.70);
     --marfil-50: rgba(244, 241, 232, 0.50);
@@ -85,13 +87,24 @@
   p { text-wrap: pretty; }
   a { color: var(--carbon); }
   a:hover { color: var(--morado); }
-  ::selection { background: var(--lima); color: var(--carbon); }
+  ::selection { background: var(--lima); color: var(--morado); }
   :focus-visible { outline: 2px solid var(--morado); outline-offset: 3px; }
   .oscuro :focus-visible { outline-color: var(--lima); }
+  [hidden] { display: none !important; }
 
   .wrap { max-width: var(--ancho); margin: 0 auto; padding: 0 var(--gutter); }
 
   /* ── Piezas del sistema ─────────────────────────────────── */
+  /* Acento: bloque lima con texto morado, solo en las palabras a resaltar */
+  .acento {
+    font-style: normal;
+    background: var(--lima);
+    color: var(--morado);
+    padding: 0 .12em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
   /* Eyebrow: Space Mono caps con guion corto debajo como cierre */
   .eb {
     font-family: var(--font-mono); font-size: 13px; letter-spacing: .16em;
@@ -105,7 +118,7 @@
 
   .btn {
     font-family: var(--font-mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
-    text-decoration: none; line-height: 1; white-space: nowrap;
+    text-decoration: none; line-height: 1; white-space: nowrap; cursor: pointer;
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     min-height: 48px; padding: 17px 28px;
     border-radius: var(--radio); border: var(--regla) solid transparent;
@@ -113,13 +126,14 @@
   }
   .btn--lima { background: var(--lima); color: var(--carbon); }
   .btn--lima:hover { background: var(--lima-hondo); color: var(--carbon); }
-  .btn--linea { border-color: var(--carbon); color: var(--carbon); }
+  .btn--linea { border-color: var(--carbon); color: var(--carbon); background: transparent; }
   .btn--linea:hover { background: var(--carbon); color: var(--marfil); }
-  .btn--linea-clara { border-color: var(--marfil); color: var(--marfil); }
+  .btn--linea-clara { border-color: var(--marfil); color: var(--marfil); background: transparent; }
   .btn--linea-clara:hover { background: var(--marfil); color: var(--morado); }
   .btn--morado { background: var(--morado); color: var(--marfil); }
   .btn--morado:hover { background: var(--morado-hondo); color: var(--marfil); }
   .btn--sm { min-height: 44px; padding: 13px 20px; font-size: 12px; }
+  .btn:disabled { opacity: .5; cursor: default; }
 
   .logo { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; text-decoration: none; }
   .logo img { height: 30px; width: auto; display: block; }
@@ -139,11 +153,20 @@
   .nav { display: flex; align-items: center; gap: 36px; }
   .nav a.l { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
 
+  /* Selector de idioma */
+  .idioma { display: inline-flex; border: var(--regla) solid var(--carbon); border-radius: var(--radio); }
+  .idioma button {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em;
+    background: transparent; color: var(--carbon); border: 0; cursor: pointer;
+    min-width: 44px; min-height: 40px; padding: 0 10px;
+  }
+  .idioma button + button { border-left: var(--regla) solid var(--carbon); }
+  .idioma button[aria-pressed="true"] { background: var(--carbon); color: var(--marfil); }
+
   /* ── 1. Hero ────────────────────────────────────────────── */
   .hero { position: relative; overflow: hidden; }
   .hero .wrap { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 32px; padding-top: clamp(64px, 10.4vw, 150px); padding-bottom: clamp(120px, 11.8vw, 170px); }
-  .hero h1 { font-size: clamp(52px, 9.2vw, 132px); line-height: .95; letter-spacing: -.04em; max-width: 1100px; }
-  .hero h1 em { font-style: normal; color: var(--morado); }
+  .hero h1 { font-size: clamp(52px, 9.2vw, 132px); line-height: 1; letter-spacing: -.04em; max-width: 1100px; }
   .hero .lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; color: var(--carbon-suave); max-width: 720px; }
   .fila { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
   .hero .mareas { left: 0; right: 0; bottom: -10px; width: 100%; height: 260px; }
@@ -177,8 +200,7 @@
 
   /* ── 3. Para quién (marfil) ─────────────────────────────── */
   .pq .wrap { display: flex; flex-direction: column; gap: 56px; padding-top: clamp(80px, 9vw, 130px); padding-bottom: clamp(80px, 9vw, 130px); }
-  .pq h2 { font-size: clamp(34px, 4.5vw, 64px); line-height: 1.02; letter-spacing: -.03em; max-width: 1050px; }
-  .pq h2 em { font-style: normal; color: var(--morado); }
+  .pq h2 { font-size: clamp(34px, 4.5vw, 64px); line-height: 1.08; letter-spacing: -.03em; max-width: 1050px; }
   .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .col { display: flex; flex-direction: column; gap: 24px; padding: clamp(28px, 3vw, 44px); }
   .col--si { border: var(--regla-gruesa) solid var(--carbon); }
@@ -198,8 +220,6 @@
   .tst .bloque { gap: 20px; }
   .tst h2 { font-size: clamp(32px, 4vw, 56px); line-height: 1.02; letter-spacing: -.03em; color: var(--marfil); max-width: 900px; }
   .tst .sub { font-size: 16px; color: var(--marfil-70); }
-  /* Seis espacios. Con 3 queda una sola fila limpia: para publicar menos,
-     borra la <figure> completa y la grilla se acomoda sola. */
   .citas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; row-gap: 48px; }
   .citas figure { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding-top: 24px; border-top: var(--regla) solid var(--lima); min-height: 200px; }
   .citas blockquote { font-size: 24px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; color: var(--marfil); }
@@ -208,46 +228,78 @@
   .citas figcaption strong { font-weight: 700; }
   .citas figcaption span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--marfil-70); }
 
-  /* ── 5. Cierre + footer (morado) ────────────────────────── */
+  /* ── 5. Cierre + contacto + footer (morado) ─────────────── */
   .cierre { background: var(--morado); color: var(--marfil); position: relative; overflow: hidden; }
   .cierre .wrap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; padding-top: clamp(96px, 10.4vw, 150px); padding-bottom: 64px; }
-  .cierre h2 { font-size: clamp(48px, 7.2vw, 104px); line-height: .95; letter-spacing: -.04em; color: var(--marfil); max-width: 1100px; }
-  .cierre h2 em { font-style: normal; color: var(--lima); }
+  .cierre h2 { font-size: clamp(48px, 7.2vw, 104px); line-height: 1; letter-spacing: -.04em; color: var(--marfil); max-width: 1100px; }
   .cierre .lead { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5; color: var(--marfil-82); max-width: 760px; }
-  .cierre .btn--lima { margin-top: 8px; padding: 20px 36px; }
+  .cierre .agendar { margin-top: 8px; padding: 20px 36px; }
   .cierre .mareas { right: 0; top: 40px; width: 62%; height: 340px; }
 
-  .pie { display: flex; justify-content: space-between; align-items: center; gap: 24px; width: 100%; margin-top: clamp(80px, 8.3vw, 120px); padding-top: 32px; border-top: var(--regla) solid var(--marfil); flex-wrap: wrap; }
+  .contacto {
+    width: 100%;
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px 64px;
+    margin-top: clamp(64px, 7vw, 100px);
+    padding-top: 40px;
+    border-top: 1px solid var(--morado-linea);
+  }
+  .contacto .texto { display: flex; flex-direction: column; gap: 16px; }
+  .contacto h3 { font-size: clamp(28px, 2.6vw, 40px); line-height: 1.05; letter-spacing: -.03em; color: var(--marfil); }
+  .contacto .texto p { font-size: 17px; line-height: 1.5; color: var(--marfil-82); max-width: 520px; }
+  .form { display: flex; flex-direction: column; gap: 18px; }
+  .campo { display: flex; flex-direction: column; gap: 8px; }
+  .campo label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--marfil-70); }
+  .campo input, .campo textarea {
+    font-family: var(--font-sans); font-size: 16px; color: var(--marfil);
+    background: var(--morado-hondo);
+    border: var(--regla) solid var(--morado-linea); border-radius: var(--radio);
+    padding: 14px 16px; width: 100%;
+    transition: border-color var(--dur), box-shadow var(--dur);
+  }
+  .campo textarea { min-height: 112px; resize: vertical; }
+  .campo input::placeholder, .campo textarea::placeholder { color: var(--marfil-50); }
+  .campo input:focus, .campo textarea:focus { outline: none; border-color: var(--lima); box-shadow: 4px 4px 0 var(--lima); }
+  .check { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: 16px; line-height: 1.45; color: var(--marfil-82); cursor: pointer; }
+  .check input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--lima); cursor: pointer; }
+  .form .btn { align-self: flex-start; }
+  .aviso { font-size: 16px; line-height: 1.5; }
+  .aviso.ok { color: var(--lima); }
+  .aviso.err { color: var(--critico); }
+
+  .pie { display: flex; justify-content: space-between; align-items: center; gap: 24px; width: 100%; margin-top: clamp(64px, 7vw, 100px); padding-top: 32px; border-top: var(--regla) solid var(--marfil); flex-wrap: wrap; }
   .pie .logo img { height: 26px; }
   .pie .logo span { color: var(--marfil); }
   .pie .links { display: flex; align-items: center; gap: 28px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
   .pie .links a { color: var(--marfil); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
   .pie .links a:hover { color: var(--lima); }
-  .pie .links a.mail { text-transform: none; letter-spacing: .04em; }
+  /* El correo va en Space Grotesk: en Space Mono la @ no se lee */
+  .pie .links a.mail { font-family: var(--font-sans); font-size: 16px; font-weight: 500; text-transform: none; letter-spacing: 0; }
 
   /* ── Responsive ─────────────────────────────────────────── */
   @media (max-width: 980px) {
     .nav a.l { display: none; }
+    .nav { gap: 12px; }
     .px-cluster { display: none; }
     .svc { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; }
     .svc > div, .svc > div + div { border-right: 0; border-bottom: 1px solid var(--morado-linea); padding: 28px 0; min-height: 0; }
-    .cols { grid-template-columns: minmax(0, 1fr); }
+    .cols, .contacto { grid-template-columns: minmax(0, 1fr); }
     .citas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .cierre .mareas { width: 100%; opacity: .6; }
   }
   @media (max-width: 640px) {
-    .hdr .wrap { padding-top: 14px; padding-bottom: 14px; }
-    .logo img { height: 24px; }
-    .logo span { font-size: 8.5px; letter-spacing: .34em; }
+    .hdr .wrap { padding-top: 12px; padding-bottom: 12px; gap: 12px; }
+    .logo img { height: 22px; }
+    .logo span { font-size: 8px; letter-spacing: .3em; }
+    .nav { gap: 8px; }
+    .idioma button { min-width: 38px; padding: 0 6px; font-size: 11px; }
+    .nav .btn--sm { padding: 12px 14px; font-size: 11px; letter-spacing: .1em; }
     .hero .mareas { height: 160px; }
     .fila .btn { flex: 1 1 100%; }
-    .partida .btn, .aliados .btn, .cierre .btn--lima { width: 100%; }
+    .partida .btn, .aliados .btn, .cierre .agendar, .form .btn { width: 100%; align-self: stretch; }
     .svc { grid-template-columns: minmax(0, 1fr); }
     .svc > div:last-child { border-bottom: 0; }
     .svc h4, .aliados h4 { font-size: 23px; }
     .col ul { font-size: 17px; }
-    /* En celular, los testimonios pasan a carrusel horizontal:
-       seis tarjetas apiladas serían un scroll eterno. */
     .citas {
       display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 20px;
       margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px;
@@ -257,7 +309,10 @@
     .citas figure { flex: 0 0 82%; scroll-snap-align: start; min-height: 180px; }
     .citas blockquote { font-size: 21px; }
     .pie { flex-direction: column; align-items: flex-start; }
-    .pie .links { flex-wrap: wrap; gap: 4px 24px; }
+    .pie .links { flex-direction: column; align-items: flex-start; gap: 0; }
+  }
+  @media (max-width: 360px) {
+    .logo span { display: none; }
   }
 </style>
 </head>
@@ -266,15 +321,20 @@
 <!-- ── Header ─────────────────────────────────────────────── -->
 <header class="hdr">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Kapüy, Movemos mareas">
+    <a class="logo" href="/" aria-label="Kapüy">
       <img src="/assets/logo/kapuy-wordmark-carbon.svg" alt="kapüy" width="93" height="30">
-      <span>Movemos mareas</span>
+      <span data-i18n="tagline">Movemos mareas</span>
     </a>
     <nav class="nav" aria-label="Principal">
-      <a class="l" href="#oferta">Qué hacemos</a>
-      <a class="l" href="#para-quien">Para quién</a>
-      <a class="l" href="#testimonios">Testimonios</a>
-      <a class="btn btn--lima btn--sm" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="header">Hablemos</a>
+      <a class="l" href="#oferta" data-i18n="navOferta">Qué hacemos</a>
+      <a class="l" href="#para-quien" data-i18n="navQuien">Para quién</a>
+      <!-- TESTIMONIOS: quitar `hidden` aquí y en la sección cuando haya testimonios reales -->
+      <a class="l" href="#testimonios" data-i18n="navTst" hidden>Testimonios</a>
+      <div class="idioma" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" aria-pressed="true" aria-label="Español">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+      </div>
+      <a class="btn btn--lima btn--sm" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="header" data-i18n="hablemos">Hablemos</a>
     </nav>
   </div>
 </header>
@@ -301,12 +361,12 @@
       <span class="px" style="right:calc(9% + 120px);top:462px;background:var(--lima)"></span>
     </div>
     <div class="wrap">
-      <p class="eb">El sistema invisible que mueve tu marketing</p>
-      <h1>Las redes sociales <em>no venden</em> solas.</h1>
-      <p class="lead">Deja de cargar solo cada decisión de marketing. Kapüy entiende tu negocio y a tu cliente, diseña el camino completo hasta la venta y lo ejecuta con criterio y con chispa.</p>
+      <p class="eb" data-i18n="heroEb">El sistema invisible que mueve tu marketing</p>
+      <h1 data-i18n="heroH1">Las redes sociales <em class="acento">no venden</em> solas.</h1>
+      <p class="lead" data-i18n="heroLead">Deja de cargar solo cada decisión de marketing. Kapüy entiende tu negocio y a tu cliente, diseña el camino completo hasta la venta y lo ejecuta con criterio y con chispa.</p>
       <div class="fila">
-        <a class="btn btn--lima" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="hero">Hablemos</a>
-        <a class="btn btn--linea" href="#oferta">Qué hacemos</a>
+        <a class="btn btn--lima" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="hero" data-i18n="hablemos">Hablemos</a>
+        <a class="btn btn--linea" href="#oferta" data-i18n="navOferta">Qué hacemos</a>
       </div>
     </div>
   </section>
@@ -315,36 +375,36 @@
   <section id="oferta" class="oferta oscuro">
     <div class="wrap">
       <div class="bloque">
-        <p class="eb">Qué hacemos</p>
-        <h2>Primero entendemos tu negocio. Después lo hacemos crecer.</h2>
-        <p class="intro">No vendemos posts sueltos ni paquetes de piezas. Todo cliente de Kapüy arranca igual: con una estrategia. De ahí sale qué necesita tu marca, en qué orden y con quién.</p>
+        <p class="eb" data-i18n="navOferta">Qué hacemos</p>
+        <h2 data-i18n="ofH2">Primero entendemos tu negocio. Después lo hacemos crecer.</h2>
+        <p class="intro" data-i18n="ofIntro">No vendemos posts sueltos ni paquetes de piezas. Todo cliente de Kapüy arranca igual: con una estrategia. De ahí sale qué necesita tu marca, en qué orden y con quién.</p>
       </div>
 
       <div class="partida">
         <div>
-          <p class="eb">El punto de partida</p>
-          <h3>Estrategia de crecimiento</h3>
-          <p>Entramos a tu negocio, conocemos a quien te compra y salimos con un plan de 90 días: qué hacer, en qué orden y por qué. Es por donde empieza todo.</p>
+          <p class="eb" data-i18n="ptEb">El punto de partida</p>
+          <h3 data-i18n="ptH3">Estrategia de crecimiento</h3>
+          <p data-i18n="ptP">Entramos a tu negocio, conocemos a quien te compra y salimos con un plan de 90 días: qué hacer, en qué orden y por qué. Es por donde empieza todo.</p>
         </div>
-        <a class="btn btn--morado" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="estrategia">Empezar aquí</a>
+        <a class="btn btn--morado" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="estrategia" data-i18n="ptBtn">Empezar aquí</a>
       </div>
 
       <div class="bloque">
-        <p class="mono servicios-titulo">Lo que construimos contigo</p>
+        <p class="mono servicios-titulo" data-i18n="svcT">Lo que construimos contigo</p>
         <div class="svc">
-          <div><span class="n">01</span><h4>Generación de demanda</h4><p>Funnel y pauta digital pensados para que la atención se convierta en clientes, no en likes.</p></div>
-          <div><span class="n">02</span><h4>Producción audiovisual</h4><p>Ideas que la gente recuerda, grabadas y editadas por nuestro equipo. Contenido que empuja el negocio, no que llena el feed.</p></div>
-          <div><span class="n">03</span><h4>Branding</h4><p>Identidad visual y verbal para marcas que están naciendo o que necesitan volver a contarse.</p></div>
-          <div><span class="n">04</span><h4>Dirección mensual</h4><p>Cada mes revisamos qué funcionó, qué no y qué ajustamos.</p><p class="claim">Tú dices hacia dónde. Nosotras creamos el camino.</p></div>
+          <div><span class="n">01</span><h4 data-i18n="s1h">Generación de demanda</h4><p data-i18n="s1p">Funnel y pauta digital pensados para que la atención se convierta en clientes, no en likes.</p></div>
+          <div><span class="n">02</span><h4 data-i18n="s2h">Producción audiovisual</h4><p data-i18n="s2p">Ideas que la gente recuerda, grabadas y editadas por nuestro equipo. Contenido que empuja el negocio, no que llena el feed.</p></div>
+          <div><span class="n">03</span><h4 data-i18n="s3h">Branding</h4><p data-i18n="s3p">Identidad visual y verbal para marcas que están naciendo o que necesitan volver a contarse.</p></div>
+          <div><span class="n">04</span><h4 data-i18n="s4h">Dirección mensual</h4><p data-i18n="s4p">Cada mes revisamos qué funcionó, qué no y qué ajustamos.</p><p class="claim" data-i18n="s4c">Tú dices hacia dónde. Nosotras creamos el camino.</p></div>
         </div>
       </div>
 
       <div class="aliados">
         <div>
-          <h4>Y lo que no hacemos, lo resolvemos.</h4>
-          <p>Páginas web, campañas de tráfico pago a gran escala y producciones grandes: las hacemos con nuestra red de aliados. Tú hablas con una sola persona; nosotras elegimos bien con quién trabajar.</p>
+          <h4 data-i18n="alH">Y lo que no hacemos, lo resolvemos.</h4>
+          <p data-i18n="alP">Páginas web, campañas de tráfico pago a gran escala y producciones grandes: las hacemos con nuestra red de aliados. Tú hablas con una sola persona; nosotras elegimos bien con quién trabajar.</p>
         </div>
-        <a class="btn btn--linea-clara" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="aliados">Hablemos</a>
+        <a class="btn btn--linea-clara" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="aliados" data-i18n="hablemos">Hablemos</a>
       </div>
     </div>
   </section>
@@ -353,41 +413,43 @@
   <section id="para-quien" class="pq">
     <div class="wrap">
       <div class="bloque">
-        <p class="eb">Para quién somos</p>
-        <h2>Si solo buscas posts, no somos tu agencia. <em>Si buscas que tu marca crezca, hablemos.</em></h2>
+        <p class="eb" data-i18n="pqEb">Para quién somos</p>
+        <h2 data-i18n="pqH2">Si solo buscas posts, no somos tu agencia. <em class="acento">Si buscas que tu marca crezca, hablemos.</em></h2>
       </div>
       <div class="cols">
         <div class="col col--si">
-          <h3>Somos para ti si…</h3>
+          <h3 data-i18n="siH">Somos para ti si…</h3>
           <ul>
-            <li>Tienes un producto definido, aunque todavía estés arrancando.</li>
-            <li>Entiendes que el marketing es un proceso, no un truco de un mes.</li>
-            <li>Quieres a alguien con criterio decidiendo contigo, y confías en ese criterio.</li>
-            <li>Tienes presupuesto real para crecer: trabajamos con marcas que invierten desde $1.000 al mes en marketing, sumando todo.</li>
+            <li data-i18n="si1">Tienes un producto definido, aunque todavía estés arrancando.</li>
+            <li data-i18n="si2">Entiendes que el marketing es un proceso, no un truco de un mes.</li>
+            <li data-i18n="si3">Quieres a alguien con criterio decidiendo contigo, y confías en ese criterio.</li>
+            <li data-i18n="si4">Tienes presupuesto real para crecer: trabajamos con marcas que invierten desde $1.000 al mes en marketing, sumando todo.</li>
           </ul>
-          <p class="nota">¿Todavía no llegas ahí? Cuéntanos igual. Muchas marcas empiezan solo con la estrategia y crecen desde ahí.</p>
+          <p class="nota" data-i18n="siNota">¿Todavía no llegas ahí? Cuéntanos igual. Muchas marcas empiezan solo con la estrategia y crecen desde ahí.</p>
         </div>
         <div class="col col--no">
-          <h3>No somos para ti si…</h3>
+          <h3 data-i18n="noH">No somos para ti si…</h3>
           <ul>
-            <li>Esperas vender en un mes solo con redes.</li>
-            <li>Necesitas resultados para ayer.</li>
-            <li>Solo buscas a alguien que publique.</li>
-            <li>Quieres competir únicamente por precio.</li>
+            <li data-i18n="no1">Esperas vender en un mes solo con redes.</li>
+            <li data-i18n="no2">Necesitas resultados para ayer.</li>
+            <li data-i18n="no3">Solo buscas a alguien que publique.</li>
+            <li data-i18n="no4">Quieres competir únicamente por precio.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 4. Testimonios ─────────────────────────────────────── -->
-  <!-- Al cargar uno real: cambia el texto y quita la clase "pendiente". -->
-  <section id="testimonios" class="tst oscuro">
+  <!-- ── 4. Testimonios ─────────────────────────────────────────
+       OCULTA hasta tener testimonios reales. Para activarla: quitar
+       `hidden` aquí y en el link del nav. Con 3 queda una fila limpia;
+       borra las <figure> que sobren y la grilla se acomoda sola. -->
+  <section id="testimonios" class="tst oscuro" hidden>
     <div class="wrap">
       <div class="bloque">
-        <p class="eb">Con quién hemos trabajado</p>
-        <h2>Lo que dicen las marcas con las que hemos trabajado.</h2>
-        <p class="sub">Algunas trabajaron con Vero Capote, nuestra directora de estrategia, antes de que Kapüy existiera.</p>
+        <p class="eb" data-i18n="tstEb">Con quién hemos trabajado</p>
+        <h2 data-i18n="tstH2">Lo que dicen las marcas con las que hemos trabajado.</h2>
+        <p class="sub" data-i18n="tstSub">Algunas trabajaron con Vero Capote, nuestra directora de estrategia, antes de que Kapüy existiera.</p>
       </div>
       <div class="citas">
         <figure class="pendiente"><blockquote>«[TESTIMONIO PENDIENTE]»</blockquote><figcaption><strong>Kathy</strong><br><span>[Cargo y empresa] · EE.UU.</span></figcaption></figure>
@@ -415,14 +477,39 @@
       <span class="px" style="right:calc(14% - 72px);top:190px;background:var(--lima)"></span>
     </div>
     <div class="wrap">
-      <h2>Deja de preguntarte <em>si funciona.</em></h2>
-      <p class="lead">Agenda 30 minutos. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte. Y si no somos nosotras, te decimos a quién buscar.</p>
-      <a class="btn btn--lima" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="cierre">Agenda una llamada</a>
+      <h2 data-i18n="ciH2">Deja de preguntarte <em class="acento">si funciona.</em></h2>
+      <p class="lead" data-i18n="ciLead">Agenda 30 minutos. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte. Y si no somos nosotras, te decimos a quién buscar.</p>
+      <a class="btn btn--lima agendar" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="cierre" data-i18n="ciBtn">Agenda una llamada</a>
+
+      <!-- Para quien no quiere agendar: mensaje o suscripción -->
+      <div class="contacto" id="contacto">
+        <div class="texto">
+          <p class="eb" data-i18n="coEb">¿Todavía no quieres agendar?</p>
+          <h3 data-i18n="coH3">Escríbenos o quédate cerca.</h3>
+          <p data-i18n="coP">Cuéntanos en qué andas y te responde una persona, no un bot. Si por ahora prefieres mirar de lejos, deja tu correo y te escribimos cuando publiquemos algo que valga la pena leer.</p>
+        </div>
+        <form class="form" id="contactForm" novalidate>
+          <div class="campo">
+            <label for="email" data-i18n="coEmail">Correo</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="tu@tunegocio.com" data-i18n-ph="coEmailPh">
+          </div>
+          <div class="campo">
+            <label for="mensaje" data-i18n="coMsg">Mensaje (opcional)</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Qué quieres hacer crecer y qué ya intentaste" data-i18n-ph="coMsgPh"></textarea>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="novedades" name="novedades">
+            <span data-i18n="coCheck">Quiero recibir lo que publiquen. Poco y bueno.</span>
+          </label>
+          <button type="submit" class="btn btn--linea-clara" id="enviar" data-i18n="coBtn">Enviar</button>
+          <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+        </form>
+      </div>
 
       <footer class="pie">
-        <a class="logo" href="/" aria-label="Kapüy, Movemos mareas">
+        <a class="logo" href="/" aria-label="Kapüy">
           <img src="/assets/logo/kapuy-wordmark-marfil.svg" alt="kapüy" width="81" height="26">
-          <span>Movemos mareas</span>
+          <span data-i18n="tagline">Movemos mareas</span>
         </a>
         <div class="links">
           <a class="mail" href="mailto:hey@kapuymarketing.com" onclick="gtag('event','contacto_click',{metodo:'footer_home'});">hey@kapuymarketing.com</a>
@@ -436,12 +523,240 @@
 </main>
 
 <script>
-  /* GA4: todos los botones al calendario mandan el mismo evento que usaba
-     la home v1 (home_booking_click), con `ubicacion` para saber cuál convierte. */
-  document.querySelectorAll('[data-cta]').forEach(function (a) {
-    a.addEventListener('click', function () {
-      gtag('event', 'home_booking_click', { idioma: 'es', ubicacion: a.dataset.cta });
+  /* ══════════════════════════════════════════════════════════
+     CONFIG — mismo proyecto y tabla que /hello. `source` = home.
+     ══════════════════════════════════════════════════════════ */
+  const SUPABASE_URL      = 'https://eptkrujkcgwzgeqgevxp.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_EfMv_jfTzBStf2oKUzVyow_RWKatcAe';
+  const TABLE             = 'hello_leads';
+  const SOURCE            = 'home';
+
+  const KIT_FORM_ID    = '';
+  const KIT_PUBLIC_KEY = '';
+
+  /* ══════════════════════════════════════════════════════════
+     i18n — ES es el copy aprobado de la maqueta.
+     ══════════════════════════════════════════════════════════ */
+  const dict = {
+    tagline:   { es: 'Movemos mareas', en: 'We move tides' },
+    navOferta: { es: 'Qué hacemos', en: 'What we do' },
+    navQuien:  { es: 'Para quién', en: "Who it's for" },
+    navTst:    { es: 'Testimonios', en: 'Testimonials' },
+    hablemos:  { es: 'Hablemos', en: "Let's talk" },
+
+    heroEb:   { es: 'El sistema invisible que mueve tu marketing', en: 'The invisible system that moves your marketing' },
+    heroH1:   { es: 'Las redes sociales <em class="acento">no venden</em> solas.', en: 'Social media <em class="acento">doesn’t sell</em> on its own.' },
+    heroLead: {
+      es: 'Deja de cargar solo cada decisión de marketing. Kapüy entiende tu negocio y a tu cliente, diseña el camino completo hasta la venta y lo ejecuta con criterio y con chispa.',
+      en: 'Stop carrying every marketing decision on your own. Kapüy gets to know your business and your customer, designs the whole path to the sale and runs it with judgment and spark.'
+    },
+
+    ofH2:    { es: 'Primero entendemos tu negocio. Después lo hacemos crecer.', en: 'First we understand your business. Then we grow it.' },
+    ofIntro: {
+      es: 'No vendemos posts sueltos ni paquetes de piezas. Todo cliente de Kapüy arranca igual: con una estrategia. De ahí sale qué necesita tu marca, en qué orden y con quién.',
+      en: 'We don’t sell one-off posts or content bundles. Every Kapüy client starts the same way: with a strategy. That’s where we work out what your brand needs, in what order and with whom.'
+    },
+    ptEb:  { es: 'El punto de partida', en: 'Where it starts' },
+    ptH3:  { es: 'Estrategia de crecimiento', en: 'Growth strategy' },
+    ptP:   {
+      es: 'Entramos a tu negocio, conocemos a quien te compra y salimos con un plan de 90 días: qué hacer, en qué orden y por qué. Es por donde empieza todo.',
+      en: 'We step into your business, get to know the people who buy from you and come out with a 90-day plan: what to do, in what order and why. Everything starts here.'
+    },
+    ptBtn: { es: 'Empezar aquí', en: 'Start here' },
+    svcT:  { es: 'Lo que construimos contigo', en: 'What we build with you' },
+    s1h: { es: 'Generación de demanda', en: 'Demand generation' },
+    s1p: { es: 'Funnel y pauta digital pensados para que la atención se convierta en clientes, no en likes.', en: 'Funnel and paid media built to turn attention into customers, not likes.' },
+    s2h: { es: 'Producción audiovisual', en: 'Video production' },
+    s2p: { es: 'Ideas que la gente recuerda, grabadas y editadas por nuestro equipo. Contenido que empuja el negocio, no que llena el feed.', en: 'Ideas people remember, shot and edited by our team. Content that moves the business instead of filling the feed.' },
+    s3h: { es: 'Branding', en: 'Branding' },
+    s3p: { es: 'Identidad visual y verbal para marcas que están naciendo o que necesitan volver a contarse.', en: 'Visual and verbal identity for brands that are just starting out or need to tell their story again.' },
+    s4h: { es: 'Dirección mensual', en: 'Monthly direction' },
+    s4p: { es: 'Cada mes revisamos qué funcionó, qué no y qué ajustamos.', en: 'Every month we review what worked, what didn’t and what we adjust.' },
+    s4c: { es: 'Tú dices hacia dónde. Nosotras creamos el camino.', en: 'You set the direction. We build the path.' },
+    alH: { es: 'Y lo que no hacemos, lo resolvemos.', en: 'And what we don’t do, we still get done.' },
+    alP: {
+      es: 'Páginas web, campañas de tráfico pago a gran escala y producciones grandes: las hacemos con nuestra red de aliados. Tú hablas con una sola persona; nosotras elegimos bien con quién trabajar.',
+      en: 'Websites, large-scale paid traffic campaigns and big productions: we handle them with our network of partners. You talk to one person; we choose the right people to work with.'
+    },
+
+    pqEb: { es: 'Para quién somos', en: 'Who we’re for' },
+    pqH2: {
+      es: 'Si solo buscas posts, no somos tu agencia. <em class="acento">Si buscas que tu marca crezca, hablemos.</em>',
+      en: 'If all you want is posts, we’re not your agency. <em class="acento">If you want your brand to grow, let’s talk.</em>'
+    },
+    siH:  { es: 'Somos para ti si…', en: 'We’re for you if…' },
+    si1:  { es: 'Tienes un producto definido, aunque todavía estés arrancando.', en: 'You have a defined product, even if you’re just getting started.' },
+    si2:  { es: 'Entiendes que el marketing es un proceso, no un truco de un mes.', en: 'You understand marketing is a process, not a one-month trick.' },
+    si3:  { es: 'Quieres a alguien con criterio decidiendo contigo, y confías en ese criterio.', en: 'You want someone with judgment making decisions with you, and you trust that judgment.' },
+    si4:  { es: 'Tienes presupuesto real para crecer: trabajamos con marcas que invierten desde $1.000 al mes en marketing, sumando todo.', en: 'You have a real budget to grow: we work with brands that invest from $1,000 a month in marketing, all in.' },
+    siNota: { es: '¿Todavía no llegas ahí? Cuéntanos igual. Muchas marcas empiezan solo con la estrategia y crecen desde ahí.', en: 'Not there yet? Tell us anyway. Plenty of brands start with just the strategy and grow from there.' },
+    noH:  { es: 'No somos para ti si…', en: 'We’re not for you if…' },
+    no1:  { es: 'Esperas vender en un mes solo con redes.', en: 'You expect to sell within a month from social media alone.' },
+    no2:  { es: 'Necesitas resultados para ayer.', en: 'You needed results yesterday.' },
+    no3:  { es: 'Solo buscas a alguien que publique.', en: 'You just want someone to post.' },
+    no4:  { es: 'Quieres competir únicamente por precio.', en: 'You want to compete on price alone.' },
+
+    tstEb:  { es: 'Con quién hemos trabajado', en: 'Who we’ve worked with' },
+    tstH2:  { es: 'Lo que dicen las marcas con las que hemos trabajado.', en: 'What the brands we’ve worked with say.' },
+    tstSub: { es: 'Algunas trabajaron con Vero Capote, nuestra directora de estrategia, antes de que Kapüy existiera.', en: 'Some worked with Vero Capote, our strategy director, before Kapüy existed.' },
+
+    ciH2:   { es: 'Deja de preguntarte <em class="acento">si funciona.</em>', en: 'Marketing you don’t have to <em class="acento">second-guess.</em>' },
+    ciLead: {
+      es: 'Agenda 30 minutos. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte. Y si no somos nosotras, te decimos a quién buscar.',
+      en: 'Book 30 minutes. Tell us about your business and we’ll tell you honestly whether we can help. And if we’re not the right fit, we’ll tell you who to look for.'
+    },
+    ciBtn:  { es: 'Agenda una llamada', en: 'Book a call' },
+
+    coEb:    { es: '¿Todavía no quieres agendar?', en: 'Not ready to book?' },
+    coH3:    { es: 'Escríbenos o quédate cerca.', en: 'Write to us, or just stay close.' },
+    coP:     {
+      es: 'Cuéntanos en qué andas y te responde una persona, no un bot. Si por ahora prefieres mirar de lejos, deja tu correo y te escribimos cuando publiquemos algo que valga la pena leer.',
+      en: 'Tell us what you’re working on and a person will write back, not a bot. If you’d rather watch from a distance for now, leave your email and we’ll write when we publish something worth reading.'
+    },
+    coEmail: { es: 'Correo', en: 'Email' },
+    coMsg:   { es: 'Mensaje (opcional)', en: 'Message (optional)' },
+    coCheck: { es: 'Quiero recibir lo que publiquen. Poco y bueno.', en: 'Send me what you publish. Not often, only the good stuff.' },
+    coBtn:   { es: 'Enviar', en: 'Send' },
+
+    _ph: {
+      coEmailPh: { es: 'tu@tunegocio.com', en: 'you@yourbusiness.com' },
+      coMsgPh:   { es: 'Qué quieres hacer crecer y qué ya intentaste', en: 'What you want to grow and what you’ve already tried' }
+    },
+    _sending:  { es: 'Enviando…', en: 'Sending…' },
+    _okMsg:    { es: 'Listo, llegó. Te respondemos en máximo dos días hábiles.', en: 'Got it. We’ll write back within two business days.' },
+    _okSub:    { es: 'Listo, ya estás en la lista.', en: 'Done, you’re on the list.' },
+    _errVacio: { es: 'Escribe un mensaje o marca la casilla: con el correo solo no sabemos qué hacer.', en: 'Write a message or tick the box: with just an email we don’t know what to do.' },
+    _errEmail: { es: 'Ese correo no se ve bien. ¿Lo revisas?', en: 'That email doesn’t look right. Mind checking it?' },
+    _errSave:  {
+      es: 'Algo se rompió de nuestro lado, lo cual es vergonzoso en un sitio de marketing. Escríbenos a hey@kapuymarketing.com y lo arreglamos.',
+      en: 'Something broke on our end, which is embarrassing on a marketing site. Write us at hey@kapuymarketing.com and we’ll fix it.'
+    },
+    _title: {
+      es: 'Kapüy — Agencia de marketing con estrategia, ideas y sistema',
+      en: 'Kapüy — Marketing agency: strategy, ideas and the system underneath'
+    }
+  };
+
+  let lang = 'es';
+
+  function setLang(next) {
+    lang = next;
+    document.documentElement.lang = next;
+    document.title = dict._title[next];
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const entry = dict[el.dataset.i18n];
+      if (entry) el.innerHTML = entry[next];
     });
+    document.querySelectorAll('[data-i18n-ph]').forEach((el) => {
+      const entry = dict._ph[el.dataset.i18nPh];
+      if (entry) el.placeholder = entry[next];
+    });
+    document.querySelectorAll('.idioma button').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === next));
+    });
+    try { localStorage.setItem('kapuy_lang', next); } catch (e) {}
+  }
+
+  document.querySelectorAll('.idioma button').forEach((b) => {
+    b.addEventListener('click', () => {
+      setLang(b.dataset.lang);
+      gtag('event', 'idioma_cambio', { idioma: b.dataset.lang });
+    });
+  });
+
+  // Default ES (la marca opera desde LATAM); cae a EN por navegador.
+  let saved = null;
+  try { saved = localStorage.getItem('kapuy_lang'); } catch (e) {}
+  setLang(saved || ((navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es'));
+
+  /* GA4: botones al calendario, mismo evento que la home v1 + `ubicacion` */
+  document.querySelectorAll('[data-cta]').forEach((a) => {
+    a.addEventListener('click', () => {
+      gtag('event', 'home_booking_click', { idioma: lang, ubicacion: a.dataset.cta });
+    });
+  });
+
+  /* ══════════════════════════════════════════════════════════
+     Formulario: mensaje y/o suscripción
+     ══════════════════════════════════════════════════════════ */
+  const form  = document.getElementById('contactForm');
+  const aviso = document.getElementById('aviso');
+  const btn   = document.getElementById('enviar');
+
+  function show(kind, text) {
+    aviso.className = 'aviso ' + kind;
+    aviso.textContent = text;
+  }
+
+  function uuid() {
+    return (crypto && crypto.randomUUID) ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+          const r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+  }
+
+  async function saveToSupabase(row) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify(row),
+    });
+    if (!res.ok) throw new Error('supabase ' + res.status);
+  }
+
+  async function saveToKit(email) {
+    if (!KIT_FORM_ID || !KIT_PUBLIC_KEY) return;
+    try {
+      await fetch(`https://api.kit.com/v3/forms/${KIT_FORM_ID}/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ api_key: KIT_PUBLIC_KEY, email, fields: { source: SOURCE } }),
+      });
+    } catch (e) { /* silencioso a propósito */ }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email   = document.getElementById('email').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+    const quiere  = document.getElementById('novedades').checked;
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show('err', dict._errEmail[lang]); return; }
+    if (!mensaje && !quiere) { show('err', dict._errVacio[lang]); return; }
+
+    btn.disabled = true;
+    btn.textContent = dict._sending[lang];
+    show('', '');
+
+    try {
+      await saveToSupabase({
+        id: uuid(),
+        email,
+        message: mensaje || null,
+        wants_updates: quiere,
+        wants_call: false,
+        source: SOURCE,
+        lang,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent,
+      });
+      if (quiere) await saveToKit(email);
+
+      gtag('event', 'home_signup', { idioma: lang, tipo: mensaje ? 'mensaje' : 'suscripcion', novedades: quiere });
+      form.querySelectorAll('input, textarea').forEach((i) => { i.disabled = true; });
+      btn.hidden = true;
+      show('ok', mensaje ? dict._okMsg[lang] : dict._okSub[lang]);
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = dict.coBtn[lang];
+      show('err', dict._errSave[lang]);
+    }
   });
 </script>
 
