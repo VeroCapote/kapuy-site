@@ -428,3 +428,23 @@
   .campo [aria-invalid="true"] { border-color: var(--critico); }
   @media (max-width: 760px) { .form-postula { grid-template-columns: minmax(0, 1fr); } }
   .persona p.bio-cierre { color: var(--carbon); font-weight: 600; padding-left: 16px; border-left: var(--regla-gruesa) solid var(--lima); }
+
+  /* ── Home · conversión (2026-10-02) ─────────────────────────── */
+  .hero .micro { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; line-height: 1.6; color: var(--carbon-mudo); margin-top: -12px; }
+
+  .tst-mas summary { cursor: pointer; list-style: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--lima); }
+  .tst-mas summary::-webkit-details-marker { display: none; }
+  .tst-mas summary::after { content: " +"; }
+  .tst-mas[open] summary::after { content: " −"; }
+  .tst-mas[open] .tst-texto { margin-top: 24px; }
+
+  .empezamos { background: var(--marfil-hondo); }
+  .pasos--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .quien-llamada { display: flex; align-items: center; gap: 16px; }
+  .quien-llamada img { width: 64px; height: 64px; object-fit: cover; object-position: center 20%; border: 2px solid var(--lima); flex: none; }
+  .quien-llamada p { font-size: 16px; line-height: 1.45; color: var(--marfil-82); max-width: 440px; }
+  .quien-llamada strong { color: var(--marfil); font-weight: 600; }
+
+  .contacto .diag { font-size: 16px; }
+  .contacto .diag a { color: var(--lima); }

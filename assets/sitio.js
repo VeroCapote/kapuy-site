@@ -77,6 +77,13 @@
       });
     });
 
+    // GA4: clics al diagnóstico gratuito (data-diag = ubicación).
+    // Delegado porque el link del bloque de contacto se re-pinta al cambiar idioma.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('[data-diag]');
+      if (a && window.gtag) gtag('event', 'diag_click', { idioma: K.lang, ubicacion: a.dataset.diag, pagina: location.pathname });
+    });
+
     // Default ES (la marca opera desde LATAM); cae a EN por navegador.
     var saved = null;
     try { saved = localStorage.getItem('kapuy_lang'); } catch (e) {}
