@@ -353,6 +353,13 @@
   .persona h3 { font-size: 26px; line-height: 1.1; letter-spacing: -.02em; }
   .persona .rol { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--morado); }
   .persona p.bio { font-size: 17px; line-height: 1.55; color: var(--carbon-suave); }
+  /* Con una sola persona: tarjeta horizontal (foto | texto) */
+  @media (min-width: 761px) {
+    .equipo:has(> .persona:only-child) { grid-template-columns: minmax(0, 1fr); }
+    .persona:only-child { display: grid; grid-template-columns: minmax(260px, 380px) minmax(0, 560px); column-gap: 56px; row-gap: 14px; align-content: start; }
+    .persona:only-child .foto { grid-row: 1 / span 5; }
+    .persona:only-child h3 { font-size: 40px; align-self: end; margin-top: 8px; }
+  }
   .pendiente-dato { background: var(--marfil-hondo); outline: 1px dashed var(--carbon-mudo); padding: 0 4px; }
 
   /* Valores: cuatro celdas en retícula editorial */
