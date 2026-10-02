@@ -509,3 +509,26 @@
     .pop-fila { margin-top: 2px; }
   }
   @media (prefers-reduced-motion: reduce) { .pop-diag { transition: none; } }
+
+  /* ── La grieta: letras recortadas (2026-10-02) ──────────────────
+     Variantes del papel: paleta de marca + tres tipos de imprenta.
+     Nunca texto lima sobre marfil; nunca morado sobre carbón. */
+  .recorte { font-style: normal; }
+  .rc-solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .rc-pal { white-space: nowrap; display: inline-block; }
+  .rc {
+    display: inline-block; line-height: .92; padding: .05em .07em .02em; margin: 0 .012em;
+    transform: translateY(var(--alto, 0)) rotate(var(--giro, 0deg));
+    box-shadow: .03em .04em 0 rgba(32, 33, 31, .22);
+  }
+  .rc--0 { background: var(--lima); color: var(--morado); font-weight: 700; clip-path: polygon(2% 4%, 97% 0, 100% 93%, 4% 100%); }
+  .rc--1 { background: var(--carbon); color: var(--marfil); font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400; clip-path: polygon(0 2%, 100% 6%, 95% 100%, 3% 96%); }
+  .rc--2 { background: var(--marfil-hondo); color: var(--carbon); font-family: var(--font-mono); font-weight: 700; font-size: .86em; clip-path: polygon(4% 0, 100% 3%, 97% 97%, 0 100%); }
+  .rc--3 { background: var(--morado); color: var(--lima); font-weight: 600; clip-path: polygon(0 5%, 96% 0, 100% 100%, 2% 95%); }
+  .rc--4 { background: var(--marfil); color: var(--morado); font-family: 'Times New Roman', Times, serif; font-weight: 700; outline: 1.5px solid var(--carbon); outline-offset: -1.5px; font-size: 1.04em; }
+  .rc--5 { background: var(--lima); color: var(--carbon); font-family: 'Courier New', Courier, monospace; font-weight: 700; font-size: .9em; clip-path: polygon(3% 3%, 100% 0, 98% 96%, 0 100%); }
+  .rc--6 { background: var(--carbon); color: var(--lima); font-weight: 500; font-size: .94em; clip-path: polygon(0 0, 97% 4%, 100% 98%, 5% 100%); }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 .rc { transition: transform .25s ease; }
+    .hero h1:hover .rc { transform: translateY(0) rotate(0deg); }
+  }

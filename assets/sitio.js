@@ -20,6 +20,39 @@
     ciBtn:     { es: 'Agenda una llamada', en: 'Book a call' }
   };
 
+
+  /* ── La grieta: letras recortadas (estilo nota de revista) ─────
+     <em class="recorte">no venden</em> se parte en letras sueltas, cada
+     una con su papel, su tipo y su giro. Determinista: misma palabra,
+     mismo recorte en cada visita. El texto real queda para lectores
+     de pantalla; las letras sueltas se ocultan. */
+  var RC_VARIANTES = 7;
+  var RC_GIRO = [-4, 3, -2, 5, -3, 2, -5, 4, -1, 3, -4, 2];
+  var RC_ALTO = [0, -.05, .04, -.02, .06, -.04, .02, -.06, .03, 0, -.03, .05];
+  function recortes() {
+    document.querySelectorAll('.recorte:not([data-hecho])').forEach(function (em) {
+      var texto = em.textContent, i = 0;
+      var vis = document.createElement('span'); vis.className = 'rc-solo-lector'; vis.textContent = texto;
+      var letras = document.createElement('span'); letras.setAttribute('aria-hidden', 'true');
+      texto.split(' ').forEach(function (palabra, w) {
+        if (w) letras.appendChild(document.createTextNode(' '));
+        var p = document.createElement('span'); p.className = 'rc-pal';
+        Array.from(palabra).forEach(function (ch) {
+          var l = document.createElement('span');
+          l.className = 'rc rc--' + ((i * 3 + w) % RC_VARIANTES);
+          l.style.setProperty('--giro', RC_GIRO[i % RC_GIRO.length] + 'deg');
+          l.style.setProperty('--alto', RC_ALTO[(i + 5) % RC_ALTO.length] + 'em');
+          l.textContent = ch;
+          p.appendChild(l); i++;
+        });
+        letras.appendChild(p);
+      });
+      em.textContent = '';
+      em.appendChild(vis); em.appendChild(letras);
+      em.setAttribute('data-hecho', '');
+    });
+  }
+
   var dict = {};
   var K = { lang: 'es' };
 
@@ -39,6 +72,7 @@
       b.setAttribute('aria-pressed', String(b.dataset.lang === next));
     });
     try { localStorage.setItem('kapuy_lang', next); } catch (e) {}
+    recortes();
   }
 
   K.init = function (pageDict) {
