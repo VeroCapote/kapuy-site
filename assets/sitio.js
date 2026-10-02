@@ -123,8 +123,91 @@
       // Default ES (la marca opera desde LATAM); cae a EN por navegador.
       setLang(saved || (navEn ? 'en' : 'es'));
     }
+    popupDiag();
     return K;
   };
+
+
+  /* ── Pop-up del diagnóstico ─────────────────────────────────
+     Solo en home y quiénes somos (ES y EN). Una vez por persona:
+     si lo cierra, no vuelve en 14 días. Nunca a quien ya tocó un
+     botón de agendar o del diagnóstico. Aparece al pasar la mitad
+     de la página o, en computadora, al ir a cerrar la pestaña
+     (siempre después de 10 s). En celular es una franja abajo. */
+  var POP = {
+    eb:    { es: 'Diagnóstico gratis', en: 'Free diagnostic' },
+    h:     { es: '¿Por dónde se te escapan los clientes?', en: 'Where are your customers slipping away?' },
+    p:     { es: '11 preguntas, 2 minutos. Ves tu resultado sin dejar el correo.', en: '11 questions, 2 minutes, in Spanish. See your result without leaving your email.' },
+    btn:   { es: 'Hacer el diagnóstico', en: 'Take the diagnostic' },
+    no:    { es: 'Ahora no', en: 'Not now' },
+    cerrar:{ es: 'Cerrar', en: 'Close' }
+  };
+  var POP_KEY = 'kapuy_popup_diag', POP_DIAS = 14;
+  var POP_PAGINAS = ['/', '/index.html', '/quienes-somos', '/en/', '/en/index.html', '/en/about'];
+
+  function popLeer() { try { return localStorage.getItem(POP_KEY); } catch (e) { return null; } }
+  function popMarcar(v) { try { localStorage.setItem(POP_KEY, v); } catch (e) {} }
+
+  function popupDiag() {
+    if (POP_PAGINAS.indexOf(location.pathname) === -1) return;
+    if (new URLSearchParams(location.search).get('build')) return;
+    var prev = popLeer();
+    if (prev === 'nunca' || (prev && Date.now() - Number(prev) < POP_DIAS * 864e5)) return;
+
+    var listo = false, mostrado = false, t0 = Date.now();
+    setTimeout(function () { listo = true; }, 10000);
+
+    // Quien ya agenda o ya fue al diagnóstico no necesita el empujón
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('[data-cta],[data-diag]')) popMarcar('nunca');
+    });
+
+    function mostrar(motivo) {
+      if (mostrado || !listo || popLeer() === 'nunca') return;
+      mostrado = true;
+      var L = K.lang;
+      var el = document.createElement('aside');
+      el.className = 'pop-diag';
+      el.setAttribute('role', 'dialog');
+      el.setAttribute('aria-labelledby', 'pop-diag-h');
+      el.innerHTML =
+        '<button type="button" class="pop-x" aria-label="' + POP.cerrar[L] + '">×</button>' +
+        '<p class="eb">' + POP.eb[L] + '</p>' +
+        '<p class="pop-h" id="pop-diag-h">' + POP.h[L] + '</p>' +
+        '<p class="pop-p">' + POP.p[L] + '</p>' +
+        '<div class="pop-fila"><a class="btn btn--lima" href="/diagnostico" data-diag="popup">' + POP.btn[L] + '</a>' +
+        '<button type="button" class="pop-no">' + POP.no[L] + '</button></div>';
+      document.body.appendChild(el);
+      requestAnimationFrame(function () { el.classList.add('abierto'); });
+      popMarcar(String(Date.now()));
+      if (window.gtag) gtag('event', 'popup_diag_ver', { idioma: L, motivo: motivo, segundos: Math.round((Date.now() - t0) / 1000) });
+
+      function cerrar(como) {
+        el.classList.remove('abierto');
+        setTimeout(function () { el.remove(); }, 300);
+        document.removeEventListener('keydown', esc);
+        if (window.gtag) gtag('event', 'popup_diag_cerrar', { idioma: L, como: como });
+      }
+      function esc(e) { if (e.key === 'Escape') cerrar('escape'); }
+      el.querySelector('.pop-x').addEventListener('click', function () { cerrar('x'); });
+      el.querySelector('.pop-no').addEventListener('click', function () { cerrar('ahora_no'); });
+      el.querySelector('a').addEventListener('click', function () {
+        if (window.gtag) gtag('event', 'popup_diag_click', { idioma: L });
+      });
+      document.addEventListener('keydown', esc);
+    }
+
+    window.addEventListener('scroll', function () {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      if (h > 0 && scrollY / h >= 0.5) mostrar('scroll');
+    }, { passive: true });
+
+    if (matchMedia('(pointer: fine)').matches) {
+      document.addEventListener('mouseout', function (e) {
+        if (!e.relatedTarget && e.clientY <= 0) mostrar('salida');
+      });
+    }
+  }
 
   K.setLang = setLang;
   window.KAPUY = K;

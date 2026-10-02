@@ -480,3 +480,29 @@
   /* Aviso para navegadores en inglés en las páginas en español */
   .aviso-idioma { display: block; padding: 10px var(--gutter); background: var(--carbon); color: var(--marfil); font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; text-align: center; }
   .aviso-idioma:hover { color: var(--lima); }
+
+  /* ── Pop-up del diagnóstico ─────────────────────────────────── */
+  .pop-diag {
+    position: fixed; right: 24px; bottom: 24px; z-index: 60; width: min(380px, calc(100vw - 48px));
+    display: flex; flex-direction: column; gap: 12px; padding: 28px 28px 24px;
+    background: var(--morado); color: var(--marfil); border: var(--regla) solid var(--lima);
+    box-shadow: 8px 8px 0 var(--carbon);
+    transform: translateY(24px); opacity: 0; transition: transform .3s ease, opacity .3s ease;
+  }
+  .pop-diag.abierto { transform: none; opacity: 1; }
+  .pop-diag .eb { color: var(--lima); }
+  .pop-h { font-size: 24px; font-weight: 600; line-height: 1.1; letter-spacing: -.02em; }
+  .pop-p { font-size: 15px; line-height: 1.5; color: var(--marfil-82); }
+  .pop-fila { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+  .pop-no, .pop-x { background: none; border: 0; color: var(--marfil-70); cursor: pointer; font-family: var(--font-mono); }
+  .pop-no { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; min-height: 40px; }
+  .pop-no:hover, .pop-x:hover { color: var(--lima); }
+  .pop-x { position: absolute; top: 6px; right: 8px; width: 40px; height: 40px; font-size: 24px; line-height: 1; }
+  @media (max-width: 640px) {
+    /* Franja abajo, nunca pantalla completa */
+    .pop-diag { right: 0; left: 0; bottom: 0; width: auto; padding: 20px var(--gutter) 18px; gap: 8px; box-shadow: none; border-width: var(--regla) 0 0; }
+    .pop-h { font-size: 20px; padding-right: 32px; }
+    .pop-p { font-size: 14px; }
+    .pop-fila .btn { flex: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pop-diag { transition: none; } }
