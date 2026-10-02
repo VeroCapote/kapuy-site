@@ -357,7 +357,8 @@
   @media (min-width: 761px) {
     .equipo:has(> .persona:only-child) { grid-template-columns: minmax(0, 1fr); }
     .persona:only-child { display: grid; grid-template-columns: minmax(260px, 380px) minmax(0, 560px); column-gap: 56px; row-gap: 14px; align-content: start; }
-    .persona:only-child .foto { grid-row: 1 / span 5; }
+    .persona:only-child > :not(.foto) { grid-column: 2; }
+    .persona:only-child .foto { grid-column: 1; grid-row: 1 / span 7; align-self: start; position: sticky; top: 120px; }
     .persona:only-child h3 { font-size: 40px; align-self: end; margin-top: 8px; }
   }
   .pendiente-dato { background: var(--marfil-hondo); outline: 1px dashed var(--carbon-mudo); padding: 0 4px; }
@@ -426,3 +427,4 @@
   .campo select option { color: var(--carbon); background: var(--marfil); }
   .campo [aria-invalid="true"] { border-color: var(--critico); }
   @media (max-width: 760px) { .form-postula { grid-template-columns: minmax(0, 1fr); } }
+  .persona p.bio-cierre { color: var(--carbon); font-weight: 600; padding-left: 16px; border-left: var(--regla-gruesa) solid var(--lima); }
