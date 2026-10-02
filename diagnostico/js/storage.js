@@ -75,7 +75,7 @@ export async function saveSubmission(result, answers) {
 export async function saveContact(submissionId, { email, businessType, investment, wantsUpdates, result }) {
   const lines = [
     'Pidió el diagnóstico con Vero.',
-    `Resultado: nota ${result.grade} (${result.healthPct}/100). Fuga principal: ${result.primaryLeak.name}. Fortaleza: ${result.strength.name}.`,
+    `Resultado: nota ${result.grade} (${result.healthPct}/100). Fuga principal: ${result.primaryLeak.name}. Fortaleza: ${result.strength.key === result.primaryLeak.key ? 'ninguna clara' : result.strength.name}.`,
     `Inversión mensual en marketing: ${investment || 'no dijo'}.`,
     `Cree que su problema es más tráfico: ${result.driftTripped ? 'sí' : 'no'}.`,
     submissionId ? `Ref. respuestas: ${submissionId}` : '',
