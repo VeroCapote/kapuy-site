@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Apoyo a la comunidad · Kapüy</title>
+<title>Kapüy por la comunidad</title>
 <meta name="description" content="Una asesoría de marketing gratis al mes para una asociación sin recursos: la estrategia completa y el sistema para operarla." />
 <link rel="canonical" href="https://kapuymarketing.com/comunidad" />
 <meta property="og:type" content="website" />
@@ -138,11 +138,58 @@
     </div>
   </section>
 
-  <section class="cierre cierre-corto oscuro">
+  <section id="postula" class="cierre cierre-corto oscuro">
     <div class="wrap">
       <h2 data-i18n="fiH2">¿Tu asociación <em class="acento">califica?</em></h2>
-      <p class="lead" data-i18n="fiLead">Escríbenos: cuál es la causa, qué quieren lograr y quién va a ejecutar. Tomamos una por mes.</p>
-      <a class="btn btn--lima agendar" href="mailto:hey@kapuymarketing.com?subject=Asesor%C3%ADa%20comunitaria" onclick="gtag('event','contacto_click',{metodo:'comunidad_aplicar'});" data-i18n="fiBtn">Escríbenos</a>
+      <p class="lead" data-i18n="fiLead">Cuéntanos de tu causa. Tomamos una por mes, en cualquier parte de Venezuela.</p>
+      <form class="form form-postula" id="postulaForm" novalidate>
+        <div class="campo">
+          <label for="pOrg" data-i18n="pOrgL">Nombre de la asociación</label>
+          <input type="text" id="pOrg" required maxlength="200" autocomplete="organization">
+        </div>
+        <div class="campo">
+          <label for="pLink" data-i18n="pLinkL">Instagram o web (opcional)</label>
+          <input type="text" id="pLink" maxlength="300" placeholder="@tuasociacion" data-i18n-ph="pLinkPh">
+        </div>
+        <div class="campo">
+          <label for="pUbi" data-i18n="pUbiL">¿Dónde están?</label>
+          <input type="text" id="pUbi" required maxlength="120" placeholder="Ciudad o estado, en Venezuela" data-i18n-ph="pUbiPh">
+        </div>
+        <div class="campo">
+          <label for="pObj" data-i18n="pObjL">¿Qué quieren lograr?</label>
+          <select id="pObj" required>
+            <option value="" data-i18n="pObj0">Elige una</option>
+            <option value="adopciones" data-i18n="pObj1">Más adopciones</option>
+            <option value="donaciones" data-i18n="pObj2">Más donaciones</option>
+            <option value="voluntarios" data-i18n="pObj3">Más voluntarios</option>
+            <option value="otro" data-i18n="pObj4">Otro</option>
+          </select>
+        </div>
+        <div class="campo ancho">
+          <label for="pCausa" data-i18n="pCausaL">¿Qué hacen?</label>
+          <textarea id="pCausa" required maxlength="1500" placeholder="La causa en dos o tres líneas" data-i18n-ph="pCausaPh"></textarea>
+        </div>
+        <div class="campo ancho">
+          <label for="pEquipo" data-i18n="pEquipoL">¿Quién va a ejecutar lo que les dejemos?</label>
+          <textarea id="pEquipo" required maxlength="1000" placeholder="Cuántas personas y cuánto tiempo a la semana" data-i18n-ph="pEquipoPh"></textarea>
+        </div>
+        <div class="campo">
+          <label for="pNombre" data-i18n="pNombreL">Tu nombre</label>
+          <input type="text" id="pNombre" required maxlength="150" autocomplete="name">
+        </div>
+        <div class="campo">
+          <label for="pEmail" data-i18n="pEmailL">Correo</label>
+          <input type="email" id="pEmail" required maxlength="254" autocomplete="email">
+        </div>
+        <div class="campo">
+          <label for="pWa" data-i18n="pWaL">WhatsApp (opcional)</label>
+          <input type="tel" id="pWa" maxlength="40" autocomplete="tel" placeholder="+58 …">
+        </div>
+        <div class="campo ancho enviar">
+          <button type="submit" class="btn btn--lima" id="pEnviar" data-i18n="pBtn">Postular mi causa</button>
+          <p class="aviso" id="pAviso" role="status" aria-live="polite"></p>
+        </div>
+      </form>
       <footer class="pie">
         <a class="logo" href="/" aria-label="Kapüy">
           <img src="/assets/logo/kapuy-wordmark-marfil.svg" alt="kapüy" width="81" height="26">
@@ -162,8 +209,8 @@
 <script>
   KAPUY.init({
   "_title": {
-    "es": "Apoyo a la comunidad · Kapüy",
-    "en": "Community · Kapüy"
+    "es": "Kapüy por la comunidad",
+    "en": "Kapüy for the community"
   },
   "coEb": {
     "es": "Kapüy por la comunidad",
@@ -294,14 +341,80 @@
     "en": "Does your organization <em class=\"acento\">qualify?</em>"
   },
   "fiLead": {
-    "es": "Escríbenos: cuál es la causa, qué quieren lograr y quién va a ejecutar. Tomamos una por mes.",
-    "en": "Write to us: what the cause is, what you want to achieve and who will run it. We take one a month."
+    "es": "Cuéntanos de tu causa. Tomamos una por mes, en cualquier parte de Venezuela.",
+    "en": "Tell us about your cause. We take one a month, anywhere in Venezuela."
   },
-  "fiBtn": {
-    "es": "Escríbenos",
-    "en": "Write to us"
+  "pOrgL": { "es": "Nombre de la asociación", "en": "Organization name" },
+  "pLinkL": { "es": "Instagram o web (opcional)", "en": "Instagram or website (optional)" },
+  "pUbiL": { "es": "¿Dónde están?", "en": "Where are you based?" },
+  "pObjL": { "es": "¿Qué quieren lograr?", "en": "What do you want to achieve?" },
+  "pObj0": { "es": "Elige una", "en": "Pick one" },
+  "pObj1": { "es": "Más adopciones", "en": "More adoptions" },
+  "pObj2": { "es": "Más donaciones", "en": "More donations" },
+  "pObj3": { "es": "Más voluntarios", "en": "More volunteers" },
+  "pObj4": { "es": "Otro", "en": "Other" },
+  "pCausaL": { "es": "¿Qué hacen?", "en": "What do you do?" },
+  "pEquipoL": { "es": "¿Quién va a ejecutar lo que les dejemos?", "en": "Who will carry out what we leave you?" },
+  "pNombreL": { "es": "Tu nombre", "en": "Your name" },
+  "pEmailL": { "es": "Correo", "en": "Email" },
+  "pWaL": { "es": "WhatsApp (opcional)", "en": "WhatsApp (optional)" },
+  "pBtn": { "es": "Postular mi causa", "en": "Apply with my cause" },
+  "_pOk": { "es": "Recibimos tu postulación. Tomamos una causa por mes: te escribimos si tu causa es la elegida.", "en": "We got your application. We take one cause a month: we’ll write to you if yours is chosen." },
+  "_pErrCampos": { "es": "Faltan campos obligatorios. Revisa los que están marcados en rojo.", "en": "Some required fields are missing. Check the ones marked in red." },
+  "_pErrEmail": { "es": "Ese correo no parece válido.", "en": "That email doesn’t look right." },
+  "_pErrRed": { "es": "No se pudo enviar. Inténtalo de nuevo o escríbenos a hey@kapuymarketing.com.", "en": "It didn’t go through. Try again or write to hey@kapuymarketing.com." },
+  "_ph": {
+    "pLinkPh": { "es": "@tuasociacion", "en": "@yourorg" },
+    "pUbiPh": { "es": "Ciudad o estado, en Venezuela", "en": "City or state, in Venezuela" },
+    "pCausaPh": { "es": "La causa en dos o tres líneas", "en": "Your cause in two or three lines" },
+    "pEquipoPh": { "es": "Cuántas personas y cuánto tiempo a la semana", "en": "How many people and how much time per week" }
   }
 });
+
+  /* Postulaciones · Kapüy por la comunidad → Supabase (comunidad_postulaciones).
+     Solo insert; el aviso por correo lo dispara un trigger (comunidad-supabase.sql). */
+  (function () {
+    var URL_SB = 'https://eptkrujkcgwzgeqgevxp.supabase.co';
+    var KEY_SB = 'sb_publishable_EfMv_jfTzBStf2oKUzVyow_RWKatcAe';
+    var f = document.getElementById('postulaForm'); if (!f) return;
+    var aviso = document.getElementById('pAviso'), btn = document.getElementById('pEnviar');
+    function t(k) { return KAPUY.dict[k][KAPUY.lang]; }
+    function show(kind, k) { aviso.className = 'aviso ' + kind; aviso.textContent = t(k); }
+    function v(id) { return document.getElementById(id).value.trim(); }
+    f.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var falta = false;
+      ['pOrg', 'pUbi', 'pObj', 'pCausa', 'pEquipo', 'pNombre', 'pEmail'].forEach(function (id) {
+        var el = document.getElementById(id), vacio = !el.value.trim();
+        el.setAttribute('aria-invalid', String(vacio)); if (vacio) falta = true;
+      });
+      if (falta) { show('err', '_pErrCampos'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('pEmail'))) {
+        document.getElementById('pEmail').setAttribute('aria-invalid', 'true'); show('err', '_pErrEmail'); return;
+      }
+      btn.disabled = true;
+      var row = {
+        organizacion: v('pOrg'), link: v('pLink') || null, ubicacion: v('pUbi'),
+        objetivo: v('pObj'), causa: v('pCausa'), equipo: v('pEquipo'),
+        contacto_nombre: v('pNombre'), email: v('pEmail'), whatsapp: v('pWa') || null, lang: KAPUY.lang
+      };
+      try {
+        var res = await fetch(URL_SB + '/rest/v1/comunidad_postulaciones', {
+          method: 'POST',
+          headers: { apikey: KEY_SB, Authorization: 'Bearer ' + KEY_SB, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+          body: JSON.stringify(row)
+        });
+        if (!res.ok) throw new Error('supabase ' + res.status);
+        f.querySelectorAll('.campo:not(.enviar)').forEach(function (c) { c.hidden = true; });
+        btn.hidden = true;
+        show('ok', '_pOk');
+        if (window.gtag) gtag('event', 'comunidad_postulacion', { objetivo: row.objetivo, idioma: KAPUY.lang });
+      } catch (err) {
+        btn.disabled = false; show('err', '_pErrRed');
+      }
+    });
+  })();
+
 </script>
 
 </body>

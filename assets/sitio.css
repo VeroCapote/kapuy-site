@@ -232,7 +232,7 @@
   .form { display: flex; flex-direction: column; gap: 18px; }
   .campo { display: flex; flex-direction: column; gap: 8px; }
   .campo label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--marfil-70); }
-  .campo input, .campo textarea {
+  .campo input, .campo textarea, .campo select {
     font-family: var(--font-sans); font-size: 16px; color: var(--marfil);
     background: var(--morado-hondo);
     border: var(--regla) solid var(--morado-linea); border-radius: var(--radio);
@@ -417,3 +417,12 @@
   .comunidad-home { border-top: var(--regla) solid var(--carbon); }
   .comunidad-home .fila { display: flex; flex-wrap: wrap; gap: 12px; }
   .comunidad-home .textos { display: flex; flex-direction: column; gap: 14px; }
+
+  /* Formulario de postulación (/comunidad) */
+  .form-postula { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; max-width: 900px; margin-top: 8px; }
+  .form-postula .ancho { grid-column: 1 / -1; }
+  .form-postula .campo[hidden] { display: none; }
+  .campo select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--lima) 50%), linear-gradient(135deg, var(--lima) 50%, transparent 50%); background-position: calc(100% - 22px) 52%, calc(100% - 16px) 52%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 44px; }
+  .campo select option { color: var(--carbon); background: var(--marfil); }
+  .campo [aria-invalid="true"] { border-color: var(--critico); }
+  @media (max-width: 760px) { .form-postula { grid-template-columns: minmax(0, 1fr); } }
