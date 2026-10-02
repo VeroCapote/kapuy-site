@@ -412,3 +412,8 @@
     .menu-btn { padding: 0 8px; }
     .nav .btn--sm { padding: 12px 10px; font-size: 10.5px; letter-spacing: .08em; }
   }
+
+  /* Apoyo a la comunidad en la home */
+  .comunidad-home { border-top: var(--regla) solid var(--carbon); }
+  .comunidad-home .fila { display: flex; flex-wrap: wrap; gap: 12px; }
+  .comunidad-home .textos { display: flex; flex-direction: column; gap: 14px; }
