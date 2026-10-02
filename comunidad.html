@@ -57,6 +57,11 @@
     <a href="/#para-quien" data-i18n="navQuien">Para quién</a>
     <a href="/quienes-somos" data-i18n="navNos">Quiénes somos</a>
     <a href="/comunidad" data-i18n="navCom" aria-current="page">Comunidad</a>
+    <a href="/#testimonios" data-i18n="navTst">Testimonios</a>
+    <div class="idioma idioma--panel" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true" aria-label="Español">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+    </div>
   </div>
 </header>
 
@@ -195,6 +200,15 @@
           <p class="aviso" id="pAviso" role="status" aria-live="polite"></p>
         </div>
       </form>
+      <div class="puente">
+        <div>
+          <p class="eb" data-i18n="puEb">¿Tienes un negocio?</p>
+          <h3 data-i18n="puH3">Esto mismo, para tu marca.</h3>
+          <p data-i18n="puP">La estrategia que le dejamos a una causa es la misma con la que arranca cualquier cliente de Kapüy. Empieza con una llamada de 30 minutos, gratis.</p>
+        </div>
+        <a class="btn btn--linea-clara" href="/#como-empezamos" data-i18n="puBtn">Cómo empezamos</a>
+      </div>
+
       <footer class="pie">
         <a class="logo" href="/" aria-label="Kapüy">
           <img src="/assets/logo/kapuy-wordmark-marfil.svg" alt="kapüy" width="81" height="26">
@@ -204,6 +218,7 @@
           <a class="mail" href="mailto:hey@kapuymarketing.com" onclick="gtag('event','contacto_click',{metodo:'footer_' + location.pathname.replace(/\W/g,'')});">hey@kapuymarketing.com</a>
           <a href="https://instagram.com/kapuymarketing" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://www.linkedin.com/company/kapuy-marketing/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="/privacidad" data-i18n="navPriv">Privacidad</a>
         </div>
       </footer>
     </div>
@@ -213,6 +228,11 @@
 <script src="/assets/sitio.js"></script>
 <script>
   KAPUY.init({
+  "navPriv": { "es": "Privacidad", "en": "Privacy" },
+  "puEb":  { "es": "¿Tienes un negocio?", "en": "Running a business?" },
+  "puH3":  { "es": "Esto mismo, para tu marca.", "en": "The same thing, for your brand." },
+  "puP":   { "es": "La estrategia que le dejamos a una causa es la misma con la que arranca cualquier cliente de Kapüy. Empieza con una llamada de 30 minutos, gratis.", "en": "The strategy we leave a cause with is the same one every Kapüy client starts with. It begins with a free 30-minute call." },
+  "puBtn": { "es": "Cómo empezamos", "en": "How we start" },
   "_title": {
     "es": "Kapüy por la comunidad",
     "en": "Kapüy for the community"

@@ -449,3 +449,30 @@
 
   .contacto .diag { font-size: 16px; }
   .contacto .diag a { color: var(--lima); }
+
+  /* ── Ronda 3 (2026-10-02) ───────────────────────────────────── */
+  /* Selector de idioma: en el header desde 641px; dentro del menú en celular */
+  .idioma--panel { display: none; margin: 16px var(--gutter); }
+  @media (max-width: 640px) {
+    .nav > .idioma { display: none; }
+    .idioma--panel { display: inline-flex; }
+    .idioma--panel button { min-width: 48px; min-height: 40px; }
+  }
+
+  /* Puente de /comunidad hacia la oferta pagada */
+  .puente { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; width: 100%; padding-top: 40px; border-top: 1px solid var(--morado-linea); }
+  .puente > div { display: flex; flex-direction: column; gap: 12px; max-width: 620px; }
+  .puente h3 { font-size: clamp(26px, 2.4vw, 36px); line-height: 1.05; letter-spacing: -.03em; color: var(--marfil); }
+  .puente p { font-size: 17px; line-height: 1.5; color: var(--marfil-82); }
+
+  /* Página legal */
+  .legal .wrap { gap: 48px; }
+  .legal .wrap > * { max-width: 760px; }
+  .pagina-hero--corto .wrap { padding-bottom: clamp(56px, 7vw, 96px); }
+  .legal-bloque { display: flex; flex-direction: column; gap: 14px; }
+  .legal-bloque h2 { font-size: clamp(24px, 2.4vw, 32px); letter-spacing: -.02em; }
+  .legal-bloque p, .legal-bloque li { font-size: 17px; line-height: 1.6; color: var(--carbon-suave); }
+  .legal-bloque ul { display: flex; flex-direction: column; gap: 12px; padding-left: 0; list-style: none; }
+  .legal-bloque li { padding-left: 20px; position: relative; }
+  .legal-bloque li::before { content: "·"; position: absolute; left: 4px; color: var(--morado); font-weight: 700; }
+  .legal-bloque strong { color: var(--carbon); }

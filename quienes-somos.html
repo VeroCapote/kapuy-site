@@ -57,6 +57,11 @@
     <a href="/#para-quien" data-i18n="navQuien">Para quién</a>
     <a href="/quienes-somos" data-i18n="navNos" aria-current="page">Quiénes somos</a>
     <a href="/comunidad" data-i18n="navCom">Comunidad</a>
+    <a href="/#testimonios" data-i18n="navTst">Testimonios</a>
+    <div class="idioma idioma--panel" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true" aria-label="Español">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+    </div>
   </div>
 </header>
 
@@ -130,7 +135,7 @@
   <section class="cierre cierre-corto oscuro">
     <div class="wrap">
       <h2 data-i18n="ciH2">Deja de preguntarte <em class="acento">si funciona.</em></h2>
-      <p class="lead" data-i18n="ciLead">Agenda 30 minutos. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte. Y si no somos nosotras, te decimos a quién buscar.</p>
+      <p class="lead" data-i18n="ciLead">Agenda 30 minutos, gratis. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte. Y si no somos nosotras, te decimos a quién buscar.</p>
       <a class="btn btn--lima agendar" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="cierre" data-i18n="ciBtn">Agenda una llamada</a>
       <footer class="pie">
         <a class="logo" href="/" aria-label="Kapüy">
@@ -141,6 +146,7 @@
           <a class="mail" href="mailto:hey@kapuymarketing.com" onclick="gtag('event','contacto_click',{metodo:'footer_' + location.pathname.replace(/\W/g,'')});">hey@kapuymarketing.com</a>
           <a href="https://instagram.com/kapuymarketing" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://www.linkedin.com/company/kapuy-marketing/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="/privacidad" data-i18n="navPriv">Privacidad</a>
         </div>
       </footer>
     </div>
@@ -150,6 +156,7 @@
 <script src="/assets/sitio.js"></script>
 <script>
   KAPUY.init({
+  "navPriv": { "es": "Privacidad", "en": "Privacy" },
   "_title": {
     "es": "Quiénes somos · Kapüy",
     "en": "About us · Kapüy"
@@ -259,8 +266,8 @@
     "en": "Marketing you don’t have to <em class=\"acento\">second-guess.</em>"
   },
   "ciLead": {
-    "es": "Agenda 30 minutos. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte. Y si no somos nosotras, te decimos a quién buscar.",
-    "en": "Book 30 minutes. Tell us about your business and we’ll tell you honestly whether we can help. And if we’re not the right fit, we’ll tell you who to look for."
+    "es": "Agenda 30 minutos, gratis. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte. Y si no somos nosotras, te decimos a quién buscar.",
+    "en": "Book a free 30-minute call. Tell us about your business and we’ll tell you honestly whether we can help. And if we’re not the right fit, we’ll tell you who to look for."
   }
 });
 </script>
