@@ -431,6 +431,7 @@
 
   /* ── Home · conversión (2026-10-02) ─────────────────────────── */
   .hero .micro { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; line-height: 1.6; color: var(--carbon-mudo); margin-top: -12px; }
+  .hero .wrap:has(.micro) { padding-bottom: clamp(170px, 15vw, 220px); }
 
   .tst-mas summary { cursor: pointer; list-style: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--lima); }
   .tst-mas summary::-webkit-details-marker { display: none; }
