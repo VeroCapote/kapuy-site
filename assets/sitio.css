@@ -476,3 +476,7 @@
   .legal-bloque li { padding-left: 20px; position: relative; }
   .legal-bloque li::before { content: "·"; position: absolute; left: 4px; color: var(--morado); font-weight: 700; }
   .legal-bloque strong { color: var(--carbon); }
+
+  /* Aviso para navegadores en inglés en las páginas en español */
+  .aviso-idioma { display: block; padding: 10px var(--gutter); background: var(--carbon); color: var(--marfil); font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; text-align: center; }
+  .aviso-idioma:hover { color: var(--lima); }

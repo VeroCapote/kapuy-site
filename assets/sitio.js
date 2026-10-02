@@ -45,10 +45,25 @@
     dict = Object.assign({}, COMUN, pageDict || {});
     K.dict = dict;
 
+    // Páginas con versión propia por idioma (/ y /en/): el idioma lo fija la
+    // URL y el selector navega a la otra versión. Sin <link hreflang>, el
+    // selector cambia el texto en la misma página (404, etc.).
+    var fijo = document.documentElement.hasAttribute('data-idioma-fijo');
+    function alterna(lang) {
+      var l = document.querySelector('link[rel="alternate"][hreflang="' + lang + '"]');
+      return l ? l.getAttribute('href') : null;
+    }
+
     document.querySelectorAll('.idioma button').forEach(function (b) {
       b.addEventListener('click', function () {
-        setLang(b.dataset.lang);
-        if (window.gtag) gtag('event', 'idioma_cambio', { idioma: b.dataset.lang });
+        var next = b.dataset.lang;
+        if (window.gtag) gtag('event', 'idioma_cambio', { idioma: next });
+        if (fijo && next !== K.lang && alterna(next)) {
+          try { localStorage.setItem('kapuy_lang', next); } catch (e) {}
+          location.href = alterna(next).replace(/^https:\/\/www\.kapuymarketing\.com/, '') + location.hash;
+          return;
+        }
+        setLang(next);
       });
     });
 
@@ -84,10 +99,30 @@
       if (a && window.gtag) gtag('event', 'diag_click', { idioma: K.lang, ubicacion: a.dataset.diag, pagina: location.pathname });
     });
 
-    // Default ES (la marca opera desde LATAM); cae a EN por navegador.
     var saved = null;
     try { saved = localStorage.getItem('kapuy_lang'); } catch (e) {}
-    setLang(saved || ((navigator.language || 'es').toLowerCase().indexOf('en') === 0 ? 'en' : 'es'));
+    var navEn = (navigator.language || 'es').toLowerCase().indexOf('en') === 0;
+    var build = new URLSearchParams(location.search).get('build');
+
+    if (build) {
+      // tools/build-en.py renderiza la versión en inglés con ?build=en
+      setLang(build);
+    } else if (fijo) {
+      setLang(document.documentElement.lang);
+      // Nunca redirigimos por idioma (Google rastrea con navegador en inglés).
+      // A quien tiene el navegador en inglés le ofrecemos la versión EN.
+      if (K.lang === 'es' && navEn && saved !== 'es' && alterna('en')) {
+        var bar = document.createElement('a');
+        bar.className = 'aviso-idioma';
+        bar.href = alterna('en').replace(/^https:\/\/www\.kapuymarketing\.com/, '');
+        bar.textContent = 'Read this page in English →';
+        bar.addEventListener('click', function () { if (window.gtag) gtag('event', 'idioma_cambio', { idioma: 'en', ubicacion: 'aviso' }); });
+        document.body.insertBefore(bar, document.body.firstChild);
+      }
+    } else {
+      // Default ES (la marca opera desde LATAM); cae a EN por navegador.
+      setLang(saved || (navEn ? 'en' : 'es'));
+    }
     return K;
   };
 

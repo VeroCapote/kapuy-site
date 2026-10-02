@@ -53,3 +53,14 @@ No hay service-role key en ninguna parte: los agregados salen de la función
 ```bash
 vercel build --prod   # compila middleware + functions; no confiar en el dev server
 ```
+
+## Versión en inglés (`/en/`)
+
+Las páginas en español son la fuente. `en/` se **genera**, no se edita a mano:
+
+```bash
+python3 tools/build-en.py
+```
+
+Correrlo cada vez que cambie el copy de `index`, `quienes-somos`, `comunidad` o
+`privacidad`, y subir el resultado en el mismo commit. Necesita Google Chrome.
