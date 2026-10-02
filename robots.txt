@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /hello
+
+Sitemap: https://www.kapuymarketing.com/sitemap.xml

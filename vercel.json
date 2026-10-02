@@ -1,3 +1,10 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/proximamente", "destination": "/", "permanent": true },
+    { "source": "/sitio-completo", "destination": "/", "permanent": true },
+    { "source": "/sitio-completo/(.*)", "destination": "/", "permanent": true },
+    { "source": "/(.*)\\.sql", "destination": "/", "permanent": false },
+    { "source": "/diagnostico/test/(.*)", "destination": "/diagnostico", "permanent": false }
+  ]
 }

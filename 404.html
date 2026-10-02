@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google tag (gtag.js) — GA4 kapuymarketing.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R9VF8E09L8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R9VF8E09L8');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Página no encontrada · Kapüy</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/sitio.css">
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Kapüy">
+      <img src="/assets/logo/kapuy-wordmark-carbon.svg" alt="kapüy" width="93" height="30">
+      <span data-i18n="tagline">Movemos mareas</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a class="l" href="/#oferta" data-i18n="navOferta">Qué hacemos</a>
+      <a class="l" href="/#para-quien" data-i18n="navQuien">Para quién</a>
+      <a class="l" href="/quienes-somos" data-i18n="navNos">Quiénes somos</a>
+      <a class="l" href="/comunidad" data-i18n="navCom">Comunidad</a>
+      <a class="l" href="/#testimonios" data-i18n="navTst">Testimonios</a>
+      <div class="idioma" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" aria-pressed="true" aria-label="Español">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+      </div>
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu-panel" data-i18n="menu">Menú</button>
+      <a class="btn btn--lima btn--sm" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="header" data-i18n="hablemos">Hablemos</a>
+    </nav>
+  </div>
+  <div class="menu-panel" id="menu-panel">
+    <a href="/#oferta" data-i18n="navOferta">Qué hacemos</a>
+    <a href="/#para-quien" data-i18n="navQuien">Para quién</a>
+    <a href="/quienes-somos" data-i18n="navNos">Quiénes somos</a>
+    <a href="/comunidad" data-i18n="navCom">Comunidad</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="mareas" viewBox="0 0 1440 260" preserveAspectRatio="none" fill="none" stroke-width="1.25" aria-hidden="true">
+      <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 150 C300 60 520 250 820 140 S1260 60 1440 110"/>
+      <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 172 C300 82 520 272 820 162 S1260 82 1440 132"/>
+      <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 194 C300 104 520 294 820 184 S1260 104 1440 154"/>
+    </svg>
+    <div class="wrap">
+      <p class="eb" data-i18n="nfEb">Error 404</p>
+      <h1 data-i18n="nfH1">Esta página <em class="acento">no existe.</em></h1>
+      <p class="lead" data-i18n="nfLead">O existió y la movimos. Pasa en las mejores familias. Desde aquí sí hay camino:</p>
+      <div class="fila">
+        <a class="btn btn--lima" href="/" data-i18n="nfBtn">Volver al inicio</a>
+        <a class="btn btn--linea" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="404" data-i18n="hablemos">Hablemos</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="/assets/sitio.js"></script>
+<script>
+  KAPUY.init({
+    nfEb:   { es: 'Error 404', en: 'Error 404' },
+    nfH1:   { es: 'Esta página <em class="acento">no existe.</em>', en: 'This page <em class="acento">doesn’t exist.</em>' },
+    nfLead: { es: 'O existió y la movimos. Pasa en las mejores familias. Desde aquí sí hay camino:', en: 'Or it did, and we moved it. Happens to the best of us. From here, there’s a way back:' },
+    nfBtn:  { es: 'Volver al inicio', en: 'Back to home' },
+    _title: { es: 'Página no encontrada · Kapüy', en: 'Page not found · Kapüy' }
+  });
+  if (window.gtag) gtag('event', 'pagina_404', { ruta: location.pathname });
+</script>
+
+</body>
+</html>
