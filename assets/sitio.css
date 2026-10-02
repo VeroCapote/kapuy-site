@@ -199,6 +199,17 @@
   .citas figcaption { font-size: 15px; line-height: 1.5; color: var(--marfil); }
   .citas figcaption strong { font-weight: 700; }
   .citas figcaption span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--marfil-70); }
+  /* Testimonio único (cita destacada) */
+  .tst-uno { display: flex; flex-direction: column; gap: 40px; }
+  .tst-uno blockquote { display: flex; flex-direction: column; gap: 40px; }
+  .tst-frase { font-size: clamp(32px, 4.4vw, 60px); font-weight: 600; line-height: 1.04; letter-spacing: -.03em; color: var(--marfil); max-width: 1000px; }
+  .tst-texto { columns: 2; column-gap: 48px; font-size: 17px; line-height: 1.6; color: var(--marfil-70); padding-top: 28px; border-top: var(--regla) solid var(--lima); }
+  .tst-texto p { margin: 0 0 1em; break-inside: avoid; }
+  .tst-uno figcaption { font-size: 16px; line-height: 1.5; color: var(--marfil); display: flex; flex-direction: column; gap: 6px; }
+  .tst-uno figcaption br { display: none; }
+  .tst-uno figcaption span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--marfil-70); }
+  .tst-uno figcaption small { font-size: 13px; color: var(--marfil-50); margin-top: 8px; max-width: 560px; }
+  @media (max-width: 760px) { .tst-texto { columns: 1; font-size: 16px; } }
 
   /* ── 5. Cierre + contacto + footer (morado) ─────────────── */
   .cierre { background: var(--morado); color: var(--marfil); position: relative; overflow: hidden; }

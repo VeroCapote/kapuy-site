@@ -41,8 +41,7 @@
       <a class="l" href="/#para-quien" data-i18n="navQuien">Para quién</a>
       <a class="l" href="/quienes-somos" data-i18n="navNos">Quiénes somos</a>
       <a class="l" href="/comunidad" data-i18n="navCom">Comunidad</a>
-      <!-- TESTIMONIOS: quitar `hidden` aquí y en la sección de la home cuando haya testimonios reales -->
-      <a class="l" href="/#testimonios" data-i18n="navTst" hidden>Testimonios</a>
+      <a class="l" href="/#testimonios" data-i18n="navTst">Testimonios</a>
       <div class="idioma" role="group" aria-label="Idioma / Language">
         <button type="button" data-lang="es" aria-pressed="true" aria-label="Español">ES</button>
         <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
@@ -161,24 +160,28 @@
   </section>
 
   <!-- ── 4. Testimonios ─────────────────────────────────────────
-       OCULTA hasta tener testimonios reales. Para activarla: quitar
-       `hidden` aquí y en el link del nav. Con 3 queda una fila limpia;
-       borra las <figure> que sobren y la grilla se acomoda sola. -->
-  <section id="testimonios" class="tst oscuro" hidden>
+       Por ahora UNO (Matt Doherty, 2026-10-02), en formato cita destacada.
+       Cliente de Vero, no de Kapüy: el encuadre va en `tstNota`. Cuando
+       lleguen más, volver a la grilla .citas (ver historial de git). -->
+  <section id="testimonios" class="tst oscuro">
     <div class="wrap">
-      <div class="bloque">
-        <p class="eb" data-i18n="tstEb">Con quién hemos trabajado</p>
-        <h2 data-i18n="tstH2">Lo que dicen las marcas con las que hemos trabajado.</h2>
-        <p class="sub" data-i18n="tstSub">Algunas trabajaron con Vero Capote, nuestra directora de estrategia, antes de que Kapüy existiera.</p>
-      </div>
-      <div class="citas">
-        <figure class="pendiente"><blockquote>«[TESTIMONIO PENDIENTE]»</blockquote><figcaption><strong>Kathy</strong><br><span>[Cargo y empresa] · EE.UU.</span></figcaption></figure>
-        <figure class="pendiente"><blockquote>«[TESTIMONIO PENDIENTE]»</blockquote><figcaption><strong>Matt Doherty</strong><br><span>Doherty Coaching · EE.UU.</span></figcaption></figure>
-        <figure class="pendiente"><blockquote>«[TESTIMONIO PENDIENTE]»</blockquote><figcaption><strong>Mary Ellen</strong><br><span>Navacare · EE.UU.</span></figcaption></figure>
-        <figure class="pendiente"><blockquote>«[TESTIMONIO PENDIENTE]»</blockquote><figcaption><strong>Alexandra Ramak</strong><br><span>Terrasouls · Venezuela</span></figcaption></figure>
-        <figure class="pendiente"><blockquote>«[TESTIMONIO PENDIENTE]»</blockquote><figcaption><strong>[Nombre]</strong><br><span>Hola Granola · Venezuela</span></figcaption></figure>
-        <figure class="pendiente"><blockquote>«[TESTIMONIO PENDIENTE]»</blockquote><figcaption><strong>[Nombre]</strong><br><span>GAC, Grupo de Apoyo Canino · asesoría comunitaria</span></figcaption></figure>
-      </div>
+      <figure class="tst-uno">
+        <p class="eb" data-i18n="tstEb">Testimonio</p>
+        <blockquote>
+          <p class="tst-frase" data-i18n="tstFrase">«Lo que más valoro de trabajar con Verónica es que <em class="acento">no tengo que estar encima de ella.</em>»</p>
+          <div class="tst-texto" data-i18n="tstTexto">
+            <p>Llevo más de dos años trabajando con Verónica, y se ha vuelto una parte importante de cómo comunicamos la marca Doherty Coaching.</p>
+            <p>En este tiempo ha aprendido mi voz, mi mensaje y la audiencia a la que queremos llegar. Puedo darle una idea, una historia, un video o una lección de liderazgo y confiar en que la va a convertir en contenido que se siente auténtico para mí y coherente con la marca.</p>
+            <p>Lo que más valoro de trabajar con Verónica es que no tengo que estar encima de ella. Toma la iniciativa, trae ideas a la mesa, decide cuando hace falta y, si algo tiene que cambiar, responde rápido. Sé que nuestra presencia online está en buenas manos.</p>
+            <p>Es creativa, confiable y reflexiva, y alguien a quien le he llegado a confiar mi marca. Recomendaría con gusto a Verónica a cualquier líder u organización que busque a alguien capaz de aportarle a su marketing tanto creatividad como buen criterio.</p>
+          </div>
+        </blockquote>
+        <figcaption>
+          <strong>Matt Doherty</strong><br>
+          <span data-i18n="tstCargo">Coach ejecutivo, conferencista y autor · Doherty Coaching · EE.UU.</span>
+          <small data-i18n="tstNota">Matt trabaja con Vero Capote, nuestra directora de estrategia, desde antes de que existiera Kapüy. Traducido del inglés.</small>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -317,9 +320,14 @@
     no3:  { es: 'Solo buscas a alguien que publique.', en: 'You just want someone to post.' },
     no4:  { es: 'Quieres competir únicamente por precio.', en: 'You want to compete on price alone.' },
 
-    tstEb:  { es: 'Con quién hemos trabajado', en: 'Who we’ve worked with' },
-    tstH2:  { es: 'Lo que dicen las marcas con las que hemos trabajado.', en: 'What the brands we’ve worked with say.' },
-    tstSub: { es: 'Algunas trabajaron con Vero Capote, nuestra directora de estrategia, antes de que Kapüy existiera.', en: 'Some worked with Vero Capote, our strategy director, before Kapüy existed.' },
+    tstEb:    { es: 'Testimonio', en: 'Testimonial' },
+    tstFrase: { es: '«Lo que más valoro de trabajar con Verónica es que <em class="acento">no tengo que estar encima de ella.</em>»', en: '“What I appreciate most about working with Verónica is that <em class="acento">I don’t have to manage her.</em>”' },
+    tstTexto: {
+      es: '<p>Llevo más de dos años trabajando con Verónica, y se ha vuelto una parte importante de cómo comunicamos la marca Doherty Coaching.</p><p>En este tiempo ha aprendido mi voz, mi mensaje y la audiencia a la que queremos llegar. Puedo darle una idea, una historia, un video o una lección de liderazgo y confiar en que la va a convertir en contenido que se siente auténtico para mí y coherente con la marca.</p><p>Lo que más valoro de trabajar con Verónica es que no tengo que estar encima de ella. Toma la iniciativa, trae ideas a la mesa, decide cuando hace falta y, si algo tiene que cambiar, responde rápido. Sé que nuestra presencia online está en buenas manos.</p><p>Es creativa, confiable y reflexiva, y alguien a quien le he llegado a confiar mi marca. Recomendaría con gusto a Verónica a cualquier líder u organización que busque a alguien capaz de aportarle a su marketing tanto creatividad como buen criterio.</p>',
+      en: '<p>I’ve had the pleasure of working with Verónica for more than two years, and she has become an important part of how we communicate the Doherty Coaching brand.</p><p>Over that time, she has learned my voice, my message, and the audience we want to reach. I can give her an idea, a story, a video, or a leadership lesson and trust her to turn it into content that feels authentic to me and consistent with the brand.</p><p>What I appreciate most about working with Verónica is that I don’t have to manage her. She takes initiative, brings ideas to the table, makes decisions when needed, and if something needs to change, she responds quickly. I know our online presence is in good hands.</p><p>She is creative, dependable, thoughtful, and someone I’ve come to trust with my brand. I would gladly recommend Verónica to any leader or organization looking for someone who can bring both creativity and good judgment to their marketing.</p>'
+    },
+    tstCargo: { es: 'Coach ejecutivo, conferencista y autor · Doherty Coaching · EE.UU.', en: 'Executive Coach, Keynote Speaker & Author · Doherty Coaching · USA' },
+    tstNota:  { es: 'Matt trabaja con Vero Capote, nuestra directora de estrategia, desde antes de que existiera Kapüy. Traducido del inglés.', en: 'Matt has worked with Vero Capote, our strategy director, since before Kapüy existed.' },
 
     ciH2:   { es: 'Deja de preguntarte <em class="acento">si funciona.</em>', en: 'Marketing you don’t have to <em class="acento">second-guess.</em>' },
     ciLead: {
