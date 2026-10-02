@@ -1,24 +1,7 @@
--- Aviso por correo del formulario + latido anti-pausa.
--- Correr UNA vez en Supabase → SQL Editor (proyecto kapuy).
--- No borra ni modifica datos. Se puede correr de nuevo sin romper nada.
+-- Asunto propio para los pedidos que llegan desde /diagnostico.
+-- Correr UNA vez en Supabase → SQL Editor. Solo reemplaza la función del aviso;
+-- no toca datos ni el trigger.
 
-create extension if not exists pg_net;
-
--- Latido: lo llama GitHub Actions (.github/workflows/supabase-latido.yml)
--- cada 3 días para que el plan free no pause el proyecto.
-create or replace function public.ping() returns timestamptz
-language sql security definer set search_path = '' as $$ select now() $$;
-revoke all on function public.ping() from public;
-grant execute on function public.ping() to anon;
-
-create or replace function public.esc_html(t text) returns text
-language sql immutable set search_path = '' as $$
-  select replace(replace(replace(coalesce(t,''),'&','&amp;'),'<','&lt;'),'>','&gt;')
-$$;
-
--- Aviso: cada fila nueva en hello_leads manda un correo vía Resend.
--- La API key vive en Vault como 'resend_api_key'; el destino en 'aviso_destino'.
--- Si falta la key, no hace nada: el formulario nunca se rompe por el aviso.
 create or replace function public.notify_hello_lead() returns trigger
 language plpgsql security definer set search_path = '' as $$
 declare
@@ -63,14 +46,3 @@ exception when others then
   return new;
 end $$;
 revoke all on function public.notify_hello_lead() from public, anon, authenticated;
-
-drop trigger if exists hello_leads_aviso on public.hello_leads;
-create trigger hello_leads_aviso after insert on public.hello_leads
-for each row execute function public.notify_hello_lead();
-
--- PASO 2, aparte, cuando tengas la API key de Resend (no la pegues en ningún chat):
--- select vault.create_secret('re_TU_CLAVE_AQUI', 'resend_api_key');
---
--- Opcional, cuando el dominio esté verificado en Resend:
--- select vault.create_secret('hey@kapuymarketing.com', 'aviso_destino');
--- select vault.create_secret('Web Kapüy <web@kapuymarketing.com>', 'aviso_remitente');
