@@ -504,5 +504,8 @@
     .pop-h { font-size: 20px; padding-right: 32px; }
     .pop-p { font-size: 14px; }
     .pop-fila .btn { flex: 1; }
+    /* Compacta: en celular basta la × para cerrar */
+    .pop-diag .eb, .pop-no { display: none; }
+    .pop-fila { margin-top: 2px; }
   }
   @media (prefers-reduced-motion: reduce) { .pop-diag { transition: none; } }
