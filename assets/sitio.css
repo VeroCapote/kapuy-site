@@ -77,14 +77,12 @@
     box-decoration-break: clone;
   }
 
-  /* Eyebrow: Space Mono caps con guion corto debajo como cierre */
+  /* Eyebrow: Space Mono caps. Sin guion debajo (Vero, 2026-10-21: «muy Claude») */
   .eb {
     font-family: var(--font-mono); font-size: 13px; letter-spacing: .16em;
     text-transform: uppercase; line-height: 1.6;
-    display: flex; flex-direction: column; gap: 12px;
     color: var(--morado);
   }
-  .eb::after { content: ""; width: 22px; border-top: 2px solid currentColor; }
   .oscuro .eb { color: var(--lima); }
   .mono { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; }
 
@@ -524,3 +522,59 @@
     .hero h1 .rc { transition: transform .25s ease; }
     .hero h1:hover .rc { transform: translateY(0) rotate(0deg); }
   }
+
+  /* ══════════════════════════════════════════════════════════
+     Home · ritmo de fondos (2026-10-21)
+     Morado y lima mandan; carbón y marfil acompañan. La home
+     alterna oscuro/claro: morado → lima → carbón → marfil →
+     morado → lima → carbón. Sin marfil hondo de fondo.
+     Todo va bajo .home para no tocar las páginas internas.
+     ══════════════════════════════════════════════════════════ */
+
+  /* Acento sobre lima: se invierte el bloque (morado con texto lima) */
+  .home .tst .acento, .home .comunidad-home .acento { background: var(--morado); color: var(--lima); }
+
+  /* 1. Hero · morado. La ola de abajo ya es el lima del testimonio */
+  .home .hero { background: var(--morado); color: var(--marfil); }
+  .home .hero h1 { color: var(--marfil); }
+  .home .hero .lead { color: var(--marfil-82); }
+  .home .hero .micro { color: var(--marfil-70); }
+  .home .hero .rc { box-shadow: .03em .04em 0 rgba(0, 0, 0, .3); }
+
+  /* 2. Testimonio · lima */
+  /* -2px: tapa la línea de antialias entre la ola y el testimonio */
+  .home .tst { background: var(--lima); color: var(--carbon); position: relative; margin-top: -2px; }
+  .home .tst .eb { color: var(--morado); }
+  .home .tst-frase { color: var(--carbon); }
+  .home .tst-mas summary { color: var(--morado); }
+  .home .tst-texto { color: var(--carbon-suave); border-top-color: var(--morado); }
+  .home .tst-uno figcaption { color: var(--carbon); }
+  .home .tst-uno figcaption span { color: var(--carbon-suave); }
+  .home .tst-uno figcaption small { color: var(--carbon-suave); }
+
+  /* 3. Para quién · carbón */
+  .home .pq { background: var(--carbon); color: var(--marfil); }
+  .home .pq h2 { color: var(--marfil); }
+  .home .col--si { border-color: var(--lima); }
+  .home .col--no { border-color: var(--carbon-linea); }
+  .home .col h3 { color: var(--lima); }
+  .home .col--no h3 { color: var(--marfil-50); }
+  .home .col ul { color: var(--marfil); }
+  .home .col--no ul { color: var(--marfil-70); }
+  .home .col li::before { background: var(--lima); }
+  .home .col--no li::before { background: transparent; border-color: var(--marfil-50); }
+  .home .col .nota { border-top-color: var(--carbon-linea); color: var(--marfil-70); }
+
+  /* 4. Cómo empezamos · marfil (antes marfil hondo) */
+  .home .empezamos { background: var(--marfil); }
+
+  /* 6. Comunidad · lima */
+  .home .comunidad-home { background: var(--lima); border-top: 0; }
+  .home .comunidad-home h2 { color: var(--carbon); }
+  .home .comunidad-home .texto { color: var(--carbon-suave); }
+
+  /* 7. Cierre · carbón (nunca morado al lado del carbón: campos y olas en marfil) */
+  .home .cierre { background: var(--carbon); }
+  .home .contacto { border-top-color: var(--carbon-linea); }
+  .home .campo input, .home .campo textarea { background: rgba(244, 241, 232, .06); border-color: var(--carbon-linea); }
+  .home .btn--linea-clara:hover { color: var(--carbon); }

@@ -85,25 +85,27 @@
   </div>
 </header>
 
-<main>
+<main class="home">
 
   <!-- ── 1. Hero ────────────────────────────────────────────── -->
-  <section class="hero">
+  <section class="hero oscuro">
+    <!-- La ola baja al testimonio: el relleno lima es el fondo de la sección siguiente -->
     <svg class="mareas" viewBox="0 0 1440 260" preserveAspectRatio="none" fill="none" stroke-width="1.25" aria-hidden="true">
-      <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 150 C300 60 520 250 820 140 S1260 60 1440 110"></path>
-      <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 172 C300 82 520 272 820 162 S1260 82 1440 132"></path>
+      <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 128 C300 38 520 228 820 118 S1260 38 1440 88"></path>
+      <path fill="#CDFC8A" d="M0 150 C300 60 520 250 820 140 S1260 60 1440 110 L1440 270 L0 270 Z"></path>
+      <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 172 C300 82 520 272 820 162 S1260 82 1440 132"></path>
       <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 194 C300 104 520 294 820 184 S1260 104 1440 154"></path>
-      <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 216 C300 126 520 316 820 206 S1260 126 1440 176"></path>
+      <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 216 C300 126 520 316 820 206 S1260 126 1440 176"></path>
     </svg>
     <div class="px-cluster" aria-hidden="true">
-      <span class="px" style="right:9%;top:150px;background:var(--morado)"></span>
+      <span class="px" style="right:9%;top:150px;background:var(--marfil)"></span>
       <span class="px" style="right:calc(9% + 24px);top:174px;background:var(--lima)"></span>
-      <span class="px" style="right:calc(9% + 48px);top:222px;background:var(--morado)"></span>
+      <span class="px" style="right:calc(9% + 48px);top:222px;background:var(--marfil)"></span>
       <span class="px" style="right:calc(9% - 48px);top:102px;background:var(--lima)"></span>
-      <span class="px" style="right:calc(9% - 24px);top:198px;background:var(--carbon)"></span>
+      <span class="px" style="right:calc(9% - 24px);top:198px;background:var(--lima)"></span>
       <span class="px" style="right:calc(9% + 96px);top:270px;background:var(--lima)"></span>
-      <span class="px" style="right:calc(9% + 72px);top:318px;background:var(--morado)"></span>
-      <span class="px" style="right:calc(9% + 144px);top:390px;background:var(--morado)"></span>
+      <span class="px" style="right:calc(9% + 72px);top:318px;background:var(--marfil)"></span>
+      <span class="px" style="right:calc(9% + 144px);top:390px;background:var(--marfil)"></span>
       <span class="px" style="right:calc(9% + 120px);top:462px;background:var(--lima)"></span>
     </div>
     <div class="wrap">
@@ -112,7 +114,7 @@
       <p class="lead" data-i18n="heroLead">Stop carrying every marketing decision on your own. Kapüy gets to know your business and your customer, designs the whole path to the sale and runs it with judgment and whimsy.</p>
       <div class="fila">
         <a class="btn btn--lima" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="hero" data-i18n="hablemos">Let's talk</a>
-        <a class="btn btn--linea" href="/diagnostico" data-diag="hero" data-i18n="heroDiag">Free 2-min diagnostic (in Spanish)</a>
+        <a class="btn btn--linea-clara" href="/diagnostico" data-diag="hero" data-i18n="heroDiag">Free 2-min diagnostic (in Spanish)</a>
       </div>
       <p class="micro" data-i18n="heroMicro">A free 30-minute call. If we’re not the right fit, we’ll tell you.</p>
     </div>
@@ -122,7 +124,7 @@
        Por ahora UNO (Matt Doherty, 2026-10-02), en formato cita destacada.
        Cliente de Vero, no de Kapüy: el encuadre va en `tstNota`. Cuando
        lleguen más, volver a la grilla .citas (ver historial de git). -->
-  <section id="testimonios" class="tst oscuro">
+  <section id="testimonios" class="tst">
     <div class="wrap">
       <figure class="tst-uno">
         <p class="eb" data-i18n="tstEb">Testimonial</p>
@@ -143,7 +145,7 @@
   </section>
 
   <!-- ── 3. Para quién ──────────────────────────────────────── -->
-  <section id="para-quien" class="pq">
+  <section id="para-quien" class="pq oscuro">
     <div class="wrap">
       <div class="bloque">
         <p class="eb" data-i18n="pqEb">Who we’re for</p>
@@ -253,9 +255,9 @@
     <svg class="mareas" viewBox="0 0 900 340" preserveAspectRatio="none" fill="none" stroke-width="1.25" aria-hidden="true">
       <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 120 C200 20 380 240 600 120 S820 40 900 80"></path>
       <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 146 C200 46 380 266 600 146 S820 66 900 106"></path>
-      <path stroke="#6B3A6B" vector-effect="non-scaling-stroke" d="M0 172 C200 72 380 292 600 172 S820 92 900 132"></path>
+      <path stroke="#F4F1E8" stroke-opacity=".45" vector-effect="non-scaling-stroke" d="M0 172 C200 72 380 292 600 172 S820 92 900 132"></path>
       <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 198 C200 98 380 318 600 198 S820 118 900 158"></path>
-      <path stroke="#6B3A6B" vector-effect="non-scaling-stroke" d="M0 224 C200 124 380 344 600 224 S820 144 900 184"></path>
+      <path stroke="#F4F1E8" stroke-opacity=".45" vector-effect="non-scaling-stroke" d="M0 224 C200 124 380 344 600 224 S820 144 900 184"></path>
     </svg>
     <div class="px-cluster" aria-hidden="true">
       <span class="px" style="right:14%;top:70px;background:var(--lima)"></span>
