@@ -68,9 +68,12 @@
 
   /* ── Piezas del sistema ─────────────────────────────────── */
   /* Acento: bloque lima con texto morado, solo en las palabras a resaltar */
+  /* El fondo arranca un poco más abajo del tope de la letra: si cubre toda la
+     caja, la línea de abajo tapa las colas (q, g, p, j) de la línea de arriba */
   .acento {
     font-style: normal;
-    background: var(--lima);
+    --acento-fondo: var(--lima);
+    background: linear-gradient(var(--acento-fondo), var(--acento-fondo)) left bottom / 100% calc(100% - .16em) no-repeat;
     color: var(--morado);
     padding: 0 .12em;
     -webkit-box-decoration-break: clone;
@@ -532,7 +535,7 @@
      ══════════════════════════════════════════════════════════ */
 
   /* Acento sobre lima: se invierte el bloque (morado con texto lima) */
-  .home .tst .acento, .home .comunidad-home .acento { background: var(--morado); color: var(--lima); }
+  .home .tst .acento, .home .comunidad-home .acento { --acento-fondo: var(--morado); color: var(--lima); }
 
   /* 1. Hero · morado. La ola de abajo ya es el lima del testimonio */
   .home .hero { background: var(--morado); color: var(--marfil); }
