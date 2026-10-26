@@ -581,3 +581,49 @@
   .home .contacto { border-top-color: var(--carbon-linea); }
   .home .campo input, .home .campo textarea { background: rgba(244, 241, 232, .06); border-color: var(--carbon-linea); }
   .home .btn--linea-clara:hover { color: var(--carbon); }
+
+  /* ══════════════════════════════════════════════════════════
+     Páginas internas · ritmo de fondos (2026-10-26)
+     Mismo lineamiento que la home: morado → lima → carbón →
+     marfil → morado. Una clase de fondo por sección (.f-*).
+     ══════════════════════════════════════════════════════════ */
+
+  /* Hero morado; la ola baja en lima a la sección siguiente */
+  .pagina-hero.f-morado { background: var(--morado); color: var(--marfil); border-bottom: 0; }
+  .pagina-hero.f-morado h1 { color: var(--marfil); }
+  .pagina-hero.f-morado .lead { color: var(--marfil-82); }
+
+  /* Lima */
+  .f-lima { background: var(--lima); color: var(--carbon); position: relative; margin-top: -2px; }
+  .f-lima .acento { --acento-fondo: var(--morado); color: var(--lima); }
+  .f-lima h2 { color: var(--carbon); }
+  .f-lima .texto { color: var(--carbon-suave); }
+  .f-lima .pasos { border-top-color: var(--carbon); }
+  .f-lima .pasos > div + div { border-left-color: rgba(32, 33, 31, .22); }
+  .f-lima .pasos p { color: var(--carbon-suave); }
+
+  /* Carbón (va con .oscuro: etiqueta lima y títulos marfil) */
+  .f-carbon { background: var(--carbon); color: var(--marfil); }
+  .f-carbon .persona h3 { color: var(--marfil); }
+  .f-carbon .persona .rol { color: var(--lima); }
+  .f-carbon .persona p.bio { color: var(--marfil-82); }
+  .f-carbon .persona p.bio-cierre { color: var(--marfil); }
+  .f-carbon .persona .foto { border-color: var(--lima); }
+
+  /* Marfil: los valores pasan de oscuro a claro (nunca lima sobre marfil) */
+  .f-marfil { background: var(--marfil); color: var(--carbon); }
+  .f-marfil .lema { color: var(--carbon); }
+  .f-marfil .valores { border-top-color: var(--carbon); }
+  .f-marfil .valores > div { border-right-color: var(--marfil-linea); }
+  .f-marfil .valores .n { color: var(--morado); font-weight: 700; }
+  .f-marfil .valores h3 { color: var(--carbon); }
+  .f-marfil .valores p { color: var(--carbon-suave); }
+
+  @media (max-width: 980px) {
+    .f-lima .pasos > div, .f-lima .pasos > div + div { border-bottom-color: rgba(32, 33, 31, .22); }
+    .f-marfil .valores > div, .f-marfil .valores > div + div { border-bottom-color: var(--marfil-linea); }
+  }
+  @media (max-width: 640px) {
+    /* En celular la ola sube proporcionalmente más: más aire bajo el texto */
+    .pagina-hero.f-morado .wrap { padding-bottom: 180px; }
+  }
