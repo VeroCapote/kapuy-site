@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Fuente de assets/og-kapuy.png (imagen para compartir en redes, 1200×630).
+     Sigue la home: hero morado, acento en bloque lima con texto morado, ola lima.
+     Para regenerarla:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --hide-scrollbars \
+       --window-size=1200,630 --screenshot=assets/og-kapuy.png tools/og-kapuy.html -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root { --marfil: #F4F1E8; --morado: #3C183C; --lima: #CDFC8A; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--morado); }
+  .og { position: relative; width: 1200px; height: 630px; color: var(--marfil); font-family: 'Space Grotesk', sans-serif; }
+  .logo { position: absolute; left: 80px; top: 80px; width: 260px; }
+  .url { position: absolute; right: 80px; top: 100px; font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: .16em; text-transform: uppercase; color: rgba(244, 241, 232, .7); }
+  h1 { position: absolute; left: 80px; top: 196px; font-size: 104px; line-height: 1.02; letter-spacing: -.04em; font-weight: 700; }
+  .acento { background: linear-gradient(var(--lima), var(--lima)) left bottom / 100% calc(100% - .16em) no-repeat; color: var(--morado); padding: 0 .12em; }
+  .tides { position: absolute; left: 80px; top: 438px; font-family: 'Space Mono', monospace; font-size: 20px; letter-spacing: .3em; text-transform: uppercase; color: var(--lima); }
+  .px { position: absolute; width: 22px; height: 22px; }
+  .mareas { position: absolute; left: 0; bottom: -4px; width: 1200px; height: 170px; }
+</style>
+</head>
+<body>
+<div class="og">
+  <img class="logo" src="../assets/logo/kapuy-wordmark-marfil.svg" alt="">
+  <div class="url">kapuymarketing.com</div>
+  <h1>Movemos<br><span class="acento">mareas.</span></h1>
+  <div class="tides">We move tides</div>
+  <span class="px" style="left:1082px;top:202px;background:var(--marfil)"></span>
+  <span class="px" style="left:1034px;top:226px;background:var(--lima)"></span>
+  <span class="px" style="left:1010px;top:250px;background:var(--marfil)"></span>
+  <span class="px" style="left:1058px;top:298px;background:var(--lima)"></span>
+  <span class="px" style="left:986px;top:322px;background:var(--lima)"></span>
+  <span class="px" style="left:938px;top:370px;background:var(--marfil)"></span>
+  <svg class="mareas" viewBox="0 0 1440 260" preserveAspectRatio="none" fill="none" stroke-width="1.5">
+    <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 128 C300 38 520 228 820 118 S1260 38 1440 88"/>
+    <path fill="#CDFC8A" d="M0 150 C300 60 520 250 820 140 S1260 60 1440 110 L1440 270 L0 270 Z"/>
+    <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 172 C300 82 520 272 820 162 S1260 82 1440 132"/>
+    <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 194 C300 104 520 294 820 184 S1260 104 1440 154"/>
+    <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 216 C300 126 520 316 820 206 S1260 126 1440 176"/>
+  </svg>
+</div>
+</body>
+</html>
