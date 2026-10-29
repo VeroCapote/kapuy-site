@@ -59,9 +59,16 @@ export function scoreFunnel(answers = {}) {
 
   // Fuga principal = etapa con menor puntaje.
   // Empate → la más temprana en el viaje (se arregla aguas arriba primero).
+  // v2: si Claridad está en fuga, manda aunque otra etapa puntúe más bajo:
+  // sin marca clara, arreglar el embudo es parchar.
   let primaryLeak = stageMap[0];
-  for (const s of stageMap) {
-    if (s.score < primaryLeak.score) primaryLeak = s;
+  const claridad = stageMap.find((s) => s.key === 'claridad');
+  if (!(claridad && claridad.level === 'fuga')) {
+    for (const s of stageMap) {
+      if (s.score < primaryLeak.score) primaryLeak = s;
+    }
+  } else {
+    primaryLeak = claridad;
   }
 
   // Fortaleza = etapa con mayor puntaje (empate → la más temprana).
@@ -72,11 +79,11 @@ export function scoreFunnel(answers = {}) {
 
   // Compuerta de deriva: cree que "más tráfico" es la solución.
   const driftTripped = answers.gate === 'traffic';
-  // Fuerte si su fuga principal NO es Atracción (querría tráfico sobre una
-  // fuga que está más abajo). Suave en cualquier otro caso.
+  // Fuerte si su fuga principal está más abajo que Atracción (querría tráfico
+  // sobre una fuga de embudo). Suave si es Atracción o Claridad (río arriba).
   let driftCaveat = null;
   if (driftTripped) {
-    driftCaveat = primaryLeak.key === 'atraccion' ? 'soft' : 'strong';
+    driftCaveat = ['atraccion', 'claridad'].includes(primaryLeak.key) ? 'soft' : 'strong';
   }
 
   // Auto-reporte demasiado limpio (equivalente al "monoculture cap"):
@@ -93,6 +100,7 @@ export function scoreFunnel(answers = {}) {
     primaryLeak: {
       key: primaryLeak.key,
       name: primaryLeak.name,
+      en: STAGES.find((s) => s.key === primaryLeak.key).en,
       verdict: STAGE_DIAGNOSIS[primaryLeak.key].verdict,
       next: STAGE_DIAGNOSIS[primaryLeak.key].next,
     },

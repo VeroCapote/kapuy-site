@@ -12,12 +12,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Diagnóstico: ¿por dónde se te escapan los clientes? · Kapüy</title>
-<meta name="description" content="Diagnóstico gratuito en 2 minutos. Responde 11 preguntas y descubre tu fuga principal y qué tan sano está el camino de tu cliente hasta la compra." />
+<meta name="description" content="Diagnóstico gratuito en 2 minutos. Responde 13 preguntas sobre tu marca y el camino de tu cliente, y te decimos qué arreglaríamos primero." />
 <link rel="canonical" href="https://www.kapuymarketing.com/diagnostico" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.kapuymarketing.com/diagnostico" />
 <meta property="og:title" content="¿Por dónde se te escapan los clientes? · Kapüy" />
-<meta property="og:description" content="Diagnóstico gratuito en 2 minutos: tu fuga principal y la salud del camino de tu cliente hasta la compra." />
+<meta property="og:description" content="Diagnóstico gratuito en 2 minutos: dónde se te escapan los clientes y qué arreglaríamos primero." />
 <meta property="og:image" content="https://www.kapuymarketing.com/assets/og-kapuy-2026-10.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -176,6 +176,31 @@
   .optin .btn, .funnel .btn { justify-self: start; }
   .stub-note { font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--lima); min-height: 1em; }
   .result-nav { margin-top: 28px; }
+
+  /* ══ v2 · auditoría «se ve hecha con IA» (2026-10-29) ══════════════
+     Mismo criterio que el sitio: la Mono queda para el lockup del logo;
+     botones, etiquetas y chips en Grotesk sin mayúsculas. La intro entra
+     en morado con la ola; preguntas y resultado en marfil para leer tranquilo. */
+  .btn { font-family: var(--font-sans); font-size: 16px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+  .btn-ghost, .hdr .volver, .pie .links { font-family: var(--font-sans); font-size: 15px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+  .intro { position: relative; overflow: hidden; background: var(--morado); color: var(--marfil); padding: clamp(32px, 6vw, 64px) clamp(24px, 6vw, 56px) clamp(130px, 18vw, 170px); }
+  .intro > :not(.intro-ola) { position: relative; z-index: 1; }
+  .intro-ola { position: absolute; left: 0; right: 0; bottom: -2px; width: 100%; height: 140px; }
+  .intro h1 { color: var(--marfil); }
+  .intro .lead { color: var(--marfil-hondo); }
+  .intro .lead strong { color: var(--lima); }
+  .intro .hand-note { font-family: var(--font-sans); font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--marfil-linea); }
+  .tag { display: inline-block; margin-bottom: 20px; padding: 4px 10px; font-size: 14px; font-weight: 600; background: var(--lima); color: var(--morado); }
+  .kicker { margin-bottom: 20px; font-size: 15px; font-weight: 600; color: var(--morado); }
+  .kicker span { font-weight: 400; color: var(--carbon-mudo); }
+  .claim { font-size: clamp(30px, 5.2vw, 48px); line-height: 1.1; hyphens: manual; }
+  .caveat { font-size: 16px; line-height: 1.55; }
+  .map-title { padding: 20px 0 4px; font-family: var(--font-sans); font-size: 20px; font-weight: 600; letter-spacing: -.01em; text-transform: none; color: var(--carbon); }
+  .banda { padding-bottom: 12px; font-size: 15px; color: var(--carbon-suave); }
+  .map-idx { font-family: var(--font-sans); font-size: 14px; }
+  .map-name em, .chip { font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+  .stub-note { font-family: var(--font-sans); font-size: 14px; letter-spacing: 0; }
+  .funnel-body strong { color: var(--lima); font-weight: 600; }
 
   @media (max-width: 560px) {
     .hdr .logo span { display: none; }

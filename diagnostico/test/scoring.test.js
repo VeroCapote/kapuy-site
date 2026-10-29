@@ -73,3 +73,30 @@ test('preguntas sin responder cuentan como fuga (conservador)', () => {
   assert.equal(r.total, 0);
   assert.equal(r.grade, 'F');
 });
+
+// ── v2: Claridad ─────────────────────────────────────────────────────────
+test('v2: Claridad en fuga manda aunque otra etapa puntúe más bajo', () => {
+  // Claridad 1+0 = 1 (fuga); Conversión 0+0 = 0 (más baja) → manda Claridad.
+  const a = { ...stageValues({ conversion: 0 }), claridad_1: 1, claridad_2: 0, gate: 'downstream' };
+  const r = scoreFunnel(a);
+  assert.equal(r.primaryLeak.key, 'claridad');
+  assert.equal(r.primaryLeak.en, 'la claridad de tu marca');
+});
+
+test('v2: Claridad parcial no se impone; gana la etapa más baja', () => {
+  const r = scoreFunnel({ ...stageValues({ claridad: 1, retencion: 0 }), gate: 'downstream' });
+  assert.equal(r.primaryLeak.key, 'retencion');
+});
+
+test('v2: pide tráfico con fuga en Claridad → apunte suave', () => {
+  const r = scoreFunnel({ ...stageValues({ claridad: 0 }), gate: 'traffic' });
+  assert.equal(r.primaryLeak.key, 'claridad');
+  assert.equal(r.driftCaveat, 'soft');
+});
+
+test('v2: hay 12 preguntas en 6 etapas', () => {
+  assert.equal(QUESTIONS.length, 12);
+  const r = scoreFunnel({ ...allValue(2), gate: 'downstream' });
+  assert.equal(r.stageMap.length, 6);
+  assert.equal(r.stageMap[0].key, 'claridad');
+});

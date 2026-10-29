@@ -7,19 +7,45 @@
 // código, no en la etiqueta que ve el usuario.
 //
 // Copy revisada con la voz de Kapüy y aprobada por Vero el 2026-10-02.
+// v2 (aprobada por Vero el 2026-10-29): etapa Claridad al inicio, resultado
+// que decide en vez de poner nota y cierre con puente al Blueprint.
+// Borrador en 1 · Kapüy/Dirección/web-hello/borrador-diagnostico-v2.md
+export const VERSION = 'v2';
 
-// Las 5 etapas del viaje del cliente = las 5 dimensiones del diagnóstico.
+// Claridad + las 5 etapas del viaje del cliente = las 6 dimensiones.
+// `en` es cómo se nombra la etapa dentro del título del resultado.
 export const STAGES = [
-  { key: 'atraccion',  index: '01', name: 'Atracción',        blurb: 'Que la persona correcta te encuentre y se reconozca.' },
-  { key: 'interes',    index: '02', name: 'Interés',           blurb: 'Ganar confianza antes de pedir la venta.' },
-  { key: 'conversion', index: '03', name: 'Conversión',        blurb: 'El momento de decidir, sin fricción.' },
-  { key: 'compra',     index: '04', name: 'Compra y arranque', blurb: 'Los primeros pasos justo después de pagar.' },
-  { key: 'retencion',  index: '05', name: 'Retención',         blurb: 'Que vuelva y te recomiende.' },
+  { key: 'claridad',   index: '01', name: 'Claridad',          en: 'la claridad de tu marca',              blurb: 'Saber qué eres, para quién y qué te hace distinto.' },
+  { key: 'atraccion',  index: '02', name: 'Atracción',         en: 'cómo te encuentran',                   blurb: 'Que la persona correcta te encuentre y se reconozca.' },
+  { key: 'interes',    index: '03', name: 'Interés',           en: 'cómo te ganas su confianza',           blurb: 'Ganar confianza antes de pedir la venta.' },
+  { key: 'conversion', index: '04', name: 'Conversión',        en: 'el momento de decidir',                blurb: 'El momento de decidir, sin fricción.' },
+  { key: 'compra',     index: '05', name: 'Compra y arranque', en: 'lo que pasa después de que te compran', blurb: 'Los primeros pasos justo después de pagar.' },
+  { key: 'retencion',  index: '06', name: 'Retención',         en: 'la recompra y las recomendaciones',    blurb: 'Que vuelva y te recomiende.' },
 ];
 
 // 2 preguntas por etapa. score: 0 = fuga clara · 1 = parcial · 2 = sólido.
 export const QUESTIONS = [
-  // 01 — Atracción
+  // 01 — Claridad (v2)
+  {
+    id: 'claridad_1', stage: 'claridad',
+    text: 'Si alguien te pregunta por qué elegirte a ti y no a otro, ¿qué respondes?',
+    options: [
+      { label: 'Que hago un buen trabajo y atiendo bien.', score: 0 },
+      { label: 'Tengo una respuesta, pero cambia según con quién hable.', score: 1 },
+      { label: 'Siempre la misma, y es algo que mi competencia no puede decir.', score: 2 },
+    ],
+  },
+  {
+    id: 'claridad_2', stage: 'claridad',
+    text: '¿Para quién es tu marca?',
+    options: [
+      { label: 'Para cualquiera que necesite lo que vendo.', score: 0 },
+      { label: 'Tengo un cliente en mente, pero termino hablándole a todos.', score: 1 },
+      { label: 'Para un tipo de cliente muy concreto, y sé a quién no le sirvo.', score: 2 },
+    ],
+  },
+
+  // 02 — Atracción
   {
     id: 'atraccion_1', stage: 'atraccion',
     text: 'Cuando alguien llega por primera vez a tu web o perfil, lo primero que ve es…',
@@ -39,7 +65,7 @@ export const QUESTIONS = [
     ],
   },
 
-  // 02 — Interés
+  // 03 — Interés
   {
     id: 'interes_1', stage: 'interes',
     text: 'Entre que alguien te descubre y que le pides comprar o agendar, ¿qué recibe de ti?',
@@ -59,7 +85,7 @@ export const QUESTIONS = [
     ],
   },
 
-  // 03 — Conversión
+  // 04 — Conversión
   {
     id: 'conversion_1', stage: 'conversion',
     text: 'En tu página o proceso de venta, el cliente se encuentra con…',
@@ -79,7 +105,7 @@ export const QUESTIONS = [
     ],
   },
 
-  // 04 — Compra y arranque
+  // 05 — Compra y arranque
   {
     id: 'compra_1', stage: 'compra',
     text: 'Justo después de que alguien te compra o agenda, ¿qué pasa?',
@@ -99,7 +125,7 @@ export const QUESTIONS = [
     ],
   },
 
-  // 05 — Retención
+  // 06 — Retención
   {
     id: 'retencion_1', stage: 'retencion',
     text: 'Cerrada una venta, ¿qué haces para que el cliente vuelva o te recomiende?',
@@ -150,28 +176,41 @@ export const STAGE_LEVELS = {
   solido:  { label: 'Sólido',  tone: 'solido' },
 };
 
-// Diagnóstico + siguiente paso por etapa cuando es la FUGA PRINCIPAL.
+// Diagnóstico + lo que haríamos primero, por etapa, cuando es la FUGA PRINCIPAL.
+// v2: `next` es una decisión, no una táctica suelta.
 export const STAGE_DIAGNOSIS = {
+  claridad: {
+    verdict: 'Tu marca todavía no tiene claro qué es, y se nota en todo lo que publicas. Mientras eso no esté resuelto, cualquier arreglo en el embudo es un parche.',
+    next: 'Antes de tocar redes o pauta, definir quién eres, para quién eres y qué te hace distinto. Todo lo demás sale de ahí.',
+  },
   atraccion: {
     verdict: 'Hablas de ti antes que del problema de tu cliente. La persona correcta llega y no se reconoce.',
-    next: 'Pon arriba de todo una sola frase que nombre su problema con sus palabras.',
+    next: 'Decidir a quién le hablas y nombrar su problema con sus palabras, antes de hablar de ti.',
   },
   interes: {
     verdict: 'Pides la venta antes de ganarte la confianza. Sin una prueba previa, la respuesta por defecto es «lo pienso».',
-    next: 'Antes del precio, muestra algo útil y una prueba real: un caso, un testimonio, un resultado.',
+    next: 'Decidir qué prueba necesita ver tu cliente para confiar, y ponerla antes del precio.',
   },
   conversion: {
     verdict: 'Hay fricción justo cuando la persona va a decidir: demasiadas opciones o su duda principal sin responder.',
-    next: 'Un solo paso claro por página, y responde su duda número uno justo antes del botón.',
+    next: 'Elegir un solo camino hacia la compra y quitar todo lo que compite con él.',
   },
   compra: {
     verdict: 'Después de pagar hay silencio, y ahí nace el arrepentimiento.',
-    next: 'Un mensaje inmediato que diga qué pasa ahora y cuál es el primer paso.',
+    next: 'Diseñar los primeros días del cliente nuevo para que sepa qué sigue sin tener que preguntar.',
   },
   retencion: {
     verdict: 'Tratas la venta como el final y dejas en la mesa la forma más barata de crecer: que vuelvan y te recomienden.',
-    next: 'Contacta a cada cliente en un momento planificado para pedirle reseña y ofrecerle lo siguiente.',
+    next: 'Tratar a quien ya te compró como tu canal más barato: decidir cuándo volver a hablarle y qué ofrecerle.',
   },
+};
+
+// Título del resultado según la última pregunta (la compuerta). {etapa} va en
+// el bloque lima. v2: el resultado decide, no pone nota.
+export const RESULT_TITLES = {
+  traffic:    'Tu problema no es traer más gente. Es {etapa}.',
+  downstream: 'Tienes razón: el problema está en lo que ya llega. Concretamente, en {etapa}.',
+  unsure:     'No estás seguro de dónde está el problema. Nosotras sí: {etapa}.',
 };
 
 // Caveats de la compuerta de deriva (respetuosos, educativos, no castigo).

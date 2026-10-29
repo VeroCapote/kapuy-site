@@ -5,12 +5,13 @@ import { saveSubmission, saveContact, isConfigured } from './storage.js';
 import {
   STAGES, QUESTIONS, GATE, HEALTH_BANDS, STAGE_LEVELS,
   DRIFT_CAVEATS, PERFECT_SELFREPORT_NOTE, BUSINESS_TYPES, INVESTMENT_RANGES,
+  RESULT_TITLES,
 } from './questions.js';
 
 const AGENDA_URL = 'https://calendar.app.google/E3eW4fh68oWo4GWF9';
 function track(name, params) { try { window.gtag && window.gtag('event', name, params || {}); } catch (e) {} }
 
-const ITEMS = [...QUESTIONS, GATE]; // 10 preguntas + compuerta
+const ITEMS = [...QUESTIONS, GATE]; // 12 preguntas + compuerta
 const answers = {};
 let step = -1; // -1 = intro
 
@@ -35,12 +36,17 @@ function paint(html) {
 function renderIntro() {
   paint(`
     <section class="card intro" data-anim>
-      <p class="eyebrow">Diagnóstico gratuito · 2 minutos</p>
+      <svg class="intro-ola" viewBox="0 0 900 160" preserveAspectRatio="none" fill="none" stroke-width="1.25" aria-hidden="true">
+        <path stroke="#CDFC8A" vector-effect="non-scaling-stroke" d="M0 70 C200 -10 380 150 600 60 S820 0 900 30"/>
+        <path fill="#CDFC8A" d="M0 92 C200 12 380 172 600 82 S820 22 900 52 L900 170 L0 170 Z"/>
+        <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 114 C200 34 380 194 600 104 S820 44 900 74"/>
+      </svg>
+      <p class="tag">Gratis · 2 minutos</p>
       <h1>¿Por dónde se te <span class="acento">escapan</span> los clientes?</h1>
       <p class="lead">Cuando un negocio no vende lo que quiere, casi nunca es por falta de gente.
-      Son <strong>fugas</strong> en puntos concretos del viaje del cliente. Responde 11 preguntas
-      y descubre tu <strong>fuga principal</strong> y qué tan sano está el camino de tu cliente hasta la compra.</p>
-      <button class="btn btn--morado" id="start">Empezar el diagnóstico →</button>
+      O la marca no tiene claro qué es, o los clientes se escapan en algún punto del camino.
+      Responde 13 preguntas y te decimos <strong>qué arreglaríamos primero</strong>.</p>
+      <button class="btn btn--lima" id="start">Empezar el diagnóstico →</button>
       <p class="hand-note">Honesto antes que bonito.</p>
     </section>
   `);
@@ -52,9 +58,7 @@ function renderStep() {
   const total = ITEMS.length;
   const pct = Math.round((step / total) * 100);
   const stage = STAGES.find((s) => s.key === item.stage);
-  const kicker = stage
-    ? `${stage.index} · ${esc(stage.name)}`
-    : 'Última · Tu prioridad';
+  const kicker = stage ? esc(stage.name) : 'Última pregunta';
 
   const options = item.options.map((o, i) => {
     const val = 'score' in o ? o.score : o.value;
@@ -68,7 +72,7 @@ function renderStep() {
   paint(`
     <section class="card step" data-anim>
       <div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>
-      <p class="eyebrow">${kicker} · ${step + 1}/${total}</p>
+      <p class="kicker">${kicker} <span>· ${step + 1} de ${total}</span></p>
       <h2 class="q">${esc(item.text)}</h2>
       <div class="options">${options}</div>
       <div class="nav">
@@ -114,46 +118,41 @@ function renderResult() {
   }).join('');
 
   const caveat = r.driftCaveat
-    ? `<aside class="caveat"><span class="label">Un apunte</span><p>${esc(DRIFT_CAVEATS[r.driftCaveat])}</p></aside>`
+    ? `<aside class="caveat"><strong>Un apunte.</strong> ${esc(DRIFT_CAVEATS[r.driftCaveat])}</aside>`
     : '';
   const perfectNote = r.perfectSelfReport
-    ? `<aside class="caveat"><span class="label">Un apunte</span><p>${esc(PERFECT_SELFREPORT_NOTE)}</p></aside>`
+    ? `<aside class="caveat"><strong>Un apunte.</strong> ${esc(PERFECT_SELFREPORT_NOTE)}</aside>`
     : '';
+  // v2: el título decide según la última respuesta; la nota ya no se muestra
+  // (se sigue guardando para research).
+  const title = esc(RESULT_TITLES[answers.gate] || RESULT_TITLES.unsure)
+    .replace(/\{etapa\}(\.?)/, (_, punto) => `<span class="acento">${esc(r.primaryLeak.en)}${punto}</span>`);
   const typeOpts = BUSINESS_TYPES.map((t) => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
   const invOpts = INVESTMENT_RANGES.map((t) => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
 
   paint(`
     <section class="card result" data-anim>
-      <p class="eyebrow">Tu diagnóstico</p>
-      <p class="claim-kicker">Tu fuga principal es</p>
-      <h1 class="claim"><span class="acento">${esc(r.primaryLeak.name)}</span></h1>
-
-      <div class="health">
-        <div class="health-num">${r.healthPct}<span>/100</span></div>
-        <div class="health-meta">
-          <span class="grade">Salud del camino · ${r.grade}</span>
-          <strong>${esc(band.label)}</strong>
-          <p>${esc(band.tagline)}</p>
-        </div>
-      </div>
+      <h1 class="claim">${title}</h1>
 
       <div class="verdict">
         <p><strong>Qué está pasando.</strong> ${esc(r.primaryLeak.verdict)}</p>
-        <p><strong>El primer arreglo.</strong> ${esc(r.primaryLeak.next)}</p>
+        <p><strong>Lo que haríamos primero.</strong> ${esc(r.primaryLeak.next)}</p>
       </div>
 
       ${caveat}${perfectNote}
 
       <div class="map">
-        <p class="map-title">Tu camino, etapa por etapa</p>
+        <h2 class="map-title">Tu camino, etapa por etapa</h2>
+        <p class="banda"><strong>${esc(band.label)}.</strong> ${esc(band.tagline)}</p>
         ${rows}
       </div>
 
       <div class="funnel" id="funnel">
-        <h3>¿Quieres que lo revisemos contigo?</h3>
-        <p class="funnel-body">Este resultado te dice dónde está la fuga. Lo que no te dice es cómo taparla en tu negocio.
-        Cada mes abrimos 4 diagnósticos con Vero, directora de estrategia de Kapüy: 30 minutos sobre tu caso.
-        Es gratis y no te vamos a perseguir después.</p>
+        <h3>¿Lo vemos contigo?</h3>
+        <p class="funnel-body">Este resultado te dice dónde mirar. Lo que no te dice es qué hacer en tu negocio.
+        En 30 minutos, gratis, Vero revisa tu caso contigo. Si tiene sentido, el siguiente paso es el
+        <strong>Kapüy Growth Blueprint</strong>: en dos semanas, claridad sobre qué es tu marca y el camino completo para crecer.
+        Y si no somos para ti, te lo decimos.</p>
 
         <form id="optin" class="optin" novalidate>
           <label class="field"><span>Tu correo</span>

@@ -1,6 +1,7 @@
 // Almacenamiento en Supabase — inserción directa desde el navegador con la
 // anon key (RLS insert-only). Sin backend; el sitio sigue estático.
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
+import { VERSION } from './questions.js';
 
 export function isConfigured() {
   return SUPABASE_URL && SUPABASE_ANON_KEY &&
@@ -53,6 +54,7 @@ export async function saveSubmission(result, answers) {
     session_id: sessionId(),
     responses: answers,
     computed: {
+      version: VERSION, // v2 = con Claridad; las filas sin version son v1
       grade: result.grade,
       healthPct: result.healthPct,
       primaryLeak: result.primaryLeak.key,
@@ -74,7 +76,7 @@ export async function saveSubmission(result, answers) {
 // diagnostico_submissions.
 export async function saveContact(submissionId, { email, businessType, investment, wantsUpdates, result }) {
   const lines = [
-    'Pidió el diagnóstico con Vero.',
+    `Pidió el diagnóstico con Vero (${VERSION}).`,
     `Resultado: nota ${result.grade} (${result.healthPct}/100). Fuga principal: ${result.primaryLeak.name}. Fortaleza: ${result.strength.key === result.primaryLeak.key ? 'ninguna clara' : result.strength.name}.`,
     `Inversión mensual en marketing: ${investment || 'no dijo'}.`,
     `Cree que su problema es más tráfico: ${result.driftTripped ? 'sí' : 'no'}.`,
