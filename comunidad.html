@@ -85,16 +85,14 @@
   <!-- ── Cómo funciona ─────────────────────────────────────── -->
   <section class="seccion f-lima">
     <div class="wrap">
-      <div class="bloque">
-        <p class="eb" data-i18n="paEb">Cómo funciona</p>
-        <h2 data-i18n="paH2">Una intervención con inicio y fin.</h2>
-      </div>
-      <div class="pasos">
-        <div><span class="n">01</span><h3 data-i18n="p1h">Aplican</h3><p data-i18n="p1p">La asociación nos cuenta su causa y qué quiere lograr. Si califica, el cupo del mes es suyo.</p></div>
-        <div><span class="n">02</span><h3 data-i18n="p2h">Escuchamos</h3><p data-i18n="p2p">Una reunión para entender la organización real, no su Instagram. Después, miramos quién en su categoría lo está haciendo bien.</p></div>
-        <div><span class="n">03</span><h3 data-i18n="p3h">Armamos la estrategia</h3><p data-i18n="p3p">Posicionamiento, voz, identidad, contenido y los sistemas para que el apoyo llegue aunque no haya una emergencia.</p></div>
-        <div><span class="n">04</span><h3 data-i18n="p4h">Entregamos y activamos</h3><p data-i18n="p4p">Una reunión de presentación, no un PDF por correo, con tareas concretas para esa misma semana. A las tres o cuatro semanas volvemos a ver cómo va.</p></div>
-      </div>
+      <h2 data-i18n="paH2">Una intervención con inicio y fin.</h2>
+      <!-- Secuencia real: recorrido con flechas, como en la home -->
+      <ol class="ruta ruta--4">
+        <li><h3 data-i18n="p1h">Aplican</h3><p data-i18n="p1p">La asociación nos cuenta su causa y qué quiere lograr. Si califica, el cupo del mes es suyo.</p></li>
+        <li><h3 data-i18n="p2h">Escuchamos</h3><p data-i18n="p2p">Una reunión para entender la organización real, no su Instagram. Después, miramos quién en su categoría lo está haciendo bien.</p></li>
+        <li><h3 data-i18n="p3h">Armamos la estrategia</h3><p data-i18n="p3p">Posicionamiento, voz, identidad, contenido y los sistemas para que el apoyo llegue aunque no haya una emergencia.</p></li>
+        <li><h3 data-i18n="p4h">Entregamos y activamos</h3><p data-i18n="p4p">Una reunión de presentación, no un PDF por correo, con tareas concretas para esa misma semana. A las tres o cuatro semanas volvemos a ver cómo va.</p></li>
+      </ol>
     </div>
   </section>
 
@@ -102,10 +100,10 @@
        Permiso de GAC confirmado por Vero el 2026-10-02. -->
   <section class="seccion f-carbon oscuro">
     <div class="wrap">
-      <p class="eb" data-i18n="gacEb">El primer caso</p>
+      <h2 data-i18n="gacH2">El primero fue GAC.</h2>
       <div class="caso">
         <div class="quien">
-          <p class="rol" style="font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--morado)" data-i18n="gacQuien">Grupo de Apoyo Canino · Universidad Simón Bolívar</p>
+          <p class="rol" data-i18n="gacQuien">Grupo de Apoyo Canino · Universidad Simón Bolívar</p>
           <h3 data-i18n="gacH3">GAC rescata, esteriliza y da en adopción a los animales que llegan a la USB.</h3>
         </div>
         <div>
@@ -122,27 +120,25 @@
   </section>
 
   <!-- ── Quién califica ─────────────────────────────────────── -->
-  <section id="califica" class="seccion pq f-marfil">
+  <!-- Mismo patrón que «Para quién» en la home: el «no» grande, el «sí» al costado -->
+  <section id="califica" class="seccion f-marfil califica">
     <div class="wrap">
-      <div class="bloque">
-        <p class="eb" data-i18n="caEb">¿Tu causa califica?</p>
-        <h2 data-i18n="caH2">Regalamos el criterio, no el trabajo operativo.</h2>
-      </div>
-      <div class="cols">
-        <div class="col col--si">
-          <h3 data-i18n="siH">Sí, si…</h3>
-          <ul>
-            <li data-i18n="si1">Tiene un objetivo que se puede medir: adopciones, donaciones o voluntarios.</li>
-            <li data-i18n="si2">Tiene manos y tiempo para ejecutar lo que le dejamos.</li>
-            <li data-i18n="si3">Ya tiene algo que apalancar: audiencia, historias o respaldo institucional.</li>
-          </ul>
-        </div>
-        <div class="col col--no">
+      <h2 data-i18n="caH2">Regalamos el criterio, no el trabajo operativo.</h2>
+      <div class="pq-split">
+        <div class="pq-no">
           <h3 data-i18n="noH">No, si…</h3>
           <ul>
             <li data-i18n="no1">Lo que busca es que le publiquemos y editemos gratis.</li>
             <li data-i18n="no2">No hay equipo ni tiempo para sostener nada después.</li>
             <li data-i18n="no3">No hay un norte ni forma de medir el impacto.</li>
+          </ul>
+        </div>
+        <div class="pq-si">
+          <h3 data-i18n="siH">Sí, si…</h3>
+          <ul>
+            <li data-i18n="si1">Tiene un objetivo que se puede medir: adopciones, donaciones o voluntarios.</li>
+            <li data-i18n="si2">Tiene manos y tiempo para ejecutar lo que le dejamos.</li>
+            <li data-i18n="si3">Ya tiene algo que apalancar: audiencia, historias o respaldo institucional.</li>
           </ul>
         </div>
       </div>
@@ -229,6 +225,7 @@
 <script src="/assets/sitio.js"></script>
 <script>
   KAPUY.init({
+  "gacH2": { "es": "El primero fue GAC.", "en": "The first was GAC." },
   "navPriv": { "es": "Privacidad", "en": "Privacy" },
   "puEb":  { "es": "¿Tienes un negocio?", "en": "Running a business?" },
   "puH3":  { "es": "Esto mismo, para tu marca.", "en": "The same thing, for your brand." },
