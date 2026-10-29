@@ -807,3 +807,25 @@
   .bio-mas summary::after { content: " +"; }
   .bio-mas[open] summary::after { content: " −"; }
   .bio-mas[open] summary { margin-bottom: 18px; }
+
+  /* Trabajo real · la pieza va dentro de un panel morado que llena su columna:
+     así el embed de Instagram (angosto y blanco) no flota en el vacío */
+  .trabajo .wrap { align-items: center; }
+  .trabajo-texto { position: static; }
+  .trabajo-pieza { position: relative; padding: clamp(32px, 4vw, 64px) 24px; background: var(--morado); }
+  .trabajo-pieza::before, .trabajo-pieza::after { content: ""; position: absolute; width: 24px; height: 24px; background: var(--lima); }
+  .trabajo-pieza::before { top: 0; right: 0; }
+  .trabajo-pieza::after { top: 24px; right: 24px; }
+  .trabajo-pieza .instagram-media { max-width: 360px !important; min-width: 0 !important; width: 100% !important; box-shadow: 0 0 0 0 transparent !important; border: 0 !important; border-radius: 0 !important; }
+  .trabajo-pieza .hueco { background: transparent; border-color: var(--marfil-50); color: var(--marfil-70); }
+  .trabajo-pieza .hueco a { color: var(--lima); }
+
+  /* Testimonios · Kathy a la izquierda, las marcas de Vero a la derecha, en una fila */
+  .tst-fila { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px clamp(40px, 6vw, 96px); align-items: start; padding-top: 40px; border-top: var(--regla) solid var(--morado); }
+  .tst-fila .tst-otra { max-width: none; margin-left: 0; padding-top: 0; border-top: 0; }
+  .tst-fila .marcas-vero { padding-top: 0; border-top: 0; }
+  .tst-fila .marcas-vero ul { flex-direction: column; gap: 4px; }
+  /* Firmas y «leer completo» iguales en los dos testimonios: Grotesk, sin mayúsculas */
+  .home .tst-uno figcaption span, .tst-otra figcaption span { font-family: var(--font-sans); font-size: 14px; letter-spacing: 0; text-transform: none; }
+  .tst-mas summary { font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+  @media (max-width: 980px) { .tst-fila { grid-template-columns: minmax(0, 1fr); } }
