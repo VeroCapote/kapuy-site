@@ -171,7 +171,7 @@
   var POP = {
     eb:    { es: 'Diagnóstico gratis', en: 'Free diagnostic' },
     h:     { es: '¿Por dónde se te escapan los clientes?', en: 'Where are your customers slipping away?' },
-    p:     { es: '11 preguntas, 2 minutos. Ves tu resultado sin dejar el correo.', en: '11 questions, 2 minutes, in Spanish. See your result without leaving your email.' },
+    p:     { es: '13 preguntas, 2 minutos. Ves tu resultado sin dejar el correo.', en: '13 questions, 2 minutes, in Spanish. See your result without leaving your email.' },
     btn:   { es: 'Hacer el diagnóstico', en: 'Take the diagnostic' },
     no:    { es: 'Ahora no', en: 'Not now' },
     cerrar:{ es: 'Cerrar', en: 'Close' }
