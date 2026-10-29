@@ -7,7 +7,9 @@
 // código, no en la etiqueta que ve el usuario.
 //
 // Copy revisada con la voz de Kapüy y aprobada por Vero el 2026-10-02.
-// v2 (aprobada por Vero el 2026-10-29): etapa Claridad al inicio, resultado
+// v2 (aprobada por Vero el 2026-10-29): wording neutral para producto y
+// servicio (cada pregunta tiene que leerse bien pensando en Hola Granola y en
+// Doherty Coaching), etapa Claridad al inicio, resultado
 // que decide en vez de poner nota y cierre con puente al Blueprint.
 // Borrador en 1 · Kapüy/Dirección/web-hello/borrador-diagnostico-v2.md
 export const VERSION = 'v2';
@@ -19,7 +21,7 @@ export const STAGES = [
   { key: 'atraccion',  index: '02', name: 'Atracción',         en: 'cómo te encuentran',                   blurb: 'Que la persona correcta te encuentre y se reconozca.' },
   { key: 'interes',    index: '03', name: 'Interés',           en: 'cómo te ganas su confianza',           blurb: 'Ganar confianza antes de pedir la venta.' },
   { key: 'conversion', index: '04', name: 'Conversión',        en: 'el momento de decidir',                blurb: 'El momento de decidir, sin fricción.' },
-  { key: 'compra',     index: '05', name: 'Compra y arranque', en: 'lo que pasa después de que te compran', blurb: 'Los primeros pasos justo después de pagar.' },
+  { key: 'compra',     index: '05', name: 'Compra y primera experiencia', en: 'lo que pasa después de que te compran', blurb: 'Los primeros pasos justo después de pagar.' },
   { key: 'retencion',  index: '06', name: 'Retención',         en: 'la recompra y las recomendaciones',    blurb: 'Que vuelva y te recomiende.' },
 ];
 
@@ -50,9 +52,9 @@ export const QUESTIONS = [
     id: 'atraccion_1', stage: 'atraccion',
     text: 'Cuando alguien llega por primera vez a tu web o perfil, lo primero que ve es…',
     options: [
-      { label: 'Lo que ofrezco y por qué soy bueno en lo mío.', score: 0 },
+      { label: 'Lo que vendo y por qué es bueno.', score: 0 },
       { label: 'Una mezcla: un poco de mí y un poco de lo que resuelvo.', score: 1 },
-      { label: 'El problema de mi cliente, dicho con sus propias palabras.', score: 2 },
+      { label: 'Lo que mi cliente busca, dicho con sus propias palabras.', score: 2 },
     ],
   },
   {
@@ -61,18 +63,18 @@ export const QUESTIONS = [
     options: [
       { label: 'Le costaría explicarlo con precisión.', score: 0 },
       { label: 'Diría más o menos a qué me dedico.', score: 1 },
-      { label: 'Nombraría exactamente el problema que resuelvo.', score: 2 },
+      { label: 'Diría exactamente qué resuelvo y para quién.', score: 2 },
     ],
   },
 
   // 03 — Interés
   {
     id: 'interes_1', stage: 'interes',
-    text: 'Entre que alguien te descubre y que le pides comprar o agendar, ¿qué recibe de ti?',
+    text: 'Entre que alguien te descubre y que le pides comprar, ¿qué recibe de ti?',
     options: [
       { label: 'Voy directo a la oferta; si le interesa, escribe.', score: 0 },
       { label: 'Algún contenido suelto, sin un orden claro.', score: 1 },
-      { label: 'Un recurso útil y una prueba concreta (caso, testimonio) antes del precio.', score: 2 },
+      { label: 'Algo que le sirve o le gusta, y pruebas de que funciona (reseñas, clientes reales) antes del precio.', score: 2 },
     ],
   },
   {
@@ -80,7 +82,7 @@ export const QUESTIONS = [
     text: '¿Tienes forma de seguir en contacto con quien todavía no está listo para comprar?',
     options: [
       { label: 'No; si no compra en el momento, se pierde.', score: 0 },
-      { label: 'Tengo sus datos, pero no les doy seguimiento constante.', score: 1 },
+      { label: 'Tengo cómo escribirle (correo, WhatsApp, seguidores), pero no lo hago con constancia.', score: 1 },
       { label: 'Sí, le hago seguimiento con un ritmo hasta que decide.', score: 2 },
     ],
   },
@@ -97,38 +99,38 @@ export const QUESTIONS = [
   },
   {
     id: 'conversion_2', stage: 'conversion',
-    text: 'La objeción #1 por la que la gente NO te compra, ¿está resuelta antes del botón?',
+    text: 'La duda que más frena a la gente antes de comprarte (precio, envío, si le va a servir), ¿la respondes antes de que tenga que preguntar?',
     options: [
-      { label: 'No tengo claro cuál es su objeción principal.', score: 0 },
-      { label: 'La intuyo, pero no la respondo de forma explícita.', score: 1 },
-      { label: 'Sí, la respondo justo antes de pedir la acción.', score: 2 },
+      { label: 'No tengo claro cuál es esa duda.', score: 0 },
+      { label: 'La intuyo, pero no la respondo de frente.', score: 1 },
+      { label: 'Sí, la respondo justo antes de pedir la compra.', score: 2 },
     ],
   },
 
-  // 05 — Compra y arranque
+  // 05 — Compra y primera experiencia
   {
     id: 'compra_1', stage: 'compra',
-    text: 'Justo después de que alguien te compra o agenda, ¿qué pasa?',
+    text: 'Justo después de que alguien te compra, ¿qué pasa?',
     options: [
-      { label: 'Nada automático; yo respondo cuando puedo.', score: 0 },
-      { label: 'Un mensaje de confirmación básico.', score: 1 },
-      { label: 'Un mensaje de bienvenida que dice “qué sigue” y cuál es el primer paso.', score: 2 },
+      { label: 'Nada; si tiene dudas, pregunta.', score: 0 },
+      { label: 'Una confirmación básica.', score: 1 },
+      { label: 'Un mensaje que le dice qué sigue: cuándo le llega, cómo empezar o qué esperar.', score: 2 },
     ],
   },
   {
     id: 'compra_2', stage: 'compra',
-    text: 'En sus primeros días como cliente nuevo, la persona…',
+    text: 'La primera experiencia con lo que compró (el producto que llega, la primera cita, el primer uso)…',
     options: [
-      { label: 'Queda algo perdida sobre cómo empezar.', score: 0 },
-      { label: 'Sabe lo esencial, pero pregunta bastante.', score: 1 },
-      { label: 'Tiene claro el camino; la experiencia se siente cuidada.', score: 2 },
+      { label: 'Depende del día: a veces sale bien y a veces no.', score: 0 },
+      { label: 'Sale bien, pero nadie la diseña a propósito.', score: 1 },
+      { label: 'Está pensada: sé qué siente y qué necesita en ese momento.', score: 2 },
     ],
   },
 
   // 06 — Retención
   {
     id: 'retencion_1', stage: 'retencion',
-    text: 'Cerrada una venta, ¿qué haces para que el cliente vuelva o te recomiende?',
+    text: 'Después de que alguien te compra, ¿qué haces para que vuelva o te recomiende?',
     options: [
       { label: 'Nada sistemático; espero que vuelva por su cuenta.', score: 0 },
       { label: 'A veces pido reseña o reactivo, sin un plan fijo.', score: 1 },
@@ -197,7 +199,7 @@ export const STAGE_DIAGNOSIS = {
   },
   compra: {
     verdict: 'Después de pagar hay silencio, y ahí nace el arrepentimiento.',
-    next: 'Diseñar los primeros días del cliente nuevo para que sepa qué sigue sin tener que preguntar.',
+    next: 'Diseñar la primera experiencia después de la compra, para que dé ganas de repetir.',
   },
   retencion: {
     verdict: 'Tratas la venta como el final y dejas en la mesa la forma más barata de crecer: que vuelvan y te recomienden.',
@@ -210,6 +212,8 @@ export const STAGE_DIAGNOSIS = {
 export const RESULT_TITLES = {
   traffic:    'Tu problema no es traer más gente. Es {etapa}.',
   downstream: 'Tienes razón: el problema está en lo que ya llega. Concretamente, en {etapa}.',
+  // Marcó «que no se escape lo que ya llega», pero la fuga está antes (Claridad o Atracción):
+  downstreamArriba: 'Lo que ya llega se te escapa, pero el problema empieza antes: en {etapa}.',
   unsure:     'No estás seguro de dónde está el problema. Nosotras sí: {etapa}.',
 };
 

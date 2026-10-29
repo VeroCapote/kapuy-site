@@ -131,7 +131,9 @@ function renderResult() {
     : '';
   // v2: el título decide según la última respuesta; la nota ya no se muestra
   // (se sigue guardando para research).
-  const title = esc(RESULT_TITLES[answers.gate] || RESULT_TITLES.unsure)
+  const arriba = ['claridad', 'atraccion'].includes(r.primaryLeak.key);
+  const titleKey = answers.gate === 'downstream' && arriba ? 'downstreamArriba' : answers.gate;
+  const title = esc(RESULT_TITLES[titleKey] || RESULT_TITLES.unsure)
     .replace(/\{etapa\}(\.?)/, (_, punto) => `<span class="acento">${esc(r.primaryLeak.en)}${punto}</span>`);
   const typeOpts = BUSINESS_TYPES.map((t) => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
   const invOpts = INVESTMENT_RANGES.map((t) => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
