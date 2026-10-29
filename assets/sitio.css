@@ -713,8 +713,9 @@
 
   /* 7. Cierre · la ola de lima entra desde comunidad */
   .home .cierre { margin-top: -2px; }
-  .cierre .mareas.mareas-borde { left: 0; right: 0; top: -2px; width: 100%; height: 260px; }
-  .home .cierre .wrap { padding-top: clamp(200px, 17vw, 260px); }
+  /* opacity: 1 pisa la regla vieja de .cierre .mareas en pantallas medianas (lo volvía verde oliva) */
+  .cierre .mareas.mareas-borde { left: 0; right: 0; top: -2px; width: 100%; height: 300px; opacity: 1; }
+  .home .cierre .wrap { padding-top: clamp(230px, 20vw, 300px); }
 
   @media (max-width: 980px) {
     .trabajo .wrap, .home .pq .wrap { grid-template-columns: minmax(0, 1fr); }
