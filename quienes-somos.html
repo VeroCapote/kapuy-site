@@ -104,9 +104,12 @@
           <h3>Verónica Capote</h3>
           <p class="rol" data-i18n="veroRol">Cofundadora y directora de estrategia</p>
           <p class="bio" data-i18n="veroP1">Verónica es publicista, estratega de marketing y profesora, con más de 10 años de experiencia entre creación de contenido, comunicación y marketing para marcas, empresas y profesionales de distintas industrias.</p>
-          <p class="bio" data-i18n="veroP2">Su carrera comenzó desde la ejecución, creando contenido y gestionando la presencia digital de marcas, y con los años evolucionó hacia la estrategia: entender qué necesita realmente un negocio, encontrar las oportunidades detrás de sus problemas y convertirlas en decisiones de marketing que tengan una razón y un objetivo claro.</p>
-          <p class="bio" data-i18n="veroP3">En Kapüy lidera el área estratégica, conectando posicionamiento, audiencia, contenido, creatividad y crecimiento para construir sistemas de marketing que no dependan de publicar por publicar. Su trabajo parte de una pregunta sencilla: ¿qué tiene que lograr esto para el negocio?</p>
-          <p class="bio" data-i18n="veroP4">Además de su trabajo en Kapüy, ejerce como profesora de Mercadotecnia, una faceta que refleja una de las cosas que más disfruta de su profesión: investigar, cuestionar, encontrar patrones y convertir información compleja en decisiones claras.</p>
+          <details class="bio-mas">
+            <summary data-i18n="bioMas">Leer la bio completa</summary>
+            <p class="bio" data-i18n="veroP2">Su carrera comenzó desde la ejecución, creando contenido y gestionando la presencia digital de marcas, y con los años evolucionó hacia la estrategia: entender qué necesita realmente un negocio, encontrar las oportunidades detrás de sus problemas y convertirlas en decisiones de marketing que tengan una razón y un objetivo claro.</p>
+            <p class="bio" data-i18n="veroP3">En Kapüy lidera el área estratégica, conectando posicionamiento, audiencia, contenido, creatividad y crecimiento para construir sistemas de marketing que no dependan de publicar por publicar. Su trabajo parte de una pregunta sencilla: ¿qué tiene que lograr esto para el negocio?</p>
+            <p class="bio" data-i18n="veroP4">Además de su trabajo en Kapüy, ejerce como profesora de Mercadotecnia, una faceta que refleja una de las cosas que más disfruta de su profesión: investigar, cuestionar, encontrar patrones y convertir información compleja en decisiones claras.</p>
+          </details>
           <p class="bio bio-cierre" data-i18n="veroP5">Cree que el buen marketing no debería dejar a quien dirige una empresa con más preguntas que antes. Debería darle claridad para saber qué está haciendo, por qué lo está haciendo y qué está funcionando.</p>
         </article>
       </div>
@@ -118,13 +121,14 @@
     <div class="wrap">
       <!-- Valores en filas, sin números: no son una secuencia -->
       <div class="bloque">
-        <h2 class="lema" data-i18n="vaLema">Filo para pensar, palabra para responder, chispa para crear, corazón para la gente.</h2>
+        <!-- Un bloque por valor, alternando morado y lima (nunca morado junto a carbón para distinguir categorías) -->
+        <h2 class="lema lema--valores" data-i18n="vaLema"><span class="v v1">Filo para pensar,</span> <span class="v v2">palabra para responder,</span> <span class="v v3">chispa para crear,</span> <span class="v v4">corazón para la gente.</span></h2>
       </div>
       <div class="valores valores--filas">
-        <div><h3 data-i18n="v1h">Filo</h3><p data-i18n="v1p">La mente afilada. Conocimiento profundo, atención al detalle y estándares altos. Probamos, aprendemos y volvemos a probar: el oficio se afila todos los días.</p></div>
-        <div><h3 data-i18n="v2h">Palabra</h3><p data-i18n="v2p">Lo que decimos, lo cumplimos. Cada una es dueña de su resultado completo, y rendimos cuentas de cada dólar sin que haya que perseguir a nadie.</p></div>
-        <div><h3 data-i18n="v3h">Chispa</h3><p data-i18n="v3p">La creatividad y el juego que nos hacen memorables. La estrategia elige la dirección; la chispa hace que se recuerde.</p></div>
-        <div><h3 data-i18n="v4h">Corazón</h3><p data-i18n="v4p">Trabajamos con el corazón y con gente de buen corazón. Feedback de frente y sin veneno. La vida es muy corta para trabajar con patanes.</p></div>
+        <div class="v1"><h3 data-i18n="v1h">Filo</h3><p data-i18n="v1p">La mente afilada. Conocimiento profundo, atención al detalle y estándares altos. Probamos, aprendemos y volvemos a probar: el oficio se afila todos los días.</p></div>
+        <div class="v2"><h3 data-i18n="v2h">Palabra</h3><p data-i18n="v2p">Lo que decimos, lo cumplimos. Cada una es dueña de su resultado completo, y rendimos cuentas de cada dólar sin que haya que perseguir a nadie.</p></div>
+        <div class="v3"><h3 data-i18n="v3h">Chispa</h3><p data-i18n="v3p">La creatividad y el juego que nos hacen memorables. La estrategia elige la dirección; la chispa hace que se recuerde.</p></div>
+        <div class="v4"><h3 data-i18n="v4h">Corazón</h3><p data-i18n="v4p">Trabajamos con el corazón y con gente de buen corazón. Feedback de frente y sin veneno. La vida es muy corta para trabajar con patanes.</p></div>
       </div>
     </div>
   </section>
@@ -153,6 +157,7 @@
 <script src="/assets/sitio.js"></script>
 <script>
   KAPUY.init({
+  "bioMas": { "es": "Leer la bio completa", "en": "Read the full bio" },
   "navPriv": { "es": "Privacidad", "en": "Privacy" },
   "_title": {
     "es": "Quiénes somos · Kapüy",
@@ -223,8 +228,8 @@
     "en": "How we work"
   },
   "vaLema": {
-    "es": "Filo para pensar, palabra para responder, chispa para crear, corazón para la gente.",
-    "en": "An edge to think with, a word we keep, whimsy to create, heart for the people."
+    "es": "<span class=\"v v1\">Filo para pensar,</span> <span class=\"v v2\">palabra para responder,</span> <span class=\"v v3\">chispa para crear,</span> <span class=\"v v4\">corazón para la gente.</span>",
+    "en": "<span class=\"v v1\">An edge to think with,</span> <span class=\"v v2\">a word we keep,</span> <span class=\"v v3\">whimsy to create,</span> <span class=\"v v4\">heart for the people.</span>"
   },
   "v1h": {
     "es": "Filo",

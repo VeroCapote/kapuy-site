@@ -782,3 +782,28 @@
     .valores--filas > div, .valores--filas > div + div { grid-template-columns: minmax(0, 1fr); }
   }
   .persona .rol { font-family: var(--font-sans); font-size: 16px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+
+  /* Quiénes somos · el lema, un bloque por valor (alternan morado y lima) */
+  .lema--valores { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .lema--valores .v { display: inline-block; padding: .08em .3em .12em; transition: transform var(--dur); }
+  .lema--valores .v1, .lema--valores .v3 { background: var(--morado); color: var(--lima); }
+  .lema--valores .v2, .lema--valores .v4 { background: var(--lima); color: var(--morado); }
+  .lema--valores .v1 { transform: rotate(-1.2deg); }
+  .lema--valores .v2 { transform: rotate(.9deg); margin-left: clamp(16px, 4vw, 64px); }
+  .lema--valores .v3 { transform: rotate(-.7deg); margin-left: clamp(8px, 2vw, 32px); }
+  .lema--valores .v4 { transform: rotate(1.3deg); margin-left: clamp(24px, 6vw, 96px); }
+  .lema--valores .v:hover { transform: none; }
+  @media (prefers-reduced-motion: reduce) { .lema--valores .v { transition: none; } }
+  /* Cada fila lleva el cuadrito del color de su valor */
+  .valores--filas h3 { display: flex; align-items: center; gap: 12px; }
+  .valores--filas h3::before { content: ""; flex: none; width: 12px; height: 12px; }
+  .valores--filas .v1 h3::before, .valores--filas .v3 h3::before { background: var(--morado); }
+  .valores--filas .v2 h3::before, .valores--filas .v4 h3::before { background: var(--lima-hondo); }
+
+  /* Quiénes somos · bio de Vero plegada */
+  .bio-mas { display: flex; flex-direction: column; gap: 18px; }
+  .bio-mas summary { cursor: pointer; width: fit-content; font-weight: 600; color: var(--lima); list-style: none; }
+  .bio-mas summary::-webkit-details-marker { display: none; }
+  .bio-mas summary::after { content: " +"; }
+  .bio-mas[open] summary::after { content: " −"; }
+  .bio-mas[open] summary { margin-bottom: 18px; }

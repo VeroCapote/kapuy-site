@@ -104,9 +104,12 @@
           <h3>Verónica Capote</h3>
           <p class="rol" data-i18n="veroRol">Co-Founder &amp; Strategy Director</p>
           <p class="bio" data-i18n="veroP1">Verónica is an advertising professional, marketing strategist and professor, with more than 10 years of experience across content creation, communication and marketing for brands, companies and professionals in a range of industries.</p>
-          <p class="bio" data-i18n="veroP2">Her career started in execution, creating content and managing brands’ digital presence, and over the years it moved toward strategy: understanding what a business really needs, finding the opportunities behind its problems and turning them into marketing decisions with a clear reason and goal.</p>
-          <p class="bio" data-i18n="veroP3">At Kapüy she leads strategy, connecting positioning, audience, content, creativity and growth to build marketing systems that don’t depend on posting for the sake of posting. Her work starts from one simple question: what does this need to achieve for the business?</p>
-          <p class="bio" data-i18n="veroP4">Beyond Kapüy, she teaches Marketing at university level, a side of her that reflects one of the things she enjoys most about the profession: researching, questioning, spotting patterns and turning complex information into clear decisions.</p>
+          <details class="bio-mas">
+            <summary data-i18n="bioMas">Read the full bio</summary>
+            <p class="bio" data-i18n="veroP2">Her career started in execution, creating content and managing brands’ digital presence, and over the years it moved toward strategy: understanding what a business really needs, finding the opportunities behind its problems and turning them into marketing decisions with a clear reason and goal.</p>
+            <p class="bio" data-i18n="veroP3">At Kapüy she leads strategy, connecting positioning, audience, content, creativity and growth to build marketing systems that don’t depend on posting for the sake of posting. Her work starts from one simple question: what does this need to achieve for the business?</p>
+            <p class="bio" data-i18n="veroP4">Beyond Kapüy, she teaches Marketing at university level, a side of her that reflects one of the things she enjoys most about the profession: researching, questioning, spotting patterns and turning complex information into clear decisions.</p>
+          </details>
           <p class="bio bio-cierre" data-i18n="veroP5">She believes good marketing shouldn’t leave the person running a company with more questions than before. It should give them clarity about what they’re doing, why they’re doing it and what’s working.</p>
         </article>
       </div>
@@ -118,13 +121,14 @@
     <div class="wrap">
       <!-- Valores en filas, sin números: no son una secuencia -->
       <div class="bloque">
-        <h2 class="lema" data-i18n="vaLema">An edge to think with, a word we keep, whimsy to create, heart for the people.</h2>
+        <!-- Un bloque por valor, alternando morado y lima (nunca morado junto a carbón para distinguir categorías) -->
+        <h2 class="lema lema--valores" data-i18n="vaLema"><span class="v v1">An edge to think with,</span> <span class="v v2">a word we keep,</span> <span class="v v3">whimsy to create,</span> <span class="v v4">heart for the people.</span></h2>
       </div>
       <div class="valores valores--filas">
-        <div><h3 data-i18n="v1h">Edge</h3><p data-i18n="v1p">A sharp mind. Deep knowledge, attention to detail, high standards. We test, learn and test again: the craft gets sharper every day.</p></div>
-        <div><h3 data-i18n="v2h">Word</h3><p data-i18n="v2p">What we say, we do. Each of us owns the whole result, and we answer for every dollar without anyone having to chase us.</p></div>
-        <div><h3 data-i18n="v3h">Whimsy</h3><p data-i18n="v3p">The creativity and play that make us memorable. Strategy picks the direction; whimsy makes it stick.</p></div>
-        <div><h3 data-i18n="v4h">Heart</h3><p data-i18n="v4p">We work with heart, and with good-hearted people. Straight feedback, no venom. Life’s too short to work with jerks.</p></div>
+        <div class="v1"><h3 data-i18n="v1h">Edge</h3><p data-i18n="v1p">A sharp mind. Deep knowledge, attention to detail, high standards. We test, learn and test again: the craft gets sharper every day.</p></div>
+        <div class="v2"><h3 data-i18n="v2h">Word</h3><p data-i18n="v2p">What we say, we do. Each of us owns the whole result, and we answer for every dollar without anyone having to chase us.</p></div>
+        <div class="v3"><h3 data-i18n="v3h">Whimsy</h3><p data-i18n="v3p">The creativity and play that make us memorable. Strategy picks the direction; whimsy makes it stick.</p></div>
+        <div class="v4"><h3 data-i18n="v4h">Heart</h3><p data-i18n="v4p">We work with heart, and with good-hearted people. Straight feedback, no venom. Life’s too short to work with jerks.</p></div>
       </div>
     </div>
   </section>
@@ -153,6 +157,7 @@
 <script src="/assets/sitio.js"></script>
 <script>
   KAPUY.init({
+  "bioMas": { "es": "Leer la bio completa", "en": "Read the full bio" },
   "navPriv": { "es": "Privacidad", "en": "Privacy" },
   "_title": {
     "es": "Quiénes somos · Kapüy",
@@ -223,8 +228,8 @@
     "en": "How we work"
   },
   "vaLema": {
-    "es": "Filo para pensar, palabra para responder, chispa para crear, corazón para la gente.",
-    "en": "An edge to think with, a word we keep, whimsy to create, heart for the people."
+    "es": "<span class=\"v v1\">Filo para pensar,</span> <span class=\"v v2\">palabra para responder,</span> <span class=\"v v3\">chispa para crear,</span> <span class=\"v v4\">corazón para la gente.</span>",
+    "en": "<span class=\"v v1\">An edge to think with,</span> <span class=\"v v2\">a word we keep,</span> <span class=\"v v3\">whimsy to create,</span> <span class=\"v v4\">heart for the people.</span>"
   },
   "v1h": {
     "es": "Filo",
