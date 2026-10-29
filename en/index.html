@@ -97,16 +97,11 @@
       <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 194 C300 104 520 294 820 184 S1260 104 1440 154"></path>
       <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 216 C300 126 520 316 820 206 S1260 126 1440 176"></path>
     </svg>
+    <!-- Pocos y cerca del título: acompañan a las letras recortadas, no salpican el fondo -->
     <div class="px-cluster" aria-hidden="true">
       <span class="px" style="right:9%;top:150px;background:var(--marfil)"></span>
       <span class="px" style="right:calc(9% + 24px);top:174px;background:var(--lima)"></span>
-      <span class="px" style="right:calc(9% + 48px);top:222px;background:var(--marfil)"></span>
-      <span class="px" style="right:calc(9% - 48px);top:102px;background:var(--lima)"></span>
       <span class="px" style="right:calc(9% - 24px);top:198px;background:var(--lima)"></span>
-      <span class="px" style="right:calc(9% + 96px);top:270px;background:var(--lima)"></span>
-      <span class="px" style="right:calc(9% + 72px);top:318px;background:var(--marfil)"></span>
-      <span class="px" style="right:calc(9% + 144px);top:390px;background:var(--marfil)"></span>
-      <span class="px" style="right:calc(9% + 120px);top:462px;background:var(--lima)"></span>
     </div>
     <div class="wrap">
       <p class="eb" data-i18n="heroEb">The invisible system that moves your marketing</p>
@@ -116,18 +111,18 @@
         <a class="btn btn--lima" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="hero" data-i18n="hablemos">Let's talk</a>
         <a class="btn btn--linea-clara" href="/diagnostico" data-diag="hero" data-i18n="heroDiag">Free 2-min diagnostic (in Spanish)</a>
       </div>
-      <p class="micro" data-i18n="heroMicro">A free 30-minute call. If we’re not the right fit, we’ll tell you.</p>
+      <p class="micro" data-i18n="heroMicro">A free 30-minute call.</p>
     </div>
   </section>
 
   <!-- ── 2. Testimonio (va arriba: la prueba antes de la oferta) ──
        Por ahora UNO (Matt Doherty, 2026-10-02), en formato cita destacada.
-       Cliente de Vero, no de Kapüy: el encuadre va en `tstNota`. Cuando
-       lleguen más, volver a la grilla .citas (ver historial de git). -->
+       Cliente de Vero, no de Kapüy: el encuadre va en `tstNota`.
+       Sin etiqueta encima a propósito (auditoría IA, 2026-10-29): la cita
+       sola, grande, rompe el esqueleto que repiten las demás secciones. -->
   <section id="testimonios" class="tst">
     <div class="wrap">
       <figure class="tst-uno">
-        <p class="eb" data-i18n="tstEb">Testimonial</p>
         <blockquote>
           <p class="tst-frase" data-i18n="tstFrase">“What I appreciate most about working with Verónica is that <em class="acento">I don’t have to manage her.</em>”</p>
           <details class="tst-mas">
@@ -144,71 +139,86 @@
     </div>
   </section>
 
-  <!-- ── 3. Para quién ──────────────────────────────────────── -->
-  <section id="para-quien" class="pq oscuro">
+  <!-- ── 3. Trabajo real (2026-10-29) ─────────────────────────
+       La pieza se pega en PIEZAS (script de abajo): con la URL del post
+       de Instagram se reemplaza el hueco por el embed. Los huecos de
+       abajo son [PLACEHOLDER]: no publicar con ellos a la vista. -->
+  <section id="trabajo" class="trabajo">
     <div class="wrap">
-      <div class="bloque">
-        <p class="eb" data-i18n="pqEb">Who we’re for</p>
-        <h2 data-i18n="pqH2">If all you want is posts, we’re not your agency. <em class="acento">If you want your brand to grow, let’s talk.</em></h2>
+      <div class="trabajo-texto">
+        <h2 data-i18n="trH2">Every flavor has its own way of living the day.</h2>
+        <p data-i18n="trP">Hola Granola wanted each of its five flavors to have a personality of its own while still being one brand. The campaign gave every flavor a woman and a character, and brought them together as a group you want to be part of.</p>
+        <p class="credito" data-i18n="trCred">Hola Granola · Flavors campaign · [PLACEHOLDER: what Kapüy did and with whom]</p>
       </div>
-      <div class="cols">
-        <div class="col col--si">
-          <h3 data-i18n="siH">We’re for you if…</h3>
-          <ul>
-            <li data-i18n="si1">You have a defined product, even if you’re just getting started.</li>
-            <li data-i18n="si2">You understand marketing is a process, not a one-month trick.</li>
-            <li data-i18n="si3">You want someone with judgment making decisions with you, and you trust that judgment.</li>
-            <li data-i18n="si4">You have a real budget to grow: we work with brands that invest $1,000 a month or more in marketing, all in.</li>
-          </ul>
-          <p class="nota" data-i18n="siNota">Not there yet? Tell us anyway. Plenty of brands start with just the strategy and grow from there.</p>
+      <div class="trabajo-pieza" id="piezaHolaGranola">
+        <div class="hueco hueco--pieza">
+          <span data-i18n="trHueco">[PLACEHOLDER] Hola Granola brand film. The Instagram post embed goes here.</span>
         </div>
-        <div class="col col--no">
-          <h3 data-i18n="noH">We’re not for you if…</h3>
-          <ul>
-            <li data-i18n="no1">You expect social media alone to bring in sales within a month.</li>
-            <li data-i18n="no2">You needed results yesterday.</li>
-            <li data-i18n="no3">You just want someone to post.</li>
-            <li data-i18n="no4">You want to compete on price alone.</li>
-          </ul>
-        </div>
+      </div>
+      <div class="trabajo-mas">
+        <div class="hueco"><span data-i18n="trMas1">[PLACEHOLDER] AGP piece</span></div>
+        <div class="hueco"><span data-i18n="trMas2">[PLACEHOLDER] Another publishable piece</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ── 4. Cómo empezamos───────────────────────────────────── -->
+  <!-- ── 4. Para quién ──────────────────────────────────────────
+       El «no» es el producto: va grande. El «sí» acompaña al costado. -->
+  <section id="para-quien" class="pq oscuro">
+    <div class="wrap">
+      <div class="pq-no">
+        <h2 data-i18n="noH">We’re not for you if…</h2>
+        <ul>
+          <li data-i18n="no1">You expect social media alone to bring in sales within a month.</li>
+          <li data-i18n="no2">You needed results yesterday.</li>
+          <li data-i18n="no3">You just want someone to post.</li>
+          <li data-i18n="no4">You want to compete on price alone.</li>
+        </ul>
+      </div>
+      <div class="pq-si">
+        <h3 data-i18n="siH">We’re for you if…</h3>
+        <ul>
+          <li data-i18n="si1">You have a defined product, even if you’re just getting started.</li>
+          <li data-i18n="si2">You understand marketing is a process, not a one-month trick.</li>
+          <li data-i18n="si3">You want someone with judgment making decisions with you, and you trust that judgment.</li>
+          <li data-i18n="si4">You have a real budget to grow: we work with brands that invest $1,000 a month or more in marketing, all in.</li>
+        </ul>
+        <p class="nota" data-i18n="siNota">Not there yet? Tell us anyway. Plenty of brands start with just the strategy and grow from there.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. Cómo empezamos ────────────────────────────────────
+       Es una secuencia de verdad: se lee como recorrido (flechas y
+       cuánto dura cada paso), no como tres tarjetas numeradas. -->
   <section id="como-empezamos" class="seccion empezamos">
     <div class="wrap">
-      <div class="bloque">
-        <p class="eb" data-i18n="emEb">How we start</p>
-        <h2 data-i18n="emH2">Three steps. <em class="acento">None of them is a leap of faith.</em></h2>
-      </div>
-      <div class="pasos pasos--3">
-        <div><span class="n">01</span><h3 data-i18n="e1h">We talk</h3><p data-i18n="e1p">30 minutes, free. You tell us about your business and we tell you honestly whether we can help.</p></div>
-        <div><span class="n">02</span><h3 data-i18n="e2h">Kapüy Growth Blueprint</h3><p data-i18n="e2p">In two weeks, clarity on what your brand is and the full path to growth.</p></div>
-        <div><span class="n">03</span><h3 data-i18n="e3h">Kapüy Growth System</h3><p data-i18n="e3p">The Blueprint’s plan running every month, with someone making the right calls on your behalf.</p></div>
-      </div>
+      <h2 data-i18n="emH2">From the first call to the first month.</h2>
+      <ol class="ruta">
+        <li><span class="cuando" data-i18n="e1t">30 min · free</span><h3 data-i18n="e1h">We talk</h3><p data-i18n="e1p">You tell us about your business and we tell you honestly whether we can help.</p></li>
+        <li><span class="cuando" data-i18n="e2t">2 weeks</span><h3 data-i18n="e2h">Kapüy Growth Blueprint</h3><p data-i18n="e2p">In two weeks, clarity on what your brand is and the full path to growth.</p></li>
+        <li><span class="cuando" data-i18n="e3t">Every month</span><h3 data-i18n="e3h">Kapüy Growth System</h3><p data-i18n="e3p">The Blueprint’s plan running every month, with someone making the right calls on your behalf.</p></li>
+      </ol>
       <div class="fila">
         <a class="btn btn--morado" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="empezamos" data-i18n="ciBtn">Book a call</a>
       </div>
     </div>
   </section>
 
-  <!-- ── 5. Qué hacemos ─────────────────────────────────────── -->
+  <!-- ── 6. Qué hacemos ─────────────────────────────────────── -->
   <section id="oferta" class="oferta oscuro">
     <div class="wrap">
       <div class="bloque">
-        <p class="eb" data-i18n="navOferta">What we do</p>
         <h2 data-i18n="ofH2">First we understand your business. Then we grow it.</h2>
-        <p class="intro" data-i18n="ofIntro">We don’t sell one-off posts or content bundles. Every Kapüy client starts the same way: with a strategy. That’s where we work out what your brand needs, in what order and with whom.</p>
+        <p class="intro" data-i18n="ofIntro">Every Kapüy client starts the same way: with a strategy. That’s where we work out what your brand needs, in what order and with whom.</p>
       </div>
 
       <div class="partida">
         <div>
-          <p class="eb" data-i18n="ptEb">Where it starts</p>
           <h3 data-i18n="ptH3">Kapüy Growth Blueprint</h3>
           <p class="bajada" data-i18n="ptBaj">In two weeks, clarity on what your brand is and the full path to growth.</p>
           <p data-i18n="ptP">A lot of brands aren’t clear on what they are, and it shows in everything they post. Before we produce a single piece, we define who you are, who you’re for and what sets you apart. Then we decide what to say, where and in what order, from the moment people discover you to the moment they come back.</p>
-          <p class="mono recibes" data-i18n="ptRec">What you get</p>
+          <h4 class="recibes" data-i18n="ptRec">What you get</h4>
           <ul class="incluye">
             <li data-i18n="pt1">Your brand platform: purpose, positioning, personality and how your brand speaks, with a read on your competition.</li>
             <li data-i18n="pt2">Your customer journey, in a visual map.</li>
@@ -221,20 +231,18 @@
         <a class="btn btn--morado" href="https://calendar.app.google/S96f3itFqxjGVBXP7" target="_blank" rel="noopener noreferrer" data-cta="estrategia" data-i18n="ptBtn">Start here</a>
       </div>
 
-      <div class="bloque">
-        <div class="caja-sistema">
-        <p class="mono servicios-titulo" data-i18n="svcT">Then, every month</p>
+      <!-- Capas en filas, sin números ni columnas: no son una secuencia -->
+      <div class="caja-sistema">
         <div class="sistema">
           <h3 data-i18n="sysH">Kapüy Growth System</h3>
           <p data-i18n="sysP">The Blueprint’s plan running every month, with someone making the right calls on your behalf. We direct, we produce, and we review what worked, what didn’t and what we adjust. The execution comes in layers, based on what your Blueprint calls for:</p>
-          <p class="claim" data-i18n="s4c">You set the direction. We build the path.</p>
         </div>
-        <div class="svc svc--3">
-          <div><span class="n">01</span><h4 data-i18n="s1h">Demand generation</h4><p data-i18n="s1p">Funnels and paid media built to turn attention into customers, not likes.</p></div>
-          <div><span class="n">02</span><h4 data-i18n="s2h">Video production</h4><p data-i18n="s2p">Ideas people remember, shot and edited by our team. Content that moves the business instead of filling the feed.</p></div>
-          <div><span class="n">03</span><h4 data-i18n="s3h">Branding</h4><p data-i18n="s3p">Visual and verbal identity for brands that are just starting out or need to tell their story again. A full visual identity is quoted separately.</p></div>
-        </div>
-        </div>
+        <dl class="capas">
+          <div><dt data-i18n="s1h">Demand generation</dt><dd data-i18n="s1p">Funnels and paid media built to turn attention into customers.</dd></div>
+          <div><dt data-i18n="s2h">Video production</dt><dd data-i18n="s2p">Ideas people remember, shot and edited by our team to move the business.</dd></div>
+          <div><dt data-i18n="s3h">Branding</dt><dd data-i18n="s3p">Visual and verbal identity for brands that are just starting out or need to tell their story again. A full visual identity is quoted separately.</dd></div>
+        </dl>
+        <p class="claim" data-i18n="s4c">You set the direction. We build the path.</p>
       </div>
 
       <div class="aliados">
@@ -247,13 +255,14 @@
     </div>
   </section>
 
-  <!-- ── 6. Apoyo a la comunidad ──────────────────────────────
-       Resumen en la home; el detalle vive en /comunidad. -->
+  <!-- ── 7. Apoyo a la comunidad ──────────────────────────────
+       Resumen en la home; el detalle vive en /comunidad. La etiqueta se
+       queda: es el nombre del programa, no repite el título. -->
   <section id="comunidad" class="seccion comunidad-home">
     <div class="wrap">
       <div class="bloque">
         <p class="eb" data-i18n="chEb">Kapüy for the community</p>
-        <h2 data-i18n="chH2">Every month, one cause gets <em class="acento">the full strategy.</em> For free.</h2>
+        <h2 data-i18n="chH2">Every month, one cause gets the full strategy. For free.</h2>
       </div>
       <div class="textos">
         <p class="texto" data-i18n="chP1">Each month we pick a nonprofit with no marketing resources and leave them the system: positioning, voice, content, and a way to turn visibility into adoptions, donations or volunteers.</p>
@@ -278,7 +287,6 @@
     <div class="px-cluster" aria-hidden="true">
       <span class="px" style="right:14%;top:70px;background:var(--lima)"></span>
       <span class="px" style="right:calc(14% + 48px);top:118px;background:var(--lima)"></span>
-      <span class="px" style="right:calc(14% - 72px);top:190px;background:var(--lima)"></span>
     </div>
     <div class="wrap">
       <h2 data-i18n="ciH2">Marketing you don’t have to <em class="acento">second-guess.</em></h2>
@@ -292,8 +300,7 @@
       <!-- Para quien no quiere agendar: mensaje o suscripción -->
       <div class="contacto" id="contacto">
         <div class="texto">
-          <p class="eb" data-i18n="coEb">Not ready to book?</p>
-          <h3 data-i18n="coH3">Write to us, or just stay close.</h3>
+          <h3 data-i18n="coH3">Not ready to book? Write to us, or just stay close.</h3>
           <p data-i18n="coP">Tell us what you’re working on and a person will write back, not a bot. If you’d rather watch from a distance for now, leave your email and we’ll write when we publish something worth reading.</p>
           <p class="diag" data-i18n="coDiag">Rather start on your own? <a href="/diagnostico" data-diag="contacto">Take the 2-minute diagnostic</a> (in Spanish).</p>
         </div>
@@ -359,12 +366,14 @@
     heroH1:   { es: 'Las redes sociales <em class="recorte">no venden</em> solas.', en: 'Social media <em class="recorte">doesn’t sell</em> on its own.' },
     navPriv:   { es: 'Privacidad', en: 'Privacy' },
     heroDiag:  { es: 'Diagnóstico gratis · 2 min', en: 'Free 2-min diagnostic (in Spanish)' },
-    heroMicro: { es: 'Llamada de 30 minutos, gratis. Si no somos para ti, te lo decimos.', en: 'A free 30-minute call. If we’re not the right fit, we’ll tell you.' },
+    heroMicro: { es: 'Llamada de 30 minutos, gratis.', en: 'A free 30-minute call.' },
     tstMas:    { es: 'Leer el testimonio completo', en: 'Read the full testimonial' },
-    emEb: { es: 'Cómo empezamos', en: 'How we start' },
-    emH2: { es: 'Tres pasos. <em class="acento">Ninguno es un salto al vacío.</em>', en: 'Three steps. <em class="acento">None of them is a leap of faith.</em>' },
+    emH2: { es: 'De la primera llamada al primer mes.', en: 'From the first call to the first month.' },
     e1h:  { es: 'Hablamos', en: 'We talk' },
-    e1p:  { es: '30 minutos, gratis. Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte.', en: '30 minutes, free. You tell us about your business and we tell you honestly whether we can help.' },
+    e1p:  { es: 'Nos cuentas tu negocio y te decimos con honestidad si podemos ayudarte.', en: 'You tell us about your business and we tell you honestly whether we can help.' },
+    e1t:  { es: '30 min · gratis', en: '30 min · free' },
+    e2t:  { es: '2 semanas', en: '2 weeks' },
+    e3t:  { es: 'Cada mes', en: 'Every month' },
     e2h:  { es: 'Kapüy Growth Blueprint', en: 'Kapüy Growth Blueprint' },
     e2p:  { es: 'En dos semanas, claridad sobre qué es tu marca y el camino completo para crecer.', en: 'In two weeks, clarity on what your brand is and the full path to growth.' },
     e3h:  { es: 'Kapüy Growth System', en: 'Kapüy Growth System' },
@@ -378,10 +387,9 @@
 
     ofH2:    { es: 'Primero entendemos tu negocio. Después lo hacemos crecer.', en: 'First we understand your business. Then we grow it.' },
     ofIntro: {
-      es: 'No vendemos posts sueltos ni paquetes de piezas. Todo cliente de Kapüy arranca igual: con una estrategia. De ahí sale qué necesita tu marca, en qué orden y con quién.',
-      en: 'We don’t sell one-off posts or content bundles. Every Kapüy client starts the same way: with a strategy. That’s where we work out what your brand needs, in what order and with whom.'
+      es: 'Todo cliente de Kapüy arranca igual: con una estrategia. De ahí sale qué necesita tu marca, en qué orden y con quién.',
+      en: 'Every Kapüy client starts the same way: with a strategy. That’s where we work out what your brand needs, in what order and with whom.'
     },
-    ptEb:  { es: 'El punto de partida', en: 'Where it starts' },
     ptH3:  { es: 'Kapüy Growth Blueprint', en: 'Kapüy Growth Blueprint' },
     ptBaj: { es: 'En dos semanas, claridad sobre qué es tu marca y el camino completo para crecer.', en: 'In two weeks, clarity on what your brand is and the full path to growth.' },
     ptP:   {
@@ -396,16 +404,15 @@
     pt5: { es: 'Todo en tu portal privado, presentado en una reunión.', en: 'All of it in your private portal, walked through in a meeting.' },
     ptNota: { es: 'Se contrata solo o viene incluido al tomar el Kapüy Growth System por 3 meses.', en: 'Book it on its own, or get it included when you take the Kapüy Growth System for 3 months.' },
     ptBtn: { es: 'Empezar aquí', en: 'Start here' },
-    svcT:  { es: 'Después, cada mes', en: 'Then, every month' },
     sysH:  { es: 'Kapüy Growth System', en: 'Kapüy Growth System' },
     sysP:  {
       es: 'El plan del Blueprint corriendo cada mes, con alguien eligiendo bien en tu nombre. Dirigimos, producimos y revisamos qué funcionó, qué no y qué ajustamos. La ejecución se arma por capas, según lo que pida tu Blueprint:',
       en: 'The Blueprint’s plan running every month, with someone making the right calls on your behalf. We direct, we produce, and we review what worked, what didn’t and what we adjust. The execution comes in layers, based on what your Blueprint calls for:'
     },
     s1h: { es: 'Generación de demanda', en: 'Demand generation' },
-    s1p: { es: 'Funnel y pauta digital pensados para que la atención se convierta en clientes, no en likes.', en: 'Funnels and paid media built to turn attention into customers, not likes.' },
+    s1p: { es: 'Funnel y pauta digital pensados para que la atención se convierta en clientes.', en: 'Funnels and paid media built to turn attention into customers.' },
     s2h: { es: 'Producción audiovisual', en: 'Video production' },
-    s2p: { es: 'Ideas que la gente recuerda, grabadas y editadas por nuestro equipo. Contenido que empuja el negocio, no que llena el feed.', en: 'Ideas people remember, shot and edited by our team. Content that moves the business instead of filling the feed.' },
+    s2p: { es: 'Ideas que la gente recuerda, grabadas y editadas por nuestro equipo para empujar el negocio.', en: 'Ideas people remember, shot and edited by our team to move the business.' },
     s3h: { es: 'Branding', en: 'Branding' },
     s3p: { es: 'Identidad visual y verbal para marcas que están naciendo o que necesitan volver a contarse. La identidad visual completa se cotiza aparte.', en: 'Visual and verbal identity for brands that are just starting out or need to tell their story again. A full visual identity is quoted separately.' },
     s4c: { es: 'Tú dices hacia dónde. Nosotras creamos el camino.', en: 'You set the direction. We build the path.' },
@@ -415,11 +422,6 @@
       en: 'Websites, large-scale paid traffic campaigns and big productions: we handle them with our network of partners. You talk to one person; we choose the right people to work with.'
     },
 
-    pqEb: { es: 'Para quién somos', en: 'Who we’re for' },
-    pqH2: {
-      es: 'Si solo buscas posts, no somos tu agencia. <em class="acento">Si buscas que tu marca crezca, hablemos.</em>',
-      en: 'If all you want is posts, we’re not your agency. <em class="acento">If you want your brand to grow, let’s talk.</em>'
-    },
     siH:  { es: 'Somos para ti si…', en: 'We’re for you if…' },
     si1:  { es: 'Tienes un producto definido, aunque todavía estés arrancando.', en: 'You have a defined product, even if you’re just getting started.' },
     si2:  { es: 'Entiendes que el marketing es un proceso, no un truco de un mes.', en: 'You understand marketing is a process, not a one-month trick.' },
@@ -433,13 +435,19 @@
     no4:  { es: 'Quieres competir únicamente por precio.', en: 'You want to compete on price alone.' },
 
     chEb:   { es: 'Kapüy por la comunidad', en: 'Kapüy for the community' },
-    chH2:   { es: 'Una causa al mes recibe <em class="acento">la estrategia completa.</em> Gratis.', en: 'Every month, one cause gets <em class="acento">the full strategy.</em> For free.' },
+    chH2:   { es: 'Una causa al mes recibe la estrategia completa. Gratis.', en: 'Every month, one cause gets the full strategy. For free.' },
     chP1:   { es: 'Cada mes elegimos una asociación sin recursos de marketing y le dejamos el sistema: posicionamiento, voz, contenido y la forma de convertir su visibilidad en adopciones, donaciones o voluntarios.', en: 'Each month we pick a nonprofit with no marketing resources and leave them the system: positioning, voice, content, and a way to turn visibility into adoptions, donations or volunteers.' },
     chP2:   { es: 'La primera fue GAC, el Grupo de Apoyo Canino de la Universidad Simón Bolívar.', en: 'The first was GAC, the dog rescue group at Universidad Simón Bolívar.' },
     chBtn:  { es: 'Conoce cómo funciona', en: 'See how it works' },
     chBtn2: { es: '¿Tu causa califica?', en: 'Does your cause qualify?' },
-    tstEb:    { es: 'Testimonio', en: 'Testimonial' },
     tstFrase: { es: '«Lo que más valoro de trabajar con Verónica es que <em class="acento">no tengo que estar detrás de ella.</em>»', en: '“What I appreciate most about working with Verónica is that <em class="acento">I don’t have to manage her.</em>”' },
+
+    trH2:   { es: 'Cada sabor tiene su manera de vivir el día.', en: 'Every flavor has its own way of living the day.' },
+    trP:    { es: 'Hola Granola quería que sus cinco sabores tuvieran personalidad propia sin dejar de ser una sola marca. La campaña le dio a cada sabor una mujer y un carácter, y las juntó como un grupo al que dan ganas de sumarse.', en: 'Hola Granola wanted each of its five flavors to have a personality of its own while still being one brand. The campaign gave every flavor a woman and a character, and brought them together as a group you want to be part of.' },
+    trCred: { es: 'Hola Granola · Campaña de sabores · [PLACEHOLDER: qué hizo Kapüy y con quién]', en: 'Hola Granola · Flavors campaign · [PLACEHOLDER: what Kapüy did and with whom]' },
+    trHueco:{ es: '[PLACEHOLDER] Brandfilm de Hola Granola. Va el embed del post de Instagram.', en: '[PLACEHOLDER] Hola Granola brand film. The Instagram post embed goes here.' },
+    trMas1: { es: '[PLACEHOLDER] Pieza de AGP', en: '[PLACEHOLDER] AGP piece' },
+    trMas2: { es: '[PLACEHOLDER] Otra pieza publicable', en: '[PLACEHOLDER] Another publishable piece' },
     tstTexto: {
       es: '<p>Llevo más de dos años trabajando con Verónica, y se ha vuelto una parte importante de cómo comunicamos la marca Doherty Coaching.</p><p>En este tiempo ha aprendido mi voz, mi mensaje y la audiencia a la que queremos llegar. Puedo darle una idea, una historia, un video o una lección de liderazgo y confiar en que la va a convertir en contenido que se siente auténtico para mí y coherente con la marca.</p><p>Lo que más valoro de trabajar con Verónica es que no tengo que estar detrás de ella. Toma la iniciativa, trae ideas a la mesa, decide cuando hace falta y, si algo tiene que cambiar, responde rápido. Sé que nuestra presencia online está en buenas manos.</p><p>Es creativa, confiable y reflexiva, y alguien a quien le he llegado a confiar mi marca. Recomendaría con gusto a Verónica a cualquier líder u organización que busque a alguien capaz de aportarle a su marketing tanto creatividad como buen criterio.</p>',
       en: '<p>I’ve had the pleasure of working with Verónica for more than two years, and she has become an important part of how we communicate the Doherty Coaching brand.</p><p>Over that time, she has learned my voice, my message, and the audience we want to reach. I can give her an idea, a story, a video, or a leadership lesson and trust her to turn it into content that feels authentic to me and consistent with the brand.</p><p>What I appreciate most about working with Verónica is that I don’t have to manage her. She takes initiative, brings ideas to the table, makes decisions when needed, and if something needs to change, she responds quickly. I know our online presence is in good hands.</p><p>She is creative, dependable, thoughtful, and someone I’ve come to trust with my brand. I would gladly recommend Verónica to any leader or organization looking for someone who can bring both creativity and good judgment to their marketing.</p>'
@@ -454,8 +462,7 @@
     },
     ciBtn:  { es: 'Agenda una llamada', en: 'Book a call' },
 
-    coEb:    { es: '¿Todavía no quieres agendar?', en: 'Not ready to book?' },
-    coH3:    { es: 'Escríbenos o quédate cerca.', en: 'Write to us, or just stay close.' },
+    coH3:    { es: '¿Todavía no quieres agendar? Escríbenos o quédate cerca.', en: 'Not ready to book? Write to us, or just stay close.' },
     coP:     {
       es: 'Cuéntanos en qué andas y te responde una persona, no un bot. Si por ahora prefieres mirar de lejos, deja tu correo y te escribimos cuando publiquemos algo que valga la pena leer.',
       en: 'Tell us what you’re working on and a person will write back, not a bot. If you’d rather watch from a distance for now, leave your email and we’ll write when we publish something worth reading.'
@@ -485,6 +492,24 @@
   };
 
   const K = KAPUY.init(dict);
+
+  /* ══════════════════════════════════════════════════════════
+     Trabajo real — pegar la URL del post de Instagram
+     (https://www.instagram.com/p/… o /reel/…). Vacía = hueco.
+     ══════════════════════════════════════════════════════════ */
+  const PIEZAS = {
+    piezaHolaGranola: '',
+  };
+  Object.entries(PIEZAS).forEach(([id, url]) => {
+    const el = document.getElementById(id);
+    if (!el || !url) return;
+    el.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="14"></blockquote>`;
+    if (!document.getElementById('ig-embed')) {
+      const sc = document.createElement('script');
+      sc.id = 'ig-embed'; sc.async = true; sc.src = 'https://www.instagram.com/embed.js';
+      document.body.appendChild(sc);
+    } else if (window.instgrm) window.instgrm.Embeds.process();
+  });
 
   /* ══════════════════════════════════════════════════════════
      Formulario: mensaje y/o suscripción

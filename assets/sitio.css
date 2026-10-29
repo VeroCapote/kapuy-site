@@ -640,3 +640,70 @@
     /* En celular la ola sube proporcionalmente más: más aire bajo el texto */
     .pagina-hero.f-morado .wrap { padding-bottom: 180px; }
   }
+
+  /* ══════════════════════════════════════════════════════════
+     Home v3 · auditoría «se ve hecha con IA» (2026-10-29)
+     Detalle en 1 · Kapüy/Dirección/web-hello/auditoria-ia-2026-10-29.md
+     ══════════════════════════════════════════════════════════ */
+
+  /* La Mono queda para detalles: botones y menú pasan a la Grotesk, sin mayúsculas */
+  .btn { font-family: var(--font-sans); font-size: 16px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+  .btn--sm { font-size: 15px; }
+  .nav a.l { font-family: var(--font-sans); font-size: 15px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
+
+  /* 3. Trabajo real · marfil, asimétrico: texto angosto, pieza grande */
+  .home .trabajo { background: var(--marfil); }
+  .trabajo .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px clamp(32px, 5vw, 80px); align-items: start; padding-top: clamp(80px, 9vw, 130px); padding-bottom: clamp(80px, 9vw, 130px); }
+  .trabajo-texto { display: flex; flex-direction: column; gap: 24px; position: sticky; top: 120px; }
+  .trabajo h2 { font-size: clamp(34px, 4.2vw, 60px); line-height: 1.02; letter-spacing: -.03em; }
+  .trabajo-texto p { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.6; color: var(--carbon-suave); max-width: 520px; }
+  .trabajo .credito { padding-top: 16px; border-top: 1px solid var(--marfil-linea); font-size: 15px; color: var(--carbon-mudo); }
+  .trabajo-pieza { display: flex; justify-content: center; }
+  .trabajo-pieza .instagram-media { margin: 0 auto !important; }
+  .trabajo-mas { grid-column: 2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .hueco { display: flex; align-items: center; justify-content: center; min-height: 180px; padding: 24px; text-align: center; font-size: 15px; line-height: 1.45; color: var(--carbon-mudo); background: var(--marfil-hondo); border: var(--regla) dashed var(--carbon-mudo); }
+  .hueco--pieza { width: 100%; aspect-ratio: 16 / 9; }
+
+  /* 4. Para quién · el «no» grande, el «sí» al costado */
+  .home .pq .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 48px clamp(40px, 6vw, 96px); align-items: end; }
+  .pq-no h2 { margin-bottom: 32px; }
+  .pq-no ul { margin: 0; padding: 0; list-style: none; border-top: var(--regla) solid var(--lima); }
+  .pq-no li { padding: 20px 0; border-bottom: 1px solid var(--carbon-linea); font-size: clamp(24px, 2.8vw, 40px); font-weight: 500; line-height: 1.15; letter-spacing: -.02em; color: var(--marfil); }
+  .pq-si { display: flex; flex-direction: column; gap: 20px; padding: clamp(24px, 2.6vw, 36px); border: var(--regla) solid var(--lima); }
+  .pq-si h3 { font-size: 20px; letter-spacing: -.01em; color: var(--lima); }
+  .pq-si ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px; line-height: 1.5; color: var(--marfil-82); }
+  .pq-si li { position: relative; padding-left: 20px; }
+  .pq-si li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: var(--lima); }
+  .pq-si .nota { padding-top: 16px; border-top: 1px solid var(--carbon-linea); font-size: 15px; line-height: 1.5; color: var(--marfil-70); }
+
+  /* 5. Cómo empezamos · recorrido con flechas y cuánto dura cada paso */
+  .ruta { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ruta li { position: relative; display: flex; flex-direction: column; gap: 12px; padding-right: clamp(48px, 5vw, 80px); }
+  .ruta li:not(:last-child)::after { content: "→"; position: absolute; right: clamp(12px, 1.5vw, 24px); top: 36px; font-size: 32px; line-height: 1; color: var(--morado); }
+  .ruta .cuando { align-self: flex-start; padding: 4px 10px; font-size: 14px; font-weight: 600; background: var(--lima); color: var(--morado); }
+  .ruta h3 { font-size: clamp(22px, 2vw, 28px); line-height: 1.1; letter-spacing: -.02em; }
+  .ruta p { font-size: 16px; line-height: 1.5; color: var(--carbon-suave); max-width: 340px; }
+
+  /* 6. Qué hacemos · capas del Growth System en filas */
+  .partida .recibes { margin-top: 8px; font-family: var(--font-sans); font-size: 18px; font-weight: 700; letter-spacing: -.01em; text-transform: none; color: var(--morado); }
+  .capas { margin: 0; border-top: var(--regla) solid var(--marfil); }
+  .capas > div { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 8px 24px; padding: 22px 0; border-bottom: 1px solid var(--morado-linea); }
+  .capas dt { font-size: clamp(20px, 1.8vw, 24px); font-weight: 600; line-height: 1.2; letter-spacing: -.02em; color: var(--marfil); }
+  .capas dd { margin: 0; font-size: 16px; line-height: 1.5; color: var(--marfil-82); max-width: 640px; }
+  .caja-sistema .claim { font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -.01em; color: var(--lima); }
+
+  @media (max-width: 980px) {
+    .trabajo .wrap, .home .pq .wrap { grid-template-columns: minmax(0, 1fr); }
+    .trabajo-texto { position: static; }
+    .trabajo-mas { grid-column: auto; }
+    .ruta { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .ruta li { padding-right: 0; }
+    .ruta li:not(:last-child)::after { content: "↓"; position: static; margin-top: 8px; font-size: 28px; }
+  }
+  @media (max-width: 640px) {
+    .capas > div { grid-template-columns: minmax(0, 1fr); }
+    .trabajo-mas { grid-template-columns: minmax(0, 1fr); }
+    .hueco { min-height: 120px; }
+  }
