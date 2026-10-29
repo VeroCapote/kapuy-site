@@ -7,7 +7,7 @@ import {
   DRIFT_CAVEATS, PERFECT_SELFREPORT_NOTE, BUSINESS_TYPES, INVESTMENT_RANGES,
 } from './questions.js';
 
-const AGENDA_URL = 'https://calendar.app.google/BLE4ZYhd7RVnfcFG6';
+const AGENDA_URL = 'https://calendar.app.google/E3eW4fh68oWo4GWF9';
 function track(name, params) { try { window.gtag && window.gtag('event', name, params || {}); } catch (e) {} }
 
 const ITEMS = [...QUESTIONS, GATE]; // 10 preguntas + compuerta
