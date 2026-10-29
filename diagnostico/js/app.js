@@ -34,6 +34,8 @@ function paint(html) {
 
 // ── Vistas ────────────────────────────────────────────────────────────────
 function renderIntro() {
+  document.body.classList.remove('es-resultado');
+  document.body.classList.add('es-intro');
   paint(`
     <section class="card intro" data-anim>
       <svg class="intro-ola" viewBox="0 0 900 160" preserveAspectRatio="none" fill="none" stroke-width="1.25" aria-hidden="true">
@@ -41,6 +43,7 @@ function renderIntro() {
         <path fill="#CDFC8A" d="M0 92 C200 12 380 172 600 82 S820 22 900 52 L900 170 L0 170 Z"/>
         <path stroke="#3C183C" vector-effect="non-scaling-stroke" d="M0 114 C200 34 380 194 600 104 S820 44 900 74"/>
       </svg>
+      <div class="intro-in">
       <p class="tag">Gratis · 2 minutos</p>
       <h1>¿Por dónde se te <span class="acento">escapan</span> los clientes?</h1>
       <p class="lead">Cuando un negocio no vende lo que quiere, casi nunca es por falta de gente.
@@ -48,12 +51,14 @@ function renderIntro() {
       Responde 13 preguntas y te decimos <strong>qué arreglaríamos primero</strong>.</p>
       <button class="btn btn--lima" id="start">Empezar el diagnóstico →</button>
       <p class="hand-note">Honesto antes que bonito.</p>
+      </div>
     </section>
   `);
   document.getElementById('start').addEventListener('click', () => { track('diag_start'); step = 0; renderStep(); });
 }
 
 function renderStep() {
+  document.body.classList.remove('es-intro');
   const item = ITEMS[step];
   const total = ITEMS.length;
   const pct = Math.round((step / total) * 100);
@@ -97,6 +102,7 @@ function renderStep() {
 let submissionId = null;
 
 function renderResult() {
+  document.body.classList.add('es-resultado');
   const r = scoreFunnel(answers);
   const band = HEALTH_BANDS[r.grade];
   track('diag_result', { nota: r.grade, fuga: r.primaryLeak.key });
@@ -132,11 +138,12 @@ function renderResult() {
 
   paint(`
     <section class="card result" data-anim>
-      <h1 class="claim">${title}</h1>
-
-      <div class="verdict">
-        <p><strong>Qué está pasando.</strong> ${esc(r.primaryLeak.verdict)}</p>
-        <p><strong>Lo que haríamos primero.</strong> ${esc(r.primaryLeak.next)}</p>
+      <div class="result-top">
+        <h1 class="claim">${title}</h1>
+        <div class="verdict">
+          <p><strong>Qué está pasando.</strong> ${esc(r.primaryLeak.verdict)}</p>
+          <p><strong>Lo que haríamos primero.</strong> ${esc(r.primaryLeak.next)}</p>
+        </div>
       </div>
 
       ${caveat}${perfectNote}
