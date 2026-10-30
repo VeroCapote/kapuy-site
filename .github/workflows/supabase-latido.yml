@@ -1,9 +1,9 @@
 # Latido para que Supabase (plan free) no pause el proyecto por inactividad.
-# Llama a public.ping() cada 3 días. Si falla, GitHub manda correo a la dueña del repo.
+# Llama a public.ping() todos los días (cada 3 no bastó: se pausó igual en oct 2026). Si falla, GitHub manda correo a la dueña del repo.
 name: Latido Supabase
 on:
   schedule:
-    - cron: "17 13 */3 * *"
+    - cron: "17 13 * * *"
   workflow_dispatch:
 jobs:
   ping:
