@@ -9,6 +9,7 @@
    ══════════════════════════════════════════════════════════ */
 (function () {
   var COMUN = {
+    skip: { es: 'Saltar al contenido', en: 'Skip to content' },
     tagline:   { es: 'Movemos mareas', en: 'We move tides' },
     navOferta: { es: 'Qué hacemos', en: 'What we do' },
     navQuien:  { es: 'Para quién', en: "Who it's for" },
@@ -78,6 +79,15 @@
   K.init = function (pageDict) {
     dict = Object.assign({}, COMUN, pageDict || {});
     K.dict = dict;
+    var main = document.querySelector('main');
+    if (main && !document.querySelector('.skip-link')) {
+      main.id = main.id || 'contenido'; main.tabIndex = -1;
+      var skip = document.createElement('a');
+      skip.className = 'skip-link'; skip.href = '#' + main.id;
+      skip.dataset.i18n = 'skip'; document.body.prepend(skip);
+      skip.addEventListener('click', function () { main.focus(); });
+    }
+
 
     // Páginas con versión propia por idioma (/ y /en/): el idioma lo fija la
     // URL y el selector navega a la otra versión. Sin <link hreflang>, el
@@ -108,6 +118,11 @@
       btn.addEventListener('click', function () {
         var abierto = panel.classList.toggle('abierto');
         btn.setAttribute('aria-expanded', String(abierto));
+      });
+      panel.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          panel.classList.remove('abierto'); btn.setAttribute('aria-expanded', 'false'); btn.focus();
+        }
       });
       panel.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', function () {
@@ -200,9 +215,11 @@
       if (mostrado || !listo || popLeer() === 'nunca') return;
       mostrado = true;
       var L = K.lang;
+      var returnFocus = document.activeElement;
       var el = document.createElement('aside');
       el.className = 'pop-diag';
-      el.setAttribute('role', 'dialog');
+      // Non-modal invitation: do not interrupt reading or capture keyboard focus.
+      el.setAttribute('role', 'region');
       el.setAttribute('aria-labelledby', 'pop-diag-h');
       el.innerHTML =
         '<button type="button" class="pop-x" aria-label="' + POP.cerrar[L] + '">×</button>' +
@@ -217,9 +234,15 @@
       if (window.gtag) gtag('event', 'popup_diag_ver', { idioma: L, motivo: motivo, segundos: Math.round((Date.now() - t0) / 1000) });
 
       function cerrar(como) {
+        if (el.contains(document.activeElement)) {
+          var destino = returnFocus && returnFocus.isConnected && returnFocus !== document.body ? returnFocus : document.querySelector('main');
+          if (destino) destino.focus({ preventScroll: true });
+        }
         el.classList.remove('abierto');
+        el.inert = true;
         setTimeout(function () { el.remove(); }, 300);
         document.removeEventListener('keydown', esc);
+        document.removeEventListener('focusin', protegerFoco);
         if (window.gtag) gtag('event', 'popup_diag_cerrar', { idioma: L, como: como });
       }
       function esc(e) { if (e.key === 'Escape') cerrar('escape'); }
@@ -228,6 +251,16 @@
       el.querySelector('a').addEventListener('click', function () {
         if (window.gtag) gtag('event', 'popup_diag_click', { idioma: L });
       });
+      // A floating invitation must not cover a keyboard user's current control.
+      function protegerFoco() {
+        var active = document.activeElement;
+        if (!active || active === document.body || el.contains(active)) return;
+        returnFocus = active;
+        var a = active.getBoundingClientRect(), b = el.getBoundingClientRect();
+        if (a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom) cerrar('focus');
+      }
+      document.addEventListener('focusin', protegerFoco);
+      requestAnimationFrame(protegerFoco);
       document.addEventListener('keydown', esc);
     }
 

@@ -16,7 +16,7 @@
     --marfil-hondo: #E9E4D6;
     --marfil-linea: #CFC9B8;
     --carbon-suave: #4A4B47;
-    --carbon-mudo:  #6E6F69;
+    --carbon-mudo:  #65665F;
     --carbon-linea: #3A3B38;
     --morado-hondo: #2A0F2A;
     --morado-linea: #5A3358;
@@ -671,7 +671,7 @@
   .film-marco .hueco { background: var(--marfil-hondo); }
   .film-cred { font-size: 15px; color: var(--morado); }
   .home .film-banda + .tst .wrap { padding-top: clamp(40px, 4vw, 64px); }
-  .trabajo-piezas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: start; }
+  .trabajo-piezas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; align-items: start; }
   .trabajo-piezas .instagram-media { min-width: 0 !important; width: 100% !important; }
   .hueco { display: flex; align-items: center; justify-content: center; min-height: 180px; padding: 24px; text-align: center; font-size: 15px; line-height: 1.45; color: var(--carbon-mudo); background: var(--marfil-hondo); border: var(--regla) dashed var(--carbon-mudo); }
   .hueco--pieza { width: 100%; aspect-ratio: 16 / 9; }
@@ -844,3 +844,14 @@
 /* Trabajo real con varias piezas (2026-11-12): texto arriba, reels en fila */
 .home .trabajo .wrap { grid-template-columns: minmax(0, 1fr); align-items: start; }
 .home .trabajo-texto { position: static; max-width: 760px; }
+/* Accesibilidad: foco visible tanto sobre fondos claros como oscuros. */
+:focus-visible { outline: 2px solid var(--morado); outline-offset: 3px; box-shadow: 0 0 0 3px var(--marfil); }
+.pop-diag :focus-visible, .f-morado :focus-visible, .f-carbon :focus-visible { outline-color: var(--lima); }
+.campo input, .campo textarea, .campo select { border-color: #92748F; }
+.campo input::placeholder, .campo textarea::placeholder { color: var(--marfil-70); }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 12px 20px; background: var(--marfil); color: var(--morado); transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+main { scroll-margin-top: 110px; }
+
+.btn { max-width: 100%; white-space: normal; text-align: center; overflow-wrap: anywhere; }
+.pop-diag { max-height: calc(100dvh - 32px); overflow-y: auto; }

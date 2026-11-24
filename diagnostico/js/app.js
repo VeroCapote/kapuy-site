@@ -24,16 +24,20 @@ function esc(s) {
 // Reemplaza #app por un clon nuevo para re-disparar la animación de entrada.
 // Reasigna la referencia del módulo — si no, el siguiente render opera sobre
 // un nodo ya desprendido del DOM.
-function paint(html) {
+function paint(html, moveFocus = true) {
   const fresh = app.cloneNode(false);
   fresh.innerHTML = html;
   app.parentElement.replaceChild(fresh, app);
   app = fresh;
+  if (moveFocus) {
+    const heading = app.querySelector('h1, h2');
+    if (heading) { heading.tabIndex = -1; heading.focus(); }
+  }
   return app;
 }
 
 // ── Vistas ────────────────────────────────────────────────────────────────
-function renderIntro() {
+function renderIntro(moveFocus = true) {
   document.body.classList.remove('es-resultado');
   document.body.classList.add('es-intro');
   paint(`
@@ -53,7 +57,7 @@ function renderIntro() {
       <p class="hand-note">Honesto antes que bonito.</p>
       </div>
     </section>
-  `);
+  `, moveFocus);
   document.getElementById('start').addEventListener('click', () => { track('diag_start'); step = 0; renderStep(); });
 }
 
@@ -68,7 +72,7 @@ function renderStep() {
   const options = item.options.map((o, i) => {
     const val = 'score' in o ? o.score : o.value;
     const selected = answers[item.id] === val ? ' is-selected' : '';
-    return `<button class="option${selected}" data-val="${esc(val)}" data-i="${i}">
+    return `<button class="option${selected}" aria-pressed="${Boolean(selected)}" data-val="${esc(val)}" data-i="${i}">
               <span class="tick" aria-hidden="true"></span>
               <span>${esc(o.label)}</span>
             </button>`;
@@ -77,8 +81,8 @@ function renderStep() {
   paint(`
     <section class="card step" data-anim>
       <div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>
-      <p class="kicker">${kicker} <span>· ${step + 1} de ${total}</span></p>
-      <h2 class="q">${esc(item.text)}</h2>
+      <p class="kicker" id="step-progress">${kicker} <span>· ${step + 1} de ${total}</span></p>
+      <h2 class="q" aria-describedby="step-progress">${esc(item.text)}</h2>
       <div class="options">${options}</div>
       <div class="nav">
         <button class="btn-ghost" id="back" ${step === 0 ? 'disabled' : ''}>← Atrás</button>
@@ -194,14 +198,20 @@ function renderResult() {
     const form = e.currentTarget;
     const note = document.getElementById('stubnote');
     const btn = form.querySelector('button[type=submit]');
+    form.querySelectorAll('[aria-invalid]').forEach(el => { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); });
+    function invalid(id, message) {
+      note.textContent = message;
+      const field = document.getElementById(id);
+      field.setAttribute('aria-invalid', 'true'); field.setAttribute('aria-describedby', 'stubnote'); field.focus();
+    }
     const email = document.getElementById('email').value.trim();
     const businessType = document.getElementById('btype').value;
     const investment = document.getElementById('invest').value;
     if (!email || !/.+@.+\..+/.test(email)) {
-      note.textContent = 'Ese correo no se ve bien. ¿Lo revisas?'; return;
+      invalid('email', 'Ese correo no se ve bien. ¿Lo revisas?'); return;
     }
     if (!businessType || !investment) {
-      note.textContent = 'Contesta las dos preguntas para que llegue preparada a la llamada.'; return;
+      invalid(!businessType ? 'btype' : 'invest', 'Contesta las dos preguntas para que llegue preparada a la llamada.'); return;
     }
     if (!isConfigured()) { note.textContent = 'Prueba local: no se guarda nada.'; return; }
 
@@ -218,6 +228,7 @@ function renderResult() {
         <h3>Listo. Ahora elige tu hora.</h3>
         <p class="funnel-body">Ya tenemos tu resultado. Escoge el momento que te quede mejor y llegamos a la llamada con tu caso leído.</p>
         <a class="btn btn--lima" id="agenda" href="${AGENDA_URL}" target="_blank" rel="noopener">Elegir mi hora →</a>`;
+      document.getElementById('agenda').focus();
       document.getElementById('agenda').addEventListener('click', () => track('diag_agenda_click'));
     } else {
       note.textContent = 'Algo se rompió de nuestro lado, que en una web de marketing da pena. Escríbenos a hey@kapuymarketing.com y lo vemos.';
@@ -226,4 +237,4 @@ function renderResult() {
   });
 }
 
-renderIntro();
+renderIntro(false);
