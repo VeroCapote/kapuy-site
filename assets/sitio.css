@@ -662,6 +662,17 @@
   .trabajo .credito { padding-top: 16px; border-top: 1px solid var(--marfil-linea); font-size: 15px; color: var(--carbon-mudo); }
   .trabajo-pieza { display: flex; justify-content: center; }
   .trabajo-pieza .instagram-media { margin: 0 auto !important; }
+  .film-banda[hidden] { display: none; }
+  .home .film-banda { background: var(--lima); color: var(--morado); }
+  .film-banda .wrap { display: flex; flex-direction: column; gap: 16px; padding-top: clamp(24px, 3vw, 48px); padding-bottom: clamp(32px, 4vw, 56px); }
+  .film-marco { width: 100%; aspect-ratio: 16 / 9; background: var(--carbon); }
+  .film-marco iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .film-marco--ig { aspect-ratio: auto; background: none; display: flex; justify-content: center; }
+  .film-marco .hueco { background: var(--marfil-hondo); }
+  .film-cred { font-size: 15px; color: var(--morado); }
+  .home .film-banda + .tst .wrap { padding-top: clamp(40px, 4vw, 64px); }
+  .trabajo-piezas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; align-items: start; }
+  .trabajo-piezas .instagram-media { min-width: 0 !important; width: 100% !important; }
   .hueco { display: flex; align-items: center; justify-content: center; min-height: 180px; padding: 24px; text-align: center; font-size: 15px; line-height: 1.45; color: var(--carbon-mudo); background: var(--marfil-hondo); border: var(--regla) dashed var(--carbon-mudo); }
   .hueco--pieza { width: 100%; aspect-ratio: 16 / 9; }
 
@@ -830,6 +841,9 @@
   .tst-mas summary { font-family: var(--font-sans); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; }
   @media (max-width: 980px) { .tst-fila { grid-template-columns: minmax(0, 1fr); } }
 
+/* Trabajo real con varias piezas (2026-11-12): texto arriba, reels en fila */
+.home .trabajo .wrap { grid-template-columns: minmax(0, 1fr); align-items: start; }
+.home .trabajo-texto { position: static; max-width: 760px; }
 /* Accesibilidad: foco visible tanto sobre fondos claros como oscuros. */
 :focus-visible { outline: 2px solid var(--morado); outline-offset: 3px; box-shadow: 0 0 0 3px var(--marfil); }
 .pop-diag :focus-visible, .f-morado :focus-visible, .f-carbon :focus-visible { outline-color: var(--lima); }

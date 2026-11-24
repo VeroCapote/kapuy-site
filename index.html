@@ -115,6 +115,17 @@
     </div>
   </section>
 
+  <!-- ── 1b. Brand film (2026-11-12) ──────────────────────────
+       El brand film de Kapüy, lo más arriba posible (pedido de Vero): recibe la
+       ola lima del hero. Se activa pegando la URL en FILM (script de abajo).
+       Vacía = la sección entera no existe. ?vista=huecos enseña el hueco. -->
+  <section id="film" class="film-banda" hidden>
+    <div class="wrap">
+      <div class="film-marco" id="filmMarco"></div>
+      <p class="film-cred" data-i18n="trFilmCred">Kapüy · Brand film</p>
+    </div>
+  </section>
+
   <!-- ── 2. Testimonio (va arriba: la prueba antes de la oferta) ──
        Por ahora UNO (Matt Doherty, 2026-10-02), en formato cita destacada.
        Cliente de Vero, no de Kapüy: el encuadre va en `tstNota`.
@@ -190,11 +201,17 @@
       <div class="trabajo-texto">
         <h2 data-i18n="trH2">Cada sabor tiene su manera de vivir el día.</h2>
         <p data-i18n="trP">Hola Granola quería que sus cinco sabores tuvieran personalidad propia sin dejar de ser una sola marca. La campaña le dio a cada sabor una mujer y un carácter, y las juntó como un grupo al que dan ganas de sumarse.</p>
-        <p class="credito" data-i18n="trCred">Hola Granola · Una de las piezas de la campaña de sabores</p>
+        <p class="credito" data-i18n="trCred">Hola Granola · Campaña de sabores, por Kapüy</p>
       </div>
-      <div class="trabajo-pieza" id="piezaHolaGranola">
-        <div class="hueco hueco--reel">
-          <a href="https://www.instagram.com/reel/DeXsMSYvzFQ/" target="_blank" rel="noopener noreferrer" data-i18n="trHueco">Ver la pieza en Instagram</a>
+      <div class="trabajo-piezas">
+        <div class="trabajo-pieza" id="piezaHolaGranola">
+          <div class="hueco hueco--reel"><a href="https://www.instagram.com/reel/DeXsMSYvzFQ/" target="_blank" rel="noopener noreferrer" data-i18n="trHueco">Ver la pieza en Instagram</a></div>
+        </div>
+        <div class="trabajo-pieza" id="piezaHolaGranola2">
+          <div class="hueco hueco--reel"><a href="https://www.instagram.com/reel/DfkT-N0vIEk/" target="_blank" rel="noopener noreferrer" data-i18n="trHueco">Ver la pieza en Instagram</a></div>
+        </div>
+        <div class="trabajo-pieza" id="piezaHolaGranola3">
+          <div class="hueco hueco--reel"><a href="https://www.instagram.com/reel/DfPgRnUxu8o/" target="_blank" rel="noopener noreferrer" data-i18n="trHueco">Ver la pieza en Instagram</a></div>
         </div>
       </div>
     </div>
@@ -483,7 +500,9 @@
 
     trH2:   { es: 'Cada sabor tiene su manera de vivir el día.', en: 'Every flavor has its own way of living the day.' },
     trP:    { es: 'Hola Granola quería que sus cinco sabores tuvieran personalidad propia sin dejar de ser una sola marca. La campaña le dio a cada sabor una mujer y un carácter, y las juntó como un grupo al que dan ganas de sumarse.', en: 'Hola Granola wanted each of its five flavors to have a personality of its own while still being one brand. The campaign gave every flavor a woman and a character, and brought them together as a group you want to be part of.' },
-    trCred: { es: 'Hola Granola · Una de las piezas de la campaña de sabores', en: 'Hola Granola · One of the pieces from the flavors campaign' },
+    trCred: { es: 'Hola Granola · Campaña de sabores, por Kapüy', en: 'Hola Granola · Flavors campaign, by Kapüy' },
+    trFilmCred: { es: 'Kapüy · Brand film', en: 'Kapüy · Brand film' },
+    trFilmHueco: { es: '[PLACEHOLDER] Aquí va el brand film de Kapüy', en: '[PLACEHOLDER] Kapüy brand film goes here' },
     trHueco:{ es: 'Ver la pieza en Instagram', en: 'See the piece on Instagram' },
     tstTexto: {
       es: '<p>Llevo más de dos años trabajando con Verónica, y se ha vuelto una parte importante de cómo comunicamos la marca Doherty Coaching.</p><p>En este tiempo ha aprendido mi voz, mi mensaje y la audiencia a la que queremos llegar. Puedo darle una idea, una historia, un video o una lección de liderazgo y confiar en que la va a convertir en contenido que se siente auténtico para mí y coherente con la marca.</p><p>Lo que más valoro de trabajar con Verónica es que no tengo que estar detrás de ella. Toma la iniciativa, trae ideas a la mesa, decide cuando hace falta y, si algo tiene que cambiar, responde rápido. Sé que nuestra presencia online está en buenas manos.</p><p>Es creativa, confiable y reflexiva, y alguien a quien le he llegado a confiar mi marca. Recomendaría con gusto a Verónica a cualquier líder u organización que busque a alguien capaz de aportarle a su marketing tanto creatividad como buen criterio.</p>',
@@ -543,6 +562,8 @@
      ══════════════════════════════════════════════════════════ */
   const PIEZAS = {
     piezaHolaGranola: 'https://www.instagram.com/reel/DeXsMSYvzFQ/',
+    piezaHolaGranola2: 'https://www.instagram.com/reel/DfkT-N0vIEk/',
+    piezaHolaGranola3: 'https://www.instagram.com/reel/DfPgRnUxu8o/',
   };
   Object.entries(PIEZAS).forEach(([id, url]) => {
     const el = document.getElementById(id);
@@ -557,6 +578,42 @@
       document.body.appendChild(sc);
     } else if (window.instgrm) window.instgrm.Embeds.process();
   });
+
+  /* ══════════════════════════════════════════════════════════
+     Brand film — pegar la URL del video (YouTube, Vimeo o Instagram).
+     Vacía = no se muestra nada. ?vista=huecos enseña el hueco.
+     ══════════════════════════════════════════════════════════ */
+  const FILM = 'https://www.youtube.com/watch?v=NWka_a9BkII';
+  (function () {
+    const caja = document.getElementById('film');
+    const marco = document.getElementById('filmMarco');
+    if (!caja || !marco) return;
+    const verHueco = new URLSearchParams(location.search).get('vista') === 'huecos';
+    if (!FILM && !verHueco) return;
+    caja.hidden = false;
+    if (!FILM) {
+      marco.innerHTML = '<div class="hueco hueco--pieza" data-i18n="trFilmHueco"></div>';
+      marco.firstChild.textContent = dict.trFilmHueco[K.lang] || dict.trFilmHueco.es;
+      return;
+    }
+    let m, src = '';
+    if ((m = FILM.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/))) {
+      src = `https://www.youtube-nocookie.com/embed/${m[1]}?rel=0`;
+    } else if ((m = FILM.match(/vimeo\.com\/(?:video\/)?(\d+)/))) {
+      src = `https://player.vimeo.com/video/${m[1]}?dnt=1`;
+    }
+    if (src) {
+      marco.innerHTML = `<iframe src="${src}" title="Kapüy · Brand film" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>`;
+    } else {
+      marco.classList.add('film-marco--ig');
+      marco.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${FILM}" data-instgrm-version="14"></blockquote>`;
+      if (!document.getElementById('ig-embed')) {
+        const sc = document.createElement('script');
+        sc.id = 'ig-embed'; sc.async = true; sc.src = 'https://www.instagram.com/embed.js';
+        document.body.appendChild(sc);
+      } else if (window.instgrm) window.instgrm.Embeds.process();
+    }
+  })();
 
   /* ══════════════════════════════════════════════════════════
      Formulario: mensaje y/o suscripción
