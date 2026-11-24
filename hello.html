@@ -22,7 +22,7 @@
     --bg:       #ffffff;
     --ink:      #111111;
     --ink-soft: #444444;
-    --ink-mute: #888888;
+    --ink-mute: #666666;
     --line:     #e6e6e6;
     --wash:     #fafafa;
 
@@ -236,9 +236,16 @@
   @media (max-width: 560px) {
     footer { flex-direction: column; align-items: flex-start; }
   }
+
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  input::placeholder { color: var(--ink-mute); opacity: 1; }
+  input[type="email"], input[type="text"] { border-color: var(--ink-mute); }
+  .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 12px; background: white; color: #111; transform: translateY(-200%); }
+  .skip-link:focus { transform: none; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#contenido" id="skip">Skip to content</a>
 
 <div class="wrap">
 
@@ -250,6 +257,7 @@
     </div>
   </header>
 
+  <main id="contenido" tabindex="-1">
   <!-- ── 1. Hero ────────────────────────────── -->
   <section>
     <p class="eyebrow" id="eyebrow">// You're here from Navacare's newsletter</p>
@@ -320,7 +328,7 @@
           added to a list, and there is no newsletter waiting for you on the other side of this button.
         </p>
 
-        <p class="msg" id="msg"></p>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -345,6 +353,7 @@
     </p>
   </section>
 
+  </main>
   <footer>
     <span id="footcopy">© 2026 Kapüy · Marketing systems</span>
     <a href="/privacidad" class="priv">Privacy</a>
@@ -485,6 +494,7 @@
   function setLang(next) {
     lang = next;
     document.documentElement.lang = next;
+    document.getElementById('skip').textContent = next === 'es' ? 'Saltar al contenido' : 'Skip to content';
     document.title = next === 'es'
       ? "Kapüy — Marketing del que no tienes que dudar"
       : "Kapüy — Marketing you don't have to second-guess";
@@ -497,6 +507,7 @@
     document.getElementById('biz').placeholder   = dict._phBiz[next];
     document.querySelectorAll('.lang button').forEach((b) => {
       b.classList.toggle('active', b.dataset.lang === next);
+      b.setAttribute('aria-pressed', String(b.dataset.lang === next));
     });
     try { localStorage.setItem('kapuy_lang', next); } catch (e) {}
   }
@@ -571,9 +582,14 @@
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       show('err', dict._errEmail[lang]);
+      document.getElementById('email').setAttribute('aria-invalid', 'true');
+      document.getElementById('email').setAttribute('aria-describedby', 'msg');
+      document.getElementById('email').focus();
       return;
     }
 
+    document.getElementById('email').removeAttribute('aria-invalid');
+    document.getElementById('email').removeAttribute('aria-describedby');
     btn.disabled = true;
     btnText.textContent = dict._sending[lang];
     msg.className = 'msg';
@@ -607,6 +623,7 @@
         book.innerHTML = dict._bookNow[lang] + ' <span aria-hidden="true">→</span>';
         book.addEventListener('click', () => gtag('event', 'hello_booking_click', { idioma: lang }));
         msg.after(book);
+        book.focus();
       } else {
         show('ok', dict._ok[lang]);
       }

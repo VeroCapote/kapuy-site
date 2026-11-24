@@ -547,6 +547,9 @@
   Object.entries(PIEZAS).forEach(([id, url]) => {
     const el = document.getElementById(id);
     if (!el || !url) return;
+    const frameTitle = K.lang === 'en' ? 'Hola Granola flavors campaign on Instagram' : 'Campaña de sabores de Hola Granola en Instagram';
+    const labelFrame = () => { const frame = el.querySelector('iframe'); if (frame) frame.title = frameTitle; };
+    new MutationObserver(labelFrame).observe(el, { childList: true, subtree: true });
     el.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="14"></blockquote>`;
     if (!document.getElementById('ig-embed')) {
       const sc = document.createElement('script');
@@ -602,12 +605,14 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    form.querySelectorAll('[aria-invalid]').forEach(el => { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); });
+    function invalid(id) { const field = document.getElementById(id); field.setAttribute('aria-invalid', 'true'); field.setAttribute('aria-describedby', 'aviso'); field.focus(); }
     const email   = document.getElementById('email').value.trim();
     const mensaje = document.getElementById('mensaje').value.trim();
     const quiere  = document.getElementById('novedades').checked;
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show('err', dict._errEmail[K.lang]); return; }
-    if (!mensaje && !quiere) { show('err', dict._errVacio[K.lang]); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { show('err', dict._errEmail[K.lang]); invalid('email'); return; }
+    if (!mensaje && !quiere) { show('err', dict._errVacio[K.lang]); invalid('mensaje'); return; }
 
     btn.disabled = true;
     btn.textContent = dict._sending[K.lang];

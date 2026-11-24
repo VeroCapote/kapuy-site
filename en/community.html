@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/sitio.css">
 </head>
-<body>
+<body><a class="skip-link" href="#contenido" data-i18n="skip">Skip to content</a>
 
 <header class="hdr">
   <div class="wrap">
@@ -64,7 +64,7 @@
   </div>
 </header>
 
-<main class="interna">
+<main class="interna" id="contenido" tabindex="-1">
 
   <!-- ── Hero ───────────────────────────────────────────────── -->
   <section class="pagina-hero f-morado oscuro">
@@ -406,14 +406,15 @@
     function v(id) { return document.getElementById(id).value.trim(); }
     f.addEventListener('submit', async function (e) {
       e.preventDefault();
+      f.querySelectorAll('[aria-describedby="pAviso"]').forEach(function (el) { el.removeAttribute('aria-describedby'); });
       var falta = false;
       ['pOrg', 'pUbi', 'pObj', 'pCausa', 'pEquipo', 'pNombre', 'pEmail'].forEach(function (id) {
         var el = document.getElementById(id), vacio = !el.value.trim();
         el.setAttribute('aria-invalid', String(vacio)); if (vacio) falta = true;
       });
-      if (falta) { show('err', '_pErrCampos'); return; }
+      if (falta) { show('err', '_pErrCampos'); var first = f.querySelector('[aria-invalid="true"]'); first.setAttribute('aria-describedby', 'pAviso'); first.focus(); return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('pEmail'))) {
-        document.getElementById('pEmail').setAttribute('aria-invalid', 'true'); show('err', '_pErrEmail'); return;
+        document.getElementById('pEmail').setAttribute('aria-invalid', 'true'); show('err', '_pErrEmail'); document.getElementById('pEmail').setAttribute('aria-describedby', 'pAviso'); document.getElementById('pEmail').focus(); return;
       }
       btn.disabled = true;
       var row = {
@@ -430,7 +431,7 @@
         if (!res.ok) throw new Error('supabase ' + res.status);
         f.querySelectorAll('.campo:not(.enviar)').forEach(function (c) { c.hidden = true; });
         btn.hidden = true;
-        show('ok', '_pOk');
+        show('ok', '_pOk'); aviso.tabIndex = -1; aviso.focus();
         if (window.gtag) gtag('event', 'comunidad_postulacion', { objetivo: row.objetivo, idioma: KAPUY.lang });
       } catch (err) {
         btn.disabled = false; show('err', '_pErrRed');

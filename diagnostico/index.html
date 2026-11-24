@@ -35,7 +35,7 @@
   :root {
     --marfil: #F4F1E8; --carbon: #20211F; --morado: #3C183C; --lima: #CDFC8A;
     --marfil-hondo: #E9E4D6; --marfil-linea: #CFC9B8;
-    --carbon-suave: #4A4B47; --carbon-mudo: #6E6F69; --carbon-linea: #3A3B38;
+    --carbon-suave: #4A4B47; --carbon-mudo: #65665F; --carbon-linea: #3A3B38;
     --morado-hondo: #2A0F2A; --morado-linea: #5A3358; --morado-ola: #6B3A6B;
     --lima-hondo: #B6EA6C; --critico: #FF9C8F;
     --font-sans: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
@@ -161,7 +161,7 @@
   .field > span { font-size: 15px; font-weight: 500; }
   .optin input[type=email], .optin select {
     width: 100%; font-family: var(--font-sans); font-size: 16px; color: var(--marfil);
-    background: var(--morado-hondo); border: var(--regla) solid var(--morado-ola); border-radius: var(--radio);
+    background: var(--morado-hondo); border: var(--regla) solid #92748F; border-radius: var(--radio);
     min-height: 48px; padding: 12px 14px;
   }
   .optin select { appearance: none; -webkit-appearance: none; padding-right: 40px; cursor: pointer;
@@ -223,9 +223,15 @@
     .chip { margin-left: 36px; }
     .optin .btn, .funnel .btn { justify-self: stretch; }
   }
+
+  :focus-visible { outline: 2px solid var(--morado); outline-offset: 3px; box-shadow: 0 0 0 3px var(--marfil); }
+  .intro :focus-visible, .funnel :focus-visible, .pie :focus-visible { outline-color: var(--lima); }
+  .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 12px; background: var(--marfil); color: var(--morado); transform: translateY(-200%); }
+  .skip-link:focus { transform: none; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#app">Saltar al contenido</a>
 
 <header class="hdr">
   <div class="wrap">
@@ -237,7 +243,7 @@
   </div>
 </header>
 
-<main id="app"><noscript>Este diagnóstico necesita JavaScript activado.</noscript></main>
+<main id="app" tabindex="-1"><noscript>Este diagnóstico necesita JavaScript activado.</noscript></main>
 
 <footer class="pie">
   <div class="wrap">
